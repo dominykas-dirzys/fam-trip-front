@@ -1,6 +1,6 @@
 export interface Hotel {
   id: number;
-  city: string;
+  city: City;
   name: string;
   officialRating: HotelRating;
   inspectionScore: number;
@@ -102,4 +102,15 @@ export enum Size {
   SMALL,
   NORMAL,
   LARGE
+}
+
+export interface City {
+  id: number;
+  title: string;
+  country: Country;
+}
+
+export interface Country {
+  id: number;
+  title: string;
 }

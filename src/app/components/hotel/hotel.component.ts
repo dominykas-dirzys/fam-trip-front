@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Hotel} from "../../types/types";
-import {ApiService} from "../../services/api.service";
-import {ActivatedRoute} from "@angular/router";
+import {Hotel} from '../../types/types';
+import {ApiService} from '../../services/api.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-hotel',
@@ -10,7 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class HotelComponent implements OnInit {
 
-  private static readonly URL = '/api/hotels/'
+  private static readonly URL = '/api/hotels/';
 
   hotel: Hotel;
 
