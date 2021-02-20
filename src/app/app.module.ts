@@ -19,6 +19,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
+import { ListHeaderComponent } from './shared/list-header/list-header.component';
+import { ListItemComponent } from './shared/list-item/list-item.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import {MatInputModule} from '@angular/material/input';
     RoomComponent,
     RoomListComponent,
     LoginComponent,
-    PageTitleComponent
+    PageTitleComponent,
+    ListHeaderComponent,
+    ListItemComponent
   ],
   imports: [
     AppRoutingModule,

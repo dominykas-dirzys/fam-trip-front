@@ -1,0 +1,6 @@
+<div (click)="select()" [ngClass]="id && selected === id ? 'selected' : null">
+  <span>{{ name }}</span>
+  <button mat-icon-button (click)="remove()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>

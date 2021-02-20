@@ -12,7 +12,7 @@ export class HotelListComponent implements OnInit {
 
   private static readonly URL = '/api/hotels';
 
-  displayedColumns: string[] = ['position', 'name'];
+  displayedColumns: string[] = ['position', 'name', 'actions'];
   hotels: Hotel[] = [];
 
   constructor(private api: ApiService, public dialog: MatDialog) {

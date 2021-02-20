@@ -1,1 +1,8 @@
-<p>hotel works!</p>
+<app-page-title>{{hotel?.name}}</app-page-title>
+
+<div class="mat-badge-content">
+  <app-list-item
+    [name]="hotel.name"
+    [officialRating]="hotel.officialRating"
+  ></app-list-item>
+</div>
