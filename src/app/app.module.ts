@@ -9,6 +9,8 @@ import {HotelListComponent} from './components/hotel-list/hotel-list.component';
 import {RoomComponent} from './components/room/room.component';
 import {RoomListComponent} from './components/room-list/room-list.component';
 import {LoginComponent} from './components/login/login.component';
+import { PageTitleComponent } from './shared/page-title/page-title.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,14 @@ import {LoginComponent} from './components/login/login.component';
     HotelListComponent,
     RoomComponent,
     RoomListComponent,
-    LoginComponent
+    LoginComponent,
+    PageTitleComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

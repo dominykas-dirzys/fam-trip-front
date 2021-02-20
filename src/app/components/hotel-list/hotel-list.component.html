@@ -1,1 +1,41 @@
-<p>hotel-list works!</p>
+<app-page-title>Hotels</app-page-title>
+
+<table mat-table [dataSource]="hotels" class="mat-elevation-z8">
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td matt-cell *matCellDef="let index = index">{{index + 1}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>City</th>
+    <td mat-cell *matCellDef="let element">{{element.city.title}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="numberOfStudyPrograms">
+    <th mat-header-cell *matHeaderCellDef>Official Rating</th>
+    <td mat-cell *matCellDef="let element">{{element.officialRating}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="numberOfStudyPrograms">
+    <th mat-header-cell *matHeaderCellDef>Inspection Score</th>
+    <td mat-cell *matCellDef="let element">{{element.inspectionScore}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="numberOfStudyPrograms">
+    <th mat-header-cell *matHeaderCellDef>Food Quality</th>
+    <td mat-cell *matCellDef="let element">{{element.foodQuality}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="numberOfStudyPrograms">
+    <th mat-header-cell *matHeaderCellDef>Territory Size</th>
+    <td mat-cell *matCellDef="let element">{{element.territorySize}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
