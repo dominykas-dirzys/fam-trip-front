@@ -1,0 +1,12 @@
+.header {
+  padding: 10px 30px;
+}
+
+button {
+  background: darkgrey;
+
+}
+
+button:hover {
+  color: white;
+}
