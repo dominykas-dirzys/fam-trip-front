@@ -1,0 +1,22 @@
+import {Router, RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {HotelComponent} from "./components/hotel/hotel.component";
+import {RoomComponent} from "./components/room/room.component";
+
+const routes: Routes = [
+  {
+    path: 'hotels',
+    component: HotelComponent
+  },
+  {
+    path: 'rooms',
+    component: RoomComponent
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {
+}
