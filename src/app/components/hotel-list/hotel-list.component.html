@@ -6,35 +6,12 @@
     <td matt-cell *matCellDef="let index = index">{{index + 1}}</td>
   </ng-container>
 
-  <ng-container matColumnDef="title">
+  <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let element">{{element.name}}</td>
   </ng-container>
 
-  <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef>City</th>
-    <td mat-cell *matCellDef="let element">{{element.city.title}}</td>
-  </ng-container>
 
-  <ng-container matColumnDef="numberOfStudyPrograms">
-    <th mat-header-cell *matHeaderCellDef>Official Rating</th>
-    <td mat-cell *matCellDef="let element">{{element.officialRating}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="numberOfStudyPrograms">
-    <th mat-header-cell *matHeaderCellDef>Inspection Score</th>
-    <td mat-cell *matCellDef="let element">{{element.inspectionScore}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="numberOfStudyPrograms">
-    <th mat-header-cell *matHeaderCellDef>Food Quality</th>
-    <td mat-cell *matCellDef="let element">{{element.foodQuality}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="numberOfStudyPrograms">
-    <th mat-header-cell *matHeaderCellDef>Territory Size</th>
-    <td mat-cell *matCellDef="let element">{{element.territorySize}}</td>
-  </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

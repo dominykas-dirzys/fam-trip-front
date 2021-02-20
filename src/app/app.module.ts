@@ -9,8 +9,16 @@ import {HotelListComponent} from './components/hotel-list/hotel-list.component';
 import {RoomComponent} from './components/room/room.component';
 import {RoomListComponent} from './components/room-list/room-list.component';
 import {LoginComponent} from './components/login/login.component';
-import { PageTitleComponent } from './shared/page-title/page-title.component';
+import {PageTitleComponent} from './shared/page-title/page-title.component';
 import {MatTableModule} from '@angular/material/table';
+import {HttpClientModule} from '@angular/common/http';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -25,8 +33,16 @@ import {MatTableModule} from '@angular/material/table';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatIconModule,
+    MatCardModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
