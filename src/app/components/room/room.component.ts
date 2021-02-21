@@ -10,8 +10,6 @@ import {ApiService} from '../../services/api.service';
 })
 export class RoomComponent implements OnInit {
 
-  private static readonly URL = '/api/hotels/';
-
   room: Room;
 
   constructor(
