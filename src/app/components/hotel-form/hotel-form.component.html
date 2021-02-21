@@ -1,0 +1,56 @@
+<h3 mat-dialog-title>Hotel: {{ data.name }}</h3>
+
+<form [formGroup]="form" mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input
+      matInput
+      required
+      autocomplete="off"
+      formControlName="name"
+    />
+    <mat-error *ngIf="name.errors?.minlength">
+      At least 2 characters are required
+    </mat-error>
+    <mat-error *ngIf="name.errors?.required">
+      Name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Official Rating</mat-label>
+    <input
+      matInput
+      required
+      formControlName="officialRating"
+    />
+    <mat-error *ngIf="officialRating.errors?.required">
+      Rating is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>City</mat-label>
+    <select type="text"
+            formControlName="city">
+      <option [ngValue]="null">Choose city</option>
+      <option *ngFor="let city of cities"
+              [ngValue]="city.id">
+        {{city.title}}
+      </option>
+    </select>
+<!--    <input-->
+<!--      matInput-->
+<!--      required-->
+<!--      formControlName="city"-->
+<!--    />-->
+<!--    <mat-error *ngIf="city.errors?.required">-->
+<!--      City is required-->
+<!--    </mat-error>-->
+  </mat-form-field>
+</form>
+
+<div mat-dialog-actions>
+  <button mat-raised-button mat-button (click)="cancel()">Cancel</button>
+  <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="save()">Save</button>
+</div>

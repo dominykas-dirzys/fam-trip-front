@@ -21,6 +21,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import { ListHeaderComponent } from './shared/list-header/list-header.component';
 import { ListItemComponent } from './shared/list-item/list-item.component';
+import { HotelFormComponent } from './components/hotel-form/hotel-form.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { ListItemComponent } from './shared/list-item/list-item.component';
     LoginComponent,
     PageTitleComponent,
     ListHeaderComponent,
-    ListItemComponent
+    ListItemComponent,
+    HotelFormComponent
   ],
   imports: [
     AppRoutingModule,
@@ -47,6 +50,7 @@ import { ListItemComponent } from './shared/list-item/list-item.component';
     MatIconModule,
     MatCardModule,
     MatInputModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
