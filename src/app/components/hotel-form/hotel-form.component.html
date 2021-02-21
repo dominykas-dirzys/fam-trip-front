@@ -28,8 +28,23 @@
       Rating is required
     </mat-error>
   </mat-form-field>
-  
-    <app-city-group></app-city-group>
+
+  <mat-form-field>
+    <mat-label>City</mat-label>
+    <input type="text"
+           matInput
+           formControlName="cityGroup"
+           required
+           [matAutocomplete]="autoGroup">
+    <mat-autocomplete #autoGroup="matAutocomplete">
+      <mat-optgroup *ngFor="let group of cityGroupOptions | async" [label]="group.country">
+        <mat-option *ngFor="let city of group.cities" [value]="city">
+          {{city}}
+        </mat-option>
+      </mat-optgroup>
+    </mat-autocomplete>
+  </mat-form-field>
+
 
 </form>
 

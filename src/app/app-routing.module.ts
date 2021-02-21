@@ -4,7 +4,6 @@ import {HotelComponent} from './components/hotel/hotel.component';
 import {RoomComponent} from './components/room/room.component';
 import {HotelListComponent} from './components/hotel-list/hotel-list.component';
 import {RoomListComponent} from './components/room-list/room-list.component';
-import {CityGroupComponent} from './components/city-group/city-group.component';
 
 const routes: Routes = [
   {
@@ -22,10 +21,6 @@ const routes: Routes = [
   {
     path: 'rooms/:id',
     component: RoomComponent
-  },
-  {
-    path: 'cityForm',
-    component: CityGroupComponent
   }
 ];
 

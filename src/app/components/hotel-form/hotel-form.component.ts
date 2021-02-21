@@ -1,7 +1,20 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {City, Hotel} from "../../types/types";
+import {FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {City, Hotel} from '../../types/types';
+import {Observable} from 'rxjs';
+import {startWith, map} from 'rxjs/operators';
+
+export interface CityGroup {
+  country: string;
+  cities: string[];
+}
+
+export const _filter = (opt: string[], value: string): string[] => {
+  const filterValue = value.toLowerCase();
+
+  return opt.filter(item => item.toLowerCase().indexOf(filterValue) === 0);
+};
 
 @Component({
   selector: 'app-hotel-form',
@@ -10,10 +23,24 @@ import {City, Hotel} from "../../types/types";
 })
 export class HotelFormComponent implements OnInit {
 
-  form: FormGroup;
-  cities: City[] = [];
+  form:  FormGroup = this._formBuilder.group({
+    cityGroup: '',
+  });
+
+  // cities: City[] = [];
+
+  cityGroups: CityGroup[] = [{
+    country: 'Lithuania',
+    cities: ['Kaunas', 'Klaipeda', 'Palanga', 'Vilnius']
+  }, {
+    country: 'Turkey',
+    cities: ['Bodrum', 'Kemer']
+  }];
+
+  cityGroupOptions: Observable<CityGroup[]>;
 
   constructor(
+    private _formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<HotelFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Hotel
   ) {
@@ -28,11 +55,31 @@ export class HotelFormComponent implements OnInit {
       officialRating: new FormControl(this.data.officialRating, [
         Validators.required
       ]),
-      city: new FormControl(this.data.city, [
-        // Validators.required
-      ])
+      cityGroup: new FormControl(this._formBuilder.group({
+        cityGroup: ''})
+      )
     });
+
+    this.cityGroupOptions = this.form.get('cityGroup')!.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filterGroup(value))
+      );
+
+
   }
+
+  private _filterGroup(value: string): CityGroup[] {
+    if (value) {
+      return this.cityGroups
+        .map(group => ({country: group.country, cities: _filter(group.cities, value)}))
+        .filter(group => group.cities.length > 0);
+    }
+
+    return this.cityGroups;
+  }
+
+
 
   cancel() {
     this.dialogRef.close();
@@ -45,10 +92,6 @@ export class HotelFormComponent implements OnInit {
   get name() {
     return this.form.get('name');
   }
-
-  // get city() {
-  //   return this.form.get('city');
-  // }
 
   get officialRating() {
     return this.form.get('officialRating');

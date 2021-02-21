@@ -115,8 +115,4 @@ export interface Country {
   title: string;
 }
 
-export interface CityGroup {
-  letter: string;
-  names: string[];
-}
 
