@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Hotel, Room} from '../../types/types';
 
 @Component({
   selector: 'app-room-list',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RoomListComponent implements OnInit {
 
-  constructor() { }
+  @Input() rooms: Room[];
+  @Input() hotel: Hotel;
+
+  constructor() {
+  }
+
+  displayedColumns: string[] = ['position', 'roomType', 'actions'];
 
   ngOnInit(): void {
   }
-
 }

@@ -1,9 +1,9 @@
-import {Router, RouterModule, Routes} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
-import {HotelComponent} from "./components/hotel/hotel.component";
-import {RoomComponent} from "./components/room/room.component";
-import {HotelListComponent} from "./components/hotel-list/hotel-list.component";
-import {GuardService} from "./services/guard.service";
+import {HotelComponent} from './components/hotel/hotel.component';
+import {RoomComponent} from './components/room/room.component';
+import {HotelListComponent} from './components/hotel-list/hotel-list.component';
+import {RoomListComponent} from './components/room-list/room-list.component';
 
 const routes: Routes = [
   {
@@ -16,6 +16,10 @@ const routes: Routes = [
   },
   {
     path: 'rooms',
+    component: RoomListComponent
+  },
+  {
+    path: 'rooms/:id',
     component: RoomComponent
   }
 ];

@@ -1,1 +1,16 @@
-<p>room works!</p>
+<app-page-title>{{room?.roomType}}</app-page-title>
+
+<table class="mat-table" >
+  <tr class="mat-header-row">
+    <th class="mat-header-cell">ID</th>
+    <th class="mat-header-cell">Size</th>
+    <th class="mat-header-cell">Room Condition</th>
+    <th class="mat-header-cell">Remarks</th>
+  </tr>
+  <tr class="mat-row">
+    <td class="mat-cell">{{room?.id}}</td>
+    <td class="mat-cell">{{room?.size}}</td>
+    <td class="mat-cell">{{room?.roomCondition}}</td>
+    <td class="mat-cell">{{room?.remarks}}</td>
+  </tr>
+</table>

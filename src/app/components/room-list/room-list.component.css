@@ -1,0 +1,14 @@
+app-page-title {
+  text-align: center;
+}
+
+table td:first-child {
+  text-align: center;
+  color: white;
+}
+
+table {
+  margin: auto;
+  max-width: 1024px;
+  width: 100%;
+}
