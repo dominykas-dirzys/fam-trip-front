@@ -1,1 +1,45 @@
-<p>hotel-list works!</p>
+<app-page-title>Hotels</app-page-title>
+
+<table mat-table [dataSource]="hotels" class="mat-elevation-z8">
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td matt-cell *matCellDef="let index = index">{{index + 1}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="city">
+    <th mat-header-cell *matHeaderCellDef>City</th>
+    <td mat-cell *matCellDef="let element">{{element.city.title}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="officialRating">
+    <th mat-header-cell *matHeaderCellDef>Official Rating</th>
+    <td mat-cell *matCellDef="let element">{{element.officialRating}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="inspectionScore">
+    <th mat-header-cell *matHeaderCellDef>Inspection Score</th>
+    <td mat-cell *matCellDef="let element">{{element.inspectionScore}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="labels">
+    <th mat-header-cell *matHeaderCellDef>Labels</th>
+    <td mat-cell *matCellDef="let element">{{element.labels}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button [routerLink]="['/hotels', element.id]">
+        View
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
