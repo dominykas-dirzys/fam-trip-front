@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {startWith, map} from 'rxjs/operators';
 
-export interface StateGroup {
+export interface CityGroup {
   letter: string;
   names: string[];
 }
@@ -14,99 +14,46 @@ export const _filter = (opt: string[], value: string): string[] => {
   return opt.filter(item => item.toLowerCase().indexOf(filterValue) === 0);
 };
 
-/**
- * @title Option groups autocomplete
- */
 @Component({
-  selector: 'autocomplete-optgroup-example',
-  templateUrl: './autocomplete-optgroup-example.html',
+  selector: 'app-city-group',
+  templateUrl: './city-group.component.html',
+  styleUrls: ['./city-group.component.css']
 })
 
-export class AutocompleteOptgroupExample implements OnInit {
-  stateForm: FormGroup = this._formBuilder.group({
-    stateGroup: '',
+export class CityGroupComponent implements OnInit {
+
+  cityForm: FormGroup = this._formBuilder.group({
+    cityGroup: '',
   });
 
-  stateGroups: StateGroup[] = [{
-    letter: 'A',
-    names: ['Alabama', 'Alaska', 'Arizona', 'Arkansas']
-  }, {
-    letter: 'C',
-    names: ['California', 'Colorado', 'Connecticut']
-  }, {
-    letter: 'D',
-    names: ['Delaware']
-  }, {
-    letter: 'F',
-    names: ['Florida']
-  }, {
-    letter: 'G',
-    names: ['Georgia']
-  }, {
-    letter: 'H',
-    names: ['Hawaii']
-  }, {
-    letter: 'I',
-    names: ['Idaho', 'Illinois', 'Indiana', 'Iowa']
-  }, {
+  cityGroups: CityGroup[] = [{
     letter: 'K',
-    names: ['Kansas', 'Kentucky']
-  }, {
-    letter: 'L',
-    names: ['Louisiana']
-  }, {
-    letter: 'M',
-    names: ['Maine', 'Maryland', 'Massachusetts', 'Michigan',
-      'Minnesota', 'Mississippi', 'Missouri', 'Montana']
-  }, {
-    letter: 'N',
-    names: ['Nebraska', 'Nevada', 'New Hampshire', 'New Jersey',
-      'New Mexico', 'New York', 'North Carolina', 'North Dakota']
-  }, {
-    letter: 'O',
-    names: ['Ohio', 'Oklahoma', 'Oregon']
-  }, {
-    letter: 'P',
-    names: ['Pennsylvania']
-  }, {
-    letter: 'R',
-    names: ['Rhode Island']
-  }, {
-    letter: 'S',
-    names: ['South Carolina', 'South Dakota']
-  }, {
-    letter: 'T',
-    names: ['Tennessee', 'Texas']
-  }, {
-    letter: 'U',
-    names: ['Utah']
+    names: ['Kaunas', 'Klaipeda']
   }, {
     letter: 'V',
-    names: ['Vermont', 'Virginia']
-  }, {
-    letter: 'W',
-    names: ['Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
+    names: ['Vilnius']
   }];
 
-  stateGroupOptions: Observable<StateGroup[]>;
+  cityGroupOptions: Observable<CityGroup[]>;
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(private _formBuilder: FormBuilder) {
+  }
 
   ngOnInit() {
-    this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges
+    this.cityGroupOptions = this.cityForm.get('cityGroup')!.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filterGroup(value))
       );
   }
 
-  private _filterGroup(value: string): StateGroup[] {
+  private _filterGroup(value: string): CityGroup[] {
     if (value) {
-      return this.stateGroups
+      return this.cityGroups
         .map(group => ({letter: group.letter, names: _filter(group.names, value)}))
         .filter(group => group.names.length > 0);
     }
 
-    return this.stateGroups;
+    return this.cityGroups;
   }
 }

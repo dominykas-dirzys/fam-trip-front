@@ -39,6 +39,7 @@ import {MatOptionModule} from "@angular/material/core";
     ListHeaderComponent,
     ListItemComponent,
     HotelFormComponent,
+    CityGroupComponent,
     CityGroupComponent
   ],
   imports: [
