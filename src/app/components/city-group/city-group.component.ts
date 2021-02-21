@@ -4,8 +4,8 @@ import {Observable} from 'rxjs';
 import {startWith, map} from 'rxjs/operators';
 
 export interface CityGroup {
-  letter: string;
-  names: string[];
+  country: string;
+  cities: string[];
 }
 
 export const _filter = (opt: string[], value: string): string[] => {
@@ -27,11 +27,11 @@ export class CityGroupComponent implements OnInit {
   });
 
   cityGroups: CityGroup[] = [{
-    letter: 'K',
-    names: ['Kaunas', 'Klaipeda']
+    country: 'Lithuania',
+    cities: ['Kaunas', 'Klaipeda', 'Palanga', 'Vilnius']
   }, {
-    letter: 'V',
-    names: ['Vilnius']
+    country: 'Turkey',
+    cities: ['Bodrum', 'Kemer']
   }];
 
   cityGroupOptions: Observable<CityGroup[]>;
@@ -50,8 +50,8 @@ export class CityGroupComponent implements OnInit {
   private _filterGroup(value: string): CityGroup[] {
     if (value) {
       return this.cityGroups
-        .map(group => ({letter: group.letter, names: _filter(group.names, value)}))
-        .filter(group => group.names.length > 0);
+        .map(group => ({country: group.country, cities: _filter(group.cities, value)}))
+        .filter(group => group.cities.length > 0);
     }
 
     return this.cityGroups;
