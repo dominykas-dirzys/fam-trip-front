@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Room} from '../../types/types';
+import {ActivatedRoute} from '@angular/router';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-room',
@@ -8,11 +10,18 @@ import {Room} from '../../types/types';
 })
 export class RoomComponent implements OnInit {
 
-  @Input() room: Room;
+  private static readonly URL = '/api/hotels/';
 
-  constructor() { }
+  room: Room;
+
+  constructor(
+    private api: ApiService,
+    private route: ActivatedRoute
+  ) {
+  }
 
   ngOnInit(): void {
+    this.room = history.state;
   }
 
 }
