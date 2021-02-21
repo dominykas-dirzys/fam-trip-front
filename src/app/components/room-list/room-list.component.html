@@ -1,1 +1,25 @@
-<p>room-list works!</p>
+<app-page-title>Rooms</app-page-title>
+
+<table mat-table [dataSource]="rooms" class="mat-elevation-z8">
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td matt-cell *matCellDef="let index = index">{{index + 1}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="roomType">
+    <th mat-header-cell *matHeaderCellDef>Room Type</th>
+    <td mat-cell *matCellDef="let element">{{element.roomType}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button [routerLink]="['/rooms', element.id]" [state]="element">
+        View
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

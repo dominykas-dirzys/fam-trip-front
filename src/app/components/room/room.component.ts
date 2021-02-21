@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Room} from '../../types/types';
 
 @Component({
   selector: 'app-room',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RoomComponent implements OnInit {
 
-  constructor() { }
+  room: Room;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
+    this.room = history.state;
   }
 
 }
