@@ -16,6 +16,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
@@ -23,6 +24,8 @@ import { ListHeaderComponent } from './shared/list-header/list-header.component'
 import { ListItemComponent } from './shared/list-item/list-item.component';
 import { HotelFormComponent } from './components/hotel-form/hotel-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { CityGroupComponent } from './components/city-group/city-group.component';
+import {MatOptionModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     PageTitleComponent,
     ListHeaderComponent,
     ListItemComponent,
-    HotelFormComponent
+    HotelFormComponent,
+    CityGroupComponent
   ],
   imports: [
     AppRoutingModule,
@@ -50,7 +54,9 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatIconModule,
     MatCardModule,
     MatInputModule,
+    MatAutocompleteModule,
     ReactiveFormsModule,
+    MatOptionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

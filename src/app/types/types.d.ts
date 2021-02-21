@@ -114,3 +114,9 @@ export interface Country {
   id: number;
   title: string;
 }
+
+export interface CityGroup {
+  letter: string;
+  names: string[];
+}
+
