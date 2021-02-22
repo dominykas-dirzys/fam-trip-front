@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {City, Hotel} from '../../types/types';
 import {Observable} from 'rxjs';
 import {startWith, map} from 'rxjs/operators';
+import {CityService} from "../../services/city.service";
 
 export interface CityGroup {
   country: string;
@@ -23,30 +24,35 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 export class HotelFormComponent implements OnInit {
 
-  form:  FormGroup = this._formBuilder.group({
+  form: FormGroup = this._formBuilder.group({
     cityGroup: '',
   });
 
-  // cities: City[] = [];
+  cities: City[];
+  cityTitles: string[] = [];
 
-  cityGroups: CityGroup[] = [{
-    country: 'Lithuania',
-    cities: ['Kaunas', 'Klaipeda', 'Palanga', 'Vilnius']
+  cityGroups = [{
+    country: 'Lithuania (hard-coded)',
+    cities: this.cityTitles
   }, {
-    country: 'Turkey',
-    cities: ['Bodrum', 'Kemer']
+    country: 'Turkey (hard-coded)',
+    cities: ['Bodrum (hard-coded)', 'Kemer (hard-coded)']
   }];
 
   cityGroupOptions: Observable<CityGroup[]>;
+  currentCity = this.data.city.title;
 
   constructor(
     private _formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<HotelFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Hotel
+    @Inject(MAT_DIALOG_DATA) public data: Hotel,
+    private cityService: CityService
   ) {
   }
 
   ngOnInit(): void {
+    this.fetchCities();
+
     this.form = new FormGroup({
       name: new FormControl(this.data.name, [
         Validators.required,
@@ -56,8 +62,13 @@ export class HotelFormComponent implements OnInit {
         Validators.required
       ]),
       cityGroup: new FormControl(this._formBuilder.group({
-        cityGroup: ''})
-      )
+          cityGroup: ''
+        })
+      ),
+      inspectionScore: new FormControl(this.data.inspectionScore, [
+        Validators.required
+      ]),
+      foodQuality: new FormControl(this.data.foodQuality)
     });
 
     this.cityGroupOptions = this.form.get('cityGroup')!.valueChanges
@@ -65,6 +76,12 @@ export class HotelFormComponent implements OnInit {
         startWith(''),
         map(value => this._filterGroup(value))
       );
+
+    this.form.patchValue(
+      {
+        cityGroup: this.currentCity,
+      }
+    );
 
 
   }
@@ -78,8 +95,6 @@ export class HotelFormComponent implements OnInit {
 
     return this.cityGroups;
   }
-
-
 
   cancel() {
     this.dialogRef.close();
@@ -96,5 +111,19 @@ export class HotelFormComponent implements OnInit {
   get officialRating() {
     return this.form.get('officialRating');
   }
+
+  get inspectionScore() {
+    return this.form.get('inspectionScore');
+  }
+
+  fetchCities() {
+    this.cityService.findAll().subscribe(data => {
+      this.cities = data;
+      for (const element of this.cities) {
+        this.cityTitles.push(element.title);
+      }
+    });
+  }
+
 
 }

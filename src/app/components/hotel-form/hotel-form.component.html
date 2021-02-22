@@ -45,6 +45,26 @@
     </mat-autocomplete>
   </mat-form-field>
 
+  <mat-form-field>
+    <mat-label>Inspection Score</mat-label>
+    <input
+      matInput
+      required
+      formControlName="inspectionScore"
+    />
+    <mat-error *ngIf="inspectionScore.errors?.required">
+      Inspection Score is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Food Quality</mat-label>
+    <input
+      matInput
+      required
+      formControlName="foodQuality"
+    />
+  </mat-form-field>
 
 </form>
 
