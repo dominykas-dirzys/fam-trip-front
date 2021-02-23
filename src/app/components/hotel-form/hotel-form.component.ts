@@ -4,7 +4,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {City, Hotel} from '../../types/types';
 import {Observable} from 'rxjs';
 import {startWith, map} from 'rxjs/operators';
-import {CityService} from "../../services/city.service";
+import {CityService} from '../../services/city.service';
+import {HttpClient} from "@angular/common/http";
 
 export interface CityGroup {
   country: string;
@@ -43,6 +44,7 @@ export class HotelFormComponent implements OnInit {
   currentCity = this.data.city.title;
 
   constructor(
+    private http: HttpClient,
     private _formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<HotelFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Hotel,
@@ -68,8 +70,19 @@ export class HotelFormComponent implements OnInit {
       inspectionScore: new FormControl(this.data.inspectionScore, [
         Validators.required
       ]),
-      foodQuality: new FormControl(this.data.foodQuality)
-    });
+      foodQuality: new FormControl(this.data.foodQuality),
+      territorySize: new FormControl(this.data.territorySize),
+      waterSlides: new FormControl(this.data.waterSlides),
+      spa: new FormControl(this.data.spa),
+      distanceToBeach: new FormControl(this.data.distanceToBeach),
+      distanceFromAirport: new FormControl(this.data.distanceFromAirport),
+      remarks: new FormControl(this.data.remarks),
+      author: new FormControl(this.data.author),
+      recommendedTos: new FormControl(this.data.recommendedTos),
+      rooms: new FormControl(this.data.rooms),
+      labels: new FormControl(this.data.labels),
+      cuisineTypes: new FormControl(this.data.cuisineTypes)
+  });
 
     this.cityGroupOptions = this.form.get('cityGroup')!.valueChanges
       .pipe(
@@ -101,6 +114,9 @@ export class HotelFormComponent implements OnInit {
   }
 
   save() {
+    console.log('Save method run');
+    console.log(this.form.getRawValue());
+    // return this.http.post<Hotel>('http://localhost:8080/api/hotels', this.form.getRawValue());
     this.dialogRef.close({...this.data, ...this.form.getRawValue()});
   }
 
@@ -112,8 +128,16 @@ export class HotelFormComponent implements OnInit {
     return this.form.get('officialRating');
   }
 
+  get city() {
+    return this.form.get('city.title');
+  }
+
   get inspectionScore() {
     return this.form.get('inspectionScore');
+  }
+
+  get territorySize() {
+    return this.form.get('territorySize');
   }
 
   fetchCities() {

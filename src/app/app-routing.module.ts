@@ -4,6 +4,7 @@ import {HotelComponent} from './components/hotel/hotel.component';
 import {RoomComponent} from './components/room/room.component';
 import {HotelListComponent} from './components/hotel-list/hotel-list.component';
 import {RoomListComponent} from './components/room-list/room-list.component';
+import {HotelFormComponent} from "./components/hotel-form/hotel-form.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'rooms/:id',
     component: RoomComponent
+  },
+  {
+    path: 'addHotel',
+    component: HotelFormComponent
   }
 ];
 
