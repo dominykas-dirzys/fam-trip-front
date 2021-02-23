@@ -116,7 +116,6 @@ export class HotelFormComponent implements OnInit {
   save() {
     console.log('Save method run');
     console.log(this.form.getRawValue());
-    // return this.http.post<Hotel>('http://localhost:8080/api/hotels', this.form.getRawValue());
     this.dialogRef.close({...this.data, ...this.form.getRawValue()});
   }
 
