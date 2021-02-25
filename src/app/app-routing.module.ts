@@ -15,11 +15,11 @@ const routes: Routes = [
     component: HotelComponent
   },
   {
-    path: 'rooms',
+    path: 'hotels/:id/rooms',
     component: RoomListComponent
   },
   {
-    path: 'rooms/:id',
+    path: 'hotels/:id/rooms/:id',
     component: RoomComponent
   }
 ];
