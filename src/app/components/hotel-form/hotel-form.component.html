@@ -115,15 +115,6 @@
     />
   </mat-form-field>
 
-<!--  <mat-form-field>-->
-<!--    <mat-label>Author</mat-label>-->
-<!--    <input-->
-<!--      matInput-->
-<!--      required-->
-<!--      formControlName="author"-->
-<!--    />-->
-<!--  </mat-form-field>-->
-
   <mat-form-field>
     <mat-label>Rooms</mat-label>
     <input
@@ -162,3 +153,13 @@
   <button mat-raised-button mat-button (click)="cancel()">Cancel</button>
   <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="save()">Save</button>
 </div>
+
+<div><p>Reference data:</p></div>
+<div *ngIf="referenceData">{{referenceData}}</div>
+
+
+<div><p>Hotel ratings:</p></div>
+<div *ngIf="hotelRatings">{{hotelRatings.values()}}</div>
+<li *ngFor="let hotelRating of hotelRatings">
+  <b>{{hotelRating?.item}}</b>
+</li>

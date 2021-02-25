@@ -52,15 +52,19 @@ export enum HotelLabel {
   SHOPPING
 }
 
-export enum RecommendedTo {
-  FAMILIES_WITH_YOUNG_CHILDREN,
-  FAMILIES_WITH_OLDER_CHILDREN,
-  COUPLES,
-  FRIENDS,
-  YOUTH,
-  BUSINESS,
-  SOLO_TRAVELERS
-}
+export type RecommendedTo = 'FAMILIES_WITH_YOUNG_CHILDREN' | 'FAMILIES_WITH_OLDER_CHILDREN'
+  | 'COUPLES' | 'FRIENDS' | 'YOUTH' | 'BUSINESS' | 'SOLO_TRAVELERS';
+
+
+// export enum RecommendedTo {
+//   FAMILIES_WITH_YOUNG_CHILDREN,
+//   FAMILIES_WITH_OLDER_CHILDREN,
+//   COUPLES,
+//   FRIENDS,
+//   YOUTH,
+//   BUSINESS,
+//   SOLO_TRAVELERS
+// }
 
 export enum RoomCondition {
   NEEDS_RENOVATION,
@@ -115,4 +119,12 @@ export interface Country {
   title: string;
 }
 
+export interface CityGroup {
+  country: string;
+  cities: string[];
+}
 
+export interface ReferenceData {
+  dataType: string;
+  enums: string[];
+}

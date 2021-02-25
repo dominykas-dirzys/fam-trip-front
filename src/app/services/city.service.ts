@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {TOKEN_KEY} from "../common/constants";
-import {Observable} from "rxjs";
-import {City} from "../types/types";
+import {HttpClient} from '@angular/common/http';
+import {TOKEN_KEY} from '../common/constants';
+import {Observable} from 'rxjs';
+import {City} from '../types/types';
 
 @Injectable({
   providedIn: 'root'

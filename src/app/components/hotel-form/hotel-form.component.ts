@@ -1,16 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {City, Hotel} from '../../types/types';
+import {City, Hotel, CityGroup, ReferenceData} from '../../types/types';
 import {Observable} from 'rxjs';
 import {startWith, map} from 'rxjs/operators';
 import {CityService} from '../../services/city.service';
-import {HttpClient} from "@angular/common/http";
-
-export interface CityGroup {
-  country: string;
-  cities: string[];
-}
+import {ApiService} from '../../services/api.service';
+import {ReferenceDataService} from "../../services/reference-data.service";
 
 export const _filter = (opt: string[], value: string): string[] => {
   const filterValue = value.toLowerCase();
@@ -25,12 +21,46 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 export class HotelFormComponent implements OnInit {
 
+  constructor(
+    // private api: ApiService,
+    private _formBuilder: FormBuilder,
+    private dialogRef: MatDialogRef<HotelFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Hotel,
+    private cityService: CityService,
+    private referenceDataService: ReferenceDataService
+  ) {
+  }
+
+  get name() {
+    return this.form.get('name');
+  }
+
+  get officialRating() {
+    return this.form.get('officialRating');
+  }
+
+  get city() {
+    return this.form.get('city.title');
+  }
+
+  get inspectionScore() {
+    return this.form.get('inspectionScore');
+  }
+
+  get territorySize() {
+    return this.form.get('territorySize');
+  }
+
+  // private static readonly URL = '/api/reference_data';
+
   form: FormGroup = this._formBuilder.group({
     cityGroup: '',
   });
 
   cities: City[];
   cityTitles: string[] = [];
+  referenceData = this.referenceDataService.findAll();
+  hotelRatings = this.referenceDataService.getHotelRatings();
 
   cityGroups = [{
     country: 'Lithuania (hard-coded)',
@@ -42,15 +72,6 @@ export class HotelFormComponent implements OnInit {
 
   cityGroupOptions: Observable<CityGroup[]>;
   currentCity = this.data.city.title;
-
-  constructor(
-    private http: HttpClient,
-    private _formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<HotelFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Hotel,
-    private cityService: CityService
-  ) {
-  }
 
   ngOnInit(): void {
     this.fetchCities();
@@ -77,12 +98,12 @@ export class HotelFormComponent implements OnInit {
       distanceToBeach: new FormControl(this.data.distanceToBeach),
       distanceFromAirport: new FormControl(this.data.distanceFromAirport),
       remarks: new FormControl(this.data.remarks),
-      author: new FormControl(this.data.author),
+      author: new FormControl(this.data.author.id),
       recommendedTos: new FormControl(this.data.recommendedTos),
       rooms: new FormControl(this.data.rooms),
       labels: new FormControl(this.data.labels),
       cuisineTypes: new FormControl(this.data.cuisineTypes)
-  });
+    });
 
     this.cityGroupOptions = this.form.get('cityGroup')!.valueChanges
       .pipe(
@@ -96,7 +117,8 @@ export class HotelFormComponent implements OnInit {
       }
     );
 
-
+    console.log('Reference data in hotel-form received from service:');
+    console.log(this.referenceData);
   }
 
   private _filterGroup(value: string): CityGroup[] {
@@ -119,26 +141,6 @@ export class HotelFormComponent implements OnInit {
     this.dialogRef.close({...this.data, ...this.form.getRawValue()});
   }
 
-  get name() {
-    return this.form.get('name');
-  }
-
-  get officialRating() {
-    return this.form.get('officialRating');
-  }
-
-  get city() {
-    return this.form.get('city.title');
-  }
-
-  get inspectionScore() {
-    return this.form.get('inspectionScore');
-  }
-
-  get territorySize() {
-    return this.form.get('territorySize');
-  }
-
   fetchCities() {
     this.cityService.findAll().subscribe(data => {
       this.cities = data;
@@ -148,5 +150,23 @@ export class HotelFormComponent implements OnInit {
     });
   }
 
-
+  // private fetchReferenceData() {
+  //   this.api.get(HotelFormComponent.URL)
+  //     .pipe(
+  //       map(responseData => {
+  //         const referenceDataArray = [];
+  //         for (const key in responseData) {
+  //           if (responseData.hasOwnProperty(key)) {
+  //             referenceDataArray.push({...responseData[key], id: key});
+  //           }
+  //         }
+  //         return referenceDataArray;
+  //       })
+  //     )
+  //     .subscribe(referenceDataUnits => {
+  //       console.log('referenceDataUnits: ');
+  //       console.log(referenceDataUnits);
+  //     });
+  //
+  // }
 }
