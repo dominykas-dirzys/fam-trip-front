@@ -1,12 +1,11 @@
-import {Component, Inject, Input, OnInit, SimpleChanges} from '@angular/core';
-import {FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, Inject, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {City, Hotel, CityGroup, ReferenceData} from '../../types/types';
+import {City, CityGroup, Hotel, ReferenceData} from '../../types/types';
 import {Observable} from 'rxjs';
-import {startWith, map} from 'rxjs/operators';
+import {map, startWith} from 'rxjs/operators';
 import {CityService} from '../../services/city.service';
-import {ApiService} from '../../services/api.service';
-import {ReferenceDataService} from "../../services/reference-data.service";
+import {ReferenceDataService} from '../../services/reference-data.service';
 
 export const _filter = (opt: string[], value: string): string[] => {
   const filterValue = value.toLowerCase();
@@ -51,16 +50,13 @@ export class HotelFormComponent implements OnInit {
     return this.form.get('territorySize');
   }
 
-  // private static readonly URL = '/api/reference_data';
-
   form: FormGroup = this._formBuilder.group({
     cityGroup: '',
   });
 
   cities: City[];
   cityTitles: string[] = [];
-  referenceData = this.referenceDataService.findAll();
-  hotelRatings = this.referenceDataService.getHotelRatings();
+  referenceData: ReferenceData[] = [];
 
   cityGroups = [{
     country: 'Lithuania (hard-coded)',
@@ -70,11 +66,30 @@ export class HotelFormComponent implements OnInit {
     cities: ['Bodrum (hard-coded)', 'Kemer (hard-coded)']
   }];
 
+  private cuisineTypes = [];
+  private foodQualities = [];
+  private hotelLabels = [];
+  private hotelRatings = [];
+  private recommendedTos = [];
+  private roomConditions = [];
+  private roomTypes = [];
+  private sizes = [];
+
   cityGroupOptions: Observable<CityGroup[]>;
   currentCity = this.data.city.title;
 
   ngOnInit(): void {
     this.fetchCities();
+
+    console.log('ngOnInit() this.referenceDataService.findAll()');
+
+    this.referenceDataService.findAll().subscribe(data => {
+      this.referenceData = data;
+    });
+
+    console.log(this.referenceData);
+
+    this.groupReferenceData();
 
     this.form = new FormGroup({
       name: new FormControl(this.data.name, [
@@ -169,4 +184,54 @@ export class HotelFormComponent implements OnInit {
   //     });
   //
   // }
+
+  groupReferenceData() {
+    console.log('groupReferenceData init');
+    console.log(this.referenceData.toString());
+    console.log(this.referenceData.length);
+
+
+    for (const key in this.referenceData) {
+      if (this.referenceData.hasOwnProperty(key)) {
+        console.log('if (this.referenceData.hasOwnProperty(key)) SUCCESS');
+        switch (key) {
+          case 'cuisineTypes':
+            this.cuisineTypes.push({...this.referenceData[key]});
+            break;
+          case 'foodQualities':
+            this.foodQualities.push({...this.referenceData[key]});
+            break;
+          case 'hotelLabels':
+            this.hotelLabels.push({...this.referenceData[key]});
+            break;
+          case 'hotelRatings':
+            this.hotelRatings.push({...this.referenceData[key]});
+            console.log('findAll switch');
+            console.log('Hotel ratings:');
+            console.log(this.hotelRatings);
+            console.log('(length:) ');
+            console.log(this.hotelRatings?.length);
+            console.log('[2]: ');
+            console.log(this.hotelRatings[2]);
+            break;
+          case 'recommendedTos':
+            this.recommendedTos.push({...this.referenceData[key]});
+            break;
+          case 'roomConditions':
+            this.roomConditions.push({...this.referenceData[key]});
+            break;
+          case 'roomTypes':
+            this.roomTypes.push({...this.referenceData[key]});
+            break;
+          case 'sizes':
+            this.sizes.push({...this.referenceData[key]});
+            break;
+        }
+      } else {
+        console.log('if (this.referenceData.hasOwnProperty(key)) HAS FAILED');
+      }
+    }
+    console.log('groupReferenceData finished');
+  }
+
 }
