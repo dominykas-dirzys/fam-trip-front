@@ -1,18 +1,3 @@
-<!--<div><p>Reference data:</p></div>-->
-<!--<div *ngIf="referenceData">{{referenceData}}</div>-->
-
-
-<div><p>Hotel ratings:</p></div>
-<div *ngFor="let hotelRating of hotelRatings">{{hotelRating}}</div>
-
-<!--<div *ngFor="let hotelRating of hotelRatings">-->
-<!--  <div *ngFor="let ratingValue of hotelRating">{{ratingValue.toString()}}</div>-->
-<!--</div>-->
-
-
-
-<br>
-
 <h3 mat-dialog-title>Hotel: {{ data.name }}</h3>
 
 <form [formGroup]="form" mat-dialog-content>
