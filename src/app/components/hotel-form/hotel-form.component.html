@@ -1,3 +1,18 @@
+<!--<div><p>Reference data:</p></div>-->
+<!--<div *ngIf="referenceData">{{referenceData}}</div>-->
+
+
+<div><p>Hotel ratings:</p></div>
+<div *ngFor="let hotelRating of hotelRatings">{{hotelRating}}</div>
+
+<!--<div *ngFor="let hotelRating of hotelRatings">-->
+<!--  <div *ngFor="let ratingValue of hotelRating">{{ratingValue.toString()}}</div>-->
+<!--</div>-->
+
+
+
+<br>
+
 <h3 mat-dialog-title>Hotel: {{ data.name }}</h3>
 
 <form [formGroup]="form" mat-dialog-content>
@@ -153,13 +168,3 @@
   <button mat-raised-button mat-button (click)="cancel()">Cancel</button>
   <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="save()">Save</button>
 </div>
-
-<div><p>Reference data:</p></div>
-<div *ngIf="referenceData">{{referenceData}}</div>
-
-
-<!--<div><p>Hotel ratings:</p></div>-->
-<!--<div *ngIf="hotelRatings">{{hotelRatings.values()}}</div>-->
-<!--<li *ngFor="let hotelRating of hotelRatings">-->
-<!--  <b>{{hotelRating?.item}}</b>-->
-<!--</li>-->

@@ -6,6 +6,8 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {CityService} from '../../services/city.service';
 import {ReferenceDataService} from '../../services/reference-data.service';
+import {HttpClient} from '@angular/common/http';
+import {TOKEN_KEY} from '../../common/constants';
 
 export const _filter = (opt: string[], value: string): string[] => {
   const filterValue = value.toLowerCase();
@@ -21,13 +23,14 @@ export const _filter = (opt: string[], value: string): string[] => {
 export class HotelFormComponent implements OnInit {
 
   constructor(
-    // private api: ApiService,
+    private http: HttpClient,
     private _formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<HotelFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Hotel,
     private cityService: CityService,
-    private referenceDataService: ReferenceDataService
+    // private referenceDataService: ReferenceDataService,
   ) {
+    this.referenceDataUrl = 'http://localhost:8080/api/reference_data';
   }
 
   get name() {
@@ -56,7 +59,6 @@ export class HotelFormComponent implements OnInit {
 
   cities: City[];
   cityTitles: string[] = [];
-  referenceData: ReferenceData[] = [];
 
   cityGroups = [{
     country: 'Lithuania (hard-coded)',
@@ -66,30 +68,48 @@ export class HotelFormComponent implements OnInit {
     cities: ['Bodrum (hard-coded)', 'Kemer (hard-coded)']
   }];
 
-  private cuisineTypes = [];
-  private foodQualities = [];
-  private hotelLabels = [];
-  private hotelRatings = [];
-  private recommendedTos = [];
-  private roomConditions = [];
-  private roomTypes = [];
-  private sizes = [];
+  // private referenceDataUrl: string;
+  // private cuisineTypes = [];
+  // private foodQualities = [];
+  // private hotelLabels = [];
+  // private hotelRatings = [];
+  // private recommendedTos = [];
+  // private roomConditions = [];
+  // private roomTypes = [];
+  // private sizes = [];
+
+  referenceDataUrl: string;
+
+  referenceData = [];
+  cuisineTypes = [];
+  foodQualities = [];
+  hotelLabels = [];
+  hotelRatings = [];
+  recommendedTos = [];
+  roomConditions = [];
+  roomTypes = [];
+  sizes = [];
 
   cityGroupOptions: Observable<CityGroup[]>;
   currentCity = this.data.city.title;
 
   ngOnInit(): void {
     this.fetchCities();
+    this.findAll();
 
-    console.log('ngOnInit() this.referenceDataService.findAll()');
+    // console.log('ngOnInit() this.referenceDataService.findAll()');
 
-    this.referenceDataService.findAll().subscribe(data => {
-      this.referenceData = data;
-    });
+    // this.referenceDataService.findAll().subscribe(data => {
+    //   this.referenceData = data;
+    // });
 
+    console.log('reference Data in OnInit after findAll');
     console.log(this.referenceData);
 
-    this.groupReferenceData();
+    console.log('hotelRatings in OnInit after findAll');
+    console.log(this.hotelRatings);
+
+    // this.groupReferenceData();
 
     this.form = new FormGroup({
       name: new FormControl(this.data.name, [
@@ -131,9 +151,6 @@ export class HotelFormComponent implements OnInit {
         cityGroup: this.currentCity,
       }
     );
-
-    console.log('Reference data in hotel-form received from service:');
-    console.log(this.referenceData);
   }
 
   private _filterGroup(value: string): CityGroup[] {
@@ -165,6 +182,74 @@ export class HotelFormComponent implements OnInit {
     });
   }
 
+  public findAll() {
+    this.http.get(this.referenceDataUrl, this.getRequestOptions())
+      .pipe(
+        map(responseData => {
+          const referenceDataArray = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              switch (key) {
+                case 'cuisineTypes':
+                  this.cuisineTypes.push(...responseData[key]);
+                  break;
+                case 'foodQualities':
+                  this.foodQualities.push(...responseData[key]);
+                  break;
+                case 'hotelLabels':
+                  this.hotelLabels.push(...responseData[key]);
+                  break;
+                case 'hotelRatings':
+                  this.hotelRatings.push(...responseData[key]);
+                  // this.hotelRatings.push({...responseData[key]});
+                  console.log('findAll switch');
+                  console.log('Hotel ratings:');
+                  console.log(this.hotelRatings);
+                  console.log('(length:) ');
+                  console.log(this.hotelRatings?.length);
+                  console.log('No. [0]: ');
+                  console.log(this.hotelRatings[0]);
+                  break;
+                case 'recommendedTos':
+                  this.recommendedTos.push(...responseData[key]);
+                  break;
+                case 'roomConditions':
+                  this.roomConditions.push(...responseData[key]);
+                  break;
+                case 'roomTypes':
+                  this.roomTypes.push(...responseData[key]);
+                  break;
+                case 'sizes':
+                  this.sizes.push(...responseData[key]);
+                  break;
+              }
+              referenceDataArray.push({...responseData[key], id: key});
+            }
+          }
+          console.log('refrerenceDataArray: ');
+          console.log(referenceDataArray);
+          this.referenceData = referenceDataArray;
+        })
+      )
+      .subscribe(referenceDataUnits => {
+        console.log('referenceDataUnits: ');
+        console.log(referenceDataUnits);
+      });
+  }
+
+  private getRequestOptions() {
+    const token = sessionStorage.getItem(TOKEN_KEY);
+
+    const headers: { [key: string]: string } = {
+      'Content-Type': 'application/json',
+      Authorization: token ? `Bearer ${token}` : ''
+    };
+
+    return {
+      headers
+    };
+  }
+
   // private fetchReferenceData() {
   //   this.api.get(HotelFormComponent.URL)
   //     .pipe(
@@ -185,53 +270,53 @@ export class HotelFormComponent implements OnInit {
   //
   // }
 
-  groupReferenceData() {
-    console.log('groupReferenceData init');
-    console.log(this.referenceData.toString());
-    console.log(this.referenceData.length);
-
-
-    for (const key in this.referenceData) {
-      if (this.referenceData.hasOwnProperty(key)) {
-        console.log('if (this.referenceData.hasOwnProperty(key)) SUCCESS');
-        switch (key) {
-          case 'cuisineTypes':
-            this.cuisineTypes.push({...this.referenceData[key]});
-            break;
-          case 'foodQualities':
-            this.foodQualities.push({...this.referenceData[key]});
-            break;
-          case 'hotelLabels':
-            this.hotelLabels.push({...this.referenceData[key]});
-            break;
-          case 'hotelRatings':
-            this.hotelRatings.push({...this.referenceData[key]});
-            console.log('findAll switch');
-            console.log('Hotel ratings:');
-            console.log(this.hotelRatings);
-            console.log('(length:) ');
-            console.log(this.hotelRatings?.length);
-            console.log('[2]: ');
-            console.log(this.hotelRatings[2]);
-            break;
-          case 'recommendedTos':
-            this.recommendedTos.push({...this.referenceData[key]});
-            break;
-          case 'roomConditions':
-            this.roomConditions.push({...this.referenceData[key]});
-            break;
-          case 'roomTypes':
-            this.roomTypes.push({...this.referenceData[key]});
-            break;
-          case 'sizes':
-            this.sizes.push({...this.referenceData[key]});
-            break;
-        }
-      } else {
-        console.log('if (this.referenceData.hasOwnProperty(key)) HAS FAILED');
-      }
-    }
-    console.log('groupReferenceData finished');
-  }
+  // groupReferenceData() {
+  //   console.log('groupReferenceData init');
+  //   console.log(this.referenceData.toString());
+  //   console.log(this.referenceData.length);
+  //
+  //
+  //   for (const key in this.referenceData) {
+  //     if (this.referenceData.hasOwnProperty(key)) {
+  //       console.log('if (this.referenceData.hasOwnProperty(key)) SUCCESS');
+  //       switch (key) {
+  //         case 'cuisineTypes':
+  //           this.cuisineTypes.push({...this.referenceData[key]});
+  //           break;
+  //         case 'foodQualities':
+  //           this.foodQualities.push({...this.referenceData[key]});
+  //           break;
+  //         case 'hotelLabels':
+  //           this.hotelLabels.push({...this.referenceData[key]});
+  //           break;
+  //         case 'hotelRatings':
+  //           this.hotelRatings.push({...this.referenceData[key]});
+  //           console.log('findAll switch');
+  //           console.log('Hotel ratings:');
+  //           console.log(this.hotelRatings);
+  //           console.log('(length:) ');
+  //           console.log(this.hotelRatings?.length);
+  //           console.log('[2]: ');
+  //           console.log(this.hotelRatings[2]);
+  //           break;
+  //         case 'recommendedTos':
+  //           this.recommendedTos.push({...this.referenceData[key]});
+  //           break;
+  //         case 'roomConditions':
+  //           this.roomConditions.push({...this.referenceData[key]});
+  //           break;
+  //         case 'roomTypes':
+  //           this.roomTypes.push({...this.referenceData[key]});
+  //           break;
+  //         case 'sizes':
+  //           this.sizes.push({...this.referenceData[key]});
+  //           break;
+  //       }
+  //     } else {
+  //       console.log('if (this.referenceData.hasOwnProperty(key)) HAS FAILED');
+  //     }
+  //   }
+  //   console.log('groupReferenceData finished');
+  // }
 
 }
