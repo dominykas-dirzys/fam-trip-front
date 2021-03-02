@@ -19,14 +19,20 @@
 
   <mat-form-field>
     <mat-label>Official Rating</mat-label>
-    <input
-      matInput
-      required
-      formControlName="officialRating"
-    />
-    <mat-error *ngIf="officialRating.errors?.required">
-      Rating is required
-    </mat-error>
+      <mat-select [formControl]="officialRating" name="rating">
+      <mat-option *ngFor="let hotelRating of hotelRatings" [value]="hotelRating">
+        {{hotelRating}}
+      </mat-option>
+      </mat-select>
+
+<!--    <input-->
+<!--      matInput-->
+<!--      required-->
+<!--      formControlName="officialRating"-->
+<!--    />-->
+<!--    <mat-error *ngIf="officialRating.errors?.required">-->
+<!--      Rating is required-->
+<!--    </mat-error>-->
   </mat-form-field>
 
   <mat-form-field>

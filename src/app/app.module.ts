@@ -25,6 +25,7 @@ import { ListItemComponent } from './shared/list-item/list-item.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatOptionModule} from '@angular/material/core';
 import {HotelFormComponent} from './components/hotel-form/hotel-form.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -39,23 +40,24 @@ import {HotelFormComponent} from './components/hotel-form/hotel-form.component';
     ListItemComponent,
     HotelFormComponent
   ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatDialogModule,
-    MatIconModule,
-    MatCardModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    ReactiveFormsModule,
-    MatOptionModule,
-  ],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatTableModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatDialogModule,
+        MatIconModule,
+        MatCardModule,
+        MatInputModule,
+        MatAutocompleteModule,
+        ReactiveFormsModule,
+        MatOptionModule,
+        MatSelectModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

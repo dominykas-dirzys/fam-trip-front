@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {City, CityGroup, Hotel} from '../../types/types';
 import {Observable} from 'rxjs';
@@ -118,6 +118,10 @@ export class HotelFormComponent implements OnInit {
     return this.form.get('officialRating');
   }
 
+  // get officialRating() {
+  //   return this.form.controls.officialRatings as FormArray;
+  // }
+
   get city() {
     return this.form.get('city.title');
   }
@@ -183,7 +187,6 @@ export class HotelFormComponent implements OnInit {
                   break;
                 case 'hotelRatings':
                   this.hotelRatings.push(...responseData[key]);
-                  // this.hotelRatings.push({...responseData[key]});
                   console.log('findAll switch');
                   console.log('Hotel ratings:');
                   console.log(this.hotelRatings);
