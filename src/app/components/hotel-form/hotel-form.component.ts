@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {City, CityGroup, Hotel} from '../../types/types';
 import {Observable} from 'rxjs';
@@ -67,6 +67,9 @@ export class HotelFormComponent implements OnInit {
     console.log('hotelRatings in OnInit after findAll');
     console.log(this.hotelRatings);
 
+    console.log('this.data.waterSlides:');
+    console.log(this.data.waterSlides);
+
     this.form = new FormGroup({
       name: new FormControl(this.data.name, [
         Validators.required,
@@ -80,7 +83,7 @@ export class HotelFormComponent implements OnInit {
         })
       ),
       inspectionScore: new FormControl(this.data.inspectionScore, [
-        Validators.required
+        Validators.required, Validators.min(1), Validators.max(10)
       ]),
       foodQuality: new FormControl(this.data.foodQuality),
       territorySize: new FormControl(this.data.territorySize),
@@ -90,10 +93,10 @@ export class HotelFormComponent implements OnInit {
       distanceFromAirport: new FormControl(this.data.distanceFromAirport),
       remarks: new FormControl(this.data.remarks),
       author: new FormControl(this.data.author.id),
-      recommendedTos: new FormControl(this.data.recommendedTos),
+      recommendations: new FormControl(this.data.recommendedTos),
       rooms: new FormControl(this.data.rooms),
       labels: new FormControl(this.data.labels),
-      cuisineTypes: new FormControl(this.data.cuisineTypes)
+      cuisines: new FormControl(this.data.cuisineTypes)
     });
 
     this.cityGroupOptions = this.form.get('cityGroup')!.valueChanges
@@ -118,9 +121,9 @@ export class HotelFormComponent implements OnInit {
     return this.form.get('officialRating');
   }
 
-  // get officialRating() {
-  //   return this.form.controls.officialRatings as FormArray;
-  // }
+  get foodQuality() {
+    return this.form.get('foodQuality');
+  }
 
   get city() {
     return this.form.get('city.title');
@@ -132,6 +135,26 @@ export class HotelFormComponent implements OnInit {
 
   get territorySize() {
     return this.form.get('territorySize');
+  }
+
+  get waterSlides() {
+    return this.form.get('waterSlides');
+  }
+
+  get spa() {
+    return this.form.get('spa');
+  }
+
+  get recommendations() {
+    return this.form.get('recommendations');
+  }
+
+  get labels() {
+    return this.form.get('labels');
+  }
+
+  get cuisines() {
+    return this.form.get('cuisines');
   }
 
   form: FormGroup = this._formBuilder.group({

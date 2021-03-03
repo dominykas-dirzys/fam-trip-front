@@ -20,12 +20,13 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
-import { ListHeaderComponent } from './shared/list-header/list-header.component';
-import { ListItemComponent } from './shared/list-item/list-item.component';
+import {ListHeaderComponent} from './shared/list-header/list-header.component';
+import {ListItemComponent} from './shared/list-item/list-item.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatOptionModule} from '@angular/material/core';
 import {HotelFormComponent} from './components/hotel-form/hotel-form.component';
-import {MatSelectModule} from "@angular/material/select";
+import {MatSelectModule} from '@angular/material/select';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -40,24 +41,26 @@ import {MatSelectModule} from "@angular/material/select";
     ListItemComponent,
     HotelFormComponent
   ],
-    imports: [
-        AppRoutingModule,
-        BrowserModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        MatTableModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatMenuModule,
-        MatDialogModule,
-        MatIconModule,
-        MatCardModule,
-        MatInputModule,
-        MatAutocompleteModule,
-        ReactiveFormsModule,
-        MatOptionModule,
-        MatSelectModule,
-    ],
+  imports: [
+    AppRoutingModule,
+    BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatIconModule,
+    MatCardModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatSlideToggleModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
