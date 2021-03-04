@@ -125,8 +125,8 @@
 
   <mat-form-field>
     <mat-label>Recommended To</mat-label>
-    <mat-select [formControl]="recommendations" multiple>
-      <mat-option *ngFor="let recommendedTo of recommendedTos" [value]="recommendedTo">
+    <mat-select [formControl]="recommendedTos" multiple>
+      <mat-option *ngFor="let recommendedTo of theRecommendedTos" [value]="recommendedTo">
         {{recommendedTo}}
       </mat-option>
     </mat-select>
@@ -143,9 +143,9 @@
 
   <mat-form-field>
     <mat-label>Cuisine Types</mat-label>
-    <mat-select [formControl]="cuisines" multiple>
-      <mat-option *ngFor="let cuisineType of cuisineTypes" [value]="cuisineType">
-        {{cuisineType}}
+    <mat-select [formControl]="cuisineTypes" multiple>
+      <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine">
+        {{cuisine}}
       </mat-option>
     </mat-select>
   </mat-form-field>

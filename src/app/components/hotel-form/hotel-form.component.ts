@@ -35,11 +35,11 @@ export class HotelFormComponent implements OnInit {
   referenceDataUrl: string;
 
   referenceData = [];
-  cuisineTypes = [];
+  cuisines = [];
   foodQualities = [];
   hotelLabels = [];
   hotelRatings = [];
-  recommendedTos = [];
+  theRecommendedTos = [];
   roomConditions = [];
   roomTypes = [];
   sizes = [];
@@ -93,10 +93,10 @@ export class HotelFormComponent implements OnInit {
       distanceFromAirport: new FormControl(this.data.distanceFromAirport),
       remarks: new FormControl(this.data.remarks),
       author: new FormControl(this.data.author.id),
-      recommendations: new FormControl(this.data.recommendedTos),
+      recommendedTos: new FormControl(this.data.recommendedTos),
       rooms: new FormControl(this.data.rooms),
       labels: new FormControl(this.data.labels),
-      cuisines: new FormControl(this.data.cuisineTypes)
+      cuisineTypes: new FormControl(this.data.cuisineTypes)
     });
 
     this.cityGroupOptions = this.form.get('cityGroup')!.valueChanges
@@ -145,16 +145,16 @@ export class HotelFormComponent implements OnInit {
     return this.form.get('spa');
   }
 
-  get recommendations() {
-    return this.form.get('recommendations');
+  get recommendedTos() {
+    return this.form.get('recommendedTos');
   }
 
   get labels() {
     return this.form.get('labels');
   }
 
-  get cuisines() {
-    return this.form.get('cuisines');
+  get cuisineTypes() {
+    return this.form.get('cuisineTypes');
   }
 
   form: FormGroup = this._formBuilder.group({
@@ -200,7 +200,7 @@ export class HotelFormComponent implements OnInit {
             if (responseData.hasOwnProperty(key)) {
               switch (key) {
                 case 'cuisineTypes':
-                  this.cuisineTypes.push(...responseData[key]);
+                  this.cuisines.push(...responseData[key]);
                   break;
                 case 'foodQualities':
                   this.foodQualities.push(...responseData[key]);
@@ -219,7 +219,7 @@ export class HotelFormComponent implements OnInit {
                   console.log(this.hotelRatings[0]);
                   break;
                 case 'recommendedTos':
-                  this.recommendedTos.push(...responseData[key]);
+                  this.theRecommendedTos.push(...responseData[key]);
                   break;
                 case 'roomConditions':
                   this.roomConditions.push(...responseData[key]);
