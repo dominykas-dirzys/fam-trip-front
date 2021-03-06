@@ -8,10 +8,10 @@ import {CityService} from '../../services/city.service';
 import {HttpClient} from '@angular/common/http';
 import {TOKEN_KEY} from '../../common/constants';
 
-export const _filter = (opt: string[], value: string): string[] => {
-  const filterValue = value.toLowerCase();
+const _filter = (opt: City[], value: City | string): City[] => {
+  const filterValue = typeof value === 'object' ? value.title.toLowerCase() : value.toLowerCase();
 
-  return opt.filter(item => item.toLowerCase().indexOf(filterValue) === 0);
+  return opt.filter(item => item.title.toLowerCase().indexOf(filterValue) === 0);
 };
 
 @Component({
@@ -21,15 +21,15 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 export class HotelFormComponent implements OnInit {
 
-  cities: City[];
+  cities: City[] = [];
   cityTitles: string[] = [];
 
   cityGroups = [{
     country: 'Lithuania (hard-coded)',
-    cities: this.cityTitles
+    cities: [],
   }, {
     country: 'Turkey (hard-coded)',
-    cities: ['Bodrum (hard-coded)', 'Kemer (hard-coded)']
+    cities: [],
   }];
 
   referenceDataUrl: string;
@@ -45,7 +45,11 @@ export class HotelFormComponent implements OnInit {
   sizes = [];
 
   cityGroupOptions: Observable<CityGroup[]>;
-  currentCity = this.data.city.title;
+  currentCity = this.data.city;
+
+  form: FormGroup = this._formBuilder.group({
+    city: '',
+  });
 
   constructor(
     private http: HttpClient,
@@ -67,9 +71,6 @@ export class HotelFormComponent implements OnInit {
     console.log('hotelRatings in OnInit after findAll');
     console.log(this.hotelRatings);
 
-    console.log('this.data.waterSlides:');
-    console.log(this.data.waterSlides);
-
     this.form = new FormGroup({
       name: new FormControl(this.data.name, [
         Validators.required,
@@ -79,7 +80,7 @@ export class HotelFormComponent implements OnInit {
         Validators.required
       ]),
       city: new FormControl(this._formBuilder.group({
-          city: ''
+          city: this.data.city,
         })
       ),
       inspectionScore: new FormControl(this.data.inspectionScore, [
@@ -112,6 +113,9 @@ export class HotelFormComponent implements OnInit {
     );
   }
 
+  displayFn(city: City): string {
+    return city ? city?.title : '';
+  }
 
   get name() {
     return this.form.get('name');
@@ -157,11 +161,6 @@ export class HotelFormComponent implements OnInit {
     return this.form.get('cuisineTypes');
   }
 
-  form: FormGroup = this._formBuilder.group({
-    city: '',
-  });
-
-
   private _filterGroup(value: string): CityGroup[] {
     if (value) {
       return this.cityGroups
@@ -185,6 +184,7 @@ export class HotelFormComponent implements OnInit {
   fetchCities() {
     this.cityService.findAll().subscribe(data => {
       this.cities = data;
+      this.cityGroups.forEach(group => group.cities = data);
       for (const element of this.cities) {
         this.cityTitles.push(element.title);
       }

@@ -32,11 +32,12 @@
            matInput
            formControlName="city"
            required
-           [matAutocomplete]="autoGroup">
-    <mat-autocomplete #autoGroup="matAutocomplete">
+           [matAutocomplete]="autoGroup"
+    />
+    <mat-autocomplete #autoGroup="matAutocomplete" [displayWith]="displayFn">
       <mat-optgroup *ngFor="let group of cityGroupOptions | async" [label]="group.country">
         <mat-option *ngFor="let city of group.cities" [value]="city">
-          {{city}}
+          {{city.title}}
         </mat-option>
       </mat-optgroup>
     </mat-autocomplete>

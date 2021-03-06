@@ -121,7 +121,7 @@ export interface Country {
 
 export interface CityGroup {
   country: string;
-  cities: string[];
+  cities: City[];
 }
 
 export interface ReferenceData {
