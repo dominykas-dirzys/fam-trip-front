@@ -65,12 +65,6 @@ export class HotelFormComponent implements OnInit {
     this.fetchCities();
     this.findAll();
 
-    console.log('reference Data in OnInit after findAll');
-    console.log(this.referenceData);
-
-    console.log('hotelRatings in OnInit after findAll');
-    console.log(this.hotelRatings);
-
     this.form = new FormGroup({
       name: new FormControl(this.data.name, [
         Validators.required,
@@ -210,13 +204,6 @@ export class HotelFormComponent implements OnInit {
                   break;
                 case 'hotelRatings':
                   this.hotelRatings.push(...responseData[key]);
-                  console.log('findAll switch');
-                  console.log('Hotel ratings:');
-                  console.log(this.hotelRatings);
-                  console.log('(length:) ');
-                  console.log(this.hotelRatings?.length);
-                  console.log('No. [0]: ');
-                  console.log(this.hotelRatings[0]);
                   break;
                 case 'recommendedTos':
                   this.theRecommendedTos.push(...responseData[key]);
@@ -234,15 +221,10 @@ export class HotelFormComponent implements OnInit {
               referenceDataArray.push({...responseData[key], id: key});
             }
           }
-          console.log('refrerenceDataArray: ');
-          console.log(referenceDataArray);
           this.referenceData = referenceDataArray;
         })
       )
-      .subscribe(referenceDataUnits => {
-        console.log('referenceDataUnits: ');
-        console.log(referenceDataUnits);
-      });
+      .subscribe();
   }
 
   private getRequestOptions() {
@@ -257,5 +239,4 @@ export class HotelFormComponent implements OnInit {
       headers
     };
   }
-
 }
