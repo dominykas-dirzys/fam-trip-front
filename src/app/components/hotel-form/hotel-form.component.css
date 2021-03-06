@@ -1,3 +1,9 @@
 .remarks {
   height: 250px;
 }
+
+
+mat-form-field {
+  background-color: #424242;
+  color: white;
+}

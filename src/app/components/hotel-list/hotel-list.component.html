@@ -37,7 +37,7 @@
       <button mat-button [routerLink]="['/hotels', element.id]">
         View
       </button>
-      <button mat-button (click)="openDialog(element)">
+      <button mat-button [routerLink]="['/hotel-form', element.id]">
         Edit
       </button>
     </td>
@@ -46,7 +46,3 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-
-
-
-

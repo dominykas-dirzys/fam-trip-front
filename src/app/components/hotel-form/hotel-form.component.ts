@@ -1,12 +1,13 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {City, CityGroup, Hotel} from '../../types/types';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {CityService} from '../../services/city.service';
 import {HttpClient} from '@angular/common/http';
 import {TOKEN_KEY} from '../../common/constants';
+import {ActivatedRoute} from '@angular/router';
+import {ApiService} from '../../services/api.service';
 
 export const _filter = (opt: string[], value: string): string[] => {
   const filterValue = value.toLowerCase();
@@ -20,6 +21,9 @@ export const _filter = (opt: string[], value: string): string[] => {
   styleUrls: ['./hotel-form.component.css']
 })
 export class HotelFormComponent implements OnInit {
+
+  private static readonly URL = '/api/hotels/';
+  data: Hotel;
 
   cities: City[];
   cityTitles: string[] = [];
@@ -45,30 +49,31 @@ export class HotelFormComponent implements OnInit {
   sizes = [];
 
   cityGroupOptions: Observable<CityGroup[]>;
-  currentCity = this.data.city.title;
+  currentCity: string;
 
   constructor(
     private http: HttpClient,
     private _formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<HotelFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Hotel,
     private cityService: CityService,
+    private api: ApiService,
+    private route: ActivatedRoute
   ) {
     this.referenceDataUrl = 'http://localhost:8080/api/reference_data';
   }
 
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.api.get(HotelFormComponent.URL + id).subscribe((data: Hotel) => this.data = data);
+
+    console.log('this.data: ');
+    console.log(this.data);
+    console.log('this.data.name: ');
+    console.log(this.data.name);
+
     this.fetchCities();
     this.findAll();
 
-    console.log('reference Data in OnInit after findAll');
-    console.log(this.referenceData);
-
-    console.log('hotelRatings in OnInit after findAll');
-    console.log(this.hotelRatings);
-
-    console.log('this.data.waterSlides:');
-    console.log(this.data.waterSlides);
+    this.currentCity = this.data.city.title;
 
     this.form = new FormGroup({
       name: new FormControl(this.data.name, [
@@ -173,13 +178,13 @@ export class HotelFormComponent implements OnInit {
   }
 
   cancel() {
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 
   save() {
     console.log('Save method run');
     console.log(this.form.getRawValue());
-    this.dialogRef.close({...this.data, ...this.form.getRawValue()});
+    // this.dialogRef.close({...this.data, ...this.form.getRawValue()});
   }
 
   fetchCities() {
@@ -210,13 +215,6 @@ export class HotelFormComponent implements OnInit {
                   break;
                 case 'hotelRatings':
                   this.hotelRatings.push(...responseData[key]);
-                  console.log('findAll switch');
-                  console.log('Hotel ratings:');
-                  console.log(this.hotelRatings);
-                  console.log('(length:) ');
-                  console.log(this.hotelRatings?.length);
-                  console.log('No. [0]: ');
-                  console.log(this.hotelRatings[0]);
                   break;
                 case 'recommendedTos':
                   this.theRecommendedTos.push(...responseData[key]);
@@ -239,10 +237,7 @@ export class HotelFormComponent implements OnInit {
           this.referenceData = referenceDataArray;
         })
       )
-      .subscribe(referenceDataUnits => {
-        console.log('referenceDataUnits: ');
-        console.log(referenceDataUnits);
-      });
+      .subscribe();
   }
 
   private getRequestOptions() {
