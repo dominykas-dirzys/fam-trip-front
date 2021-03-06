@@ -36,7 +36,7 @@ export class HotelListComponent implements OnInit {
 
   openDialog(hotel?: Hotel) {
     const dialogRef = this.dialog.open(HotelFormComponent, {
-      width: '250px',
+      width: '100%',
       data: hotel || {}
     });
 
