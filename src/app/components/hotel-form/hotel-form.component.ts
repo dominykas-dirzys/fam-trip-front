@@ -78,8 +78,8 @@ export class HotelFormComponent implements OnInit {
       officialRating: new FormControl(this.data.officialRating, [
         Validators.required
       ]),
-      cityGroup: new FormControl(this._formBuilder.group({
-          cityGroup: ''
+      city: new FormControl(this._formBuilder.group({
+          city: ''
         })
       ),
       inspectionScore: new FormControl(this.data.inspectionScore, [
@@ -99,7 +99,7 @@ export class HotelFormComponent implements OnInit {
       cuisineTypes: new FormControl(this.data.cuisineTypes)
     });
 
-    this.cityGroupOptions = this.form.get('cityGroup')!.valueChanges
+    this.cityGroupOptions = this.form.get('city')!.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filterGroup(value))
@@ -107,7 +107,7 @@ export class HotelFormComponent implements OnInit {
 
     this.form.patchValue(
       {
-        cityGroup: this.currentCity,
+        city: this.currentCity,
       }
     );
   }
@@ -158,7 +158,7 @@ export class HotelFormComponent implements OnInit {
   }
 
   form: FormGroup = this._formBuilder.group({
-    cityGroup: '',
+    city: '',
   });
 
 
