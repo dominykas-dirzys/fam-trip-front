@@ -1,6 +1,7 @@
 <h3 mat-dialog-title>Hotel: {{ data.name }}</h3>
 
-<form [formGroup]="form">
+
+<form *ngIf="data" [formGroup]="form">
   <mat-form-field>
     <mat-label>Name</mat-label>
     <input

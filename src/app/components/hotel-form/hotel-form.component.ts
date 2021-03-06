@@ -63,58 +63,14 @@ export class HotelFormComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.api.get(HotelFormComponent.URL + id).subscribe((data: Hotel) => this.data = data);
-
-    console.log('this.data: ');
-    console.log(this.data);
-    console.log('this.data.name: ');
-    console.log(this.data.name);
+    this.api.get(HotelFormComponent.URL + id).subscribe((data: Hotel) =>
+    {
+      this.data = data;
+      this.initForm();
+    });
 
     this.fetchCities();
     this.findAll();
-
-    this.currentCity = this.data.city.title;
-
-    this.form = new FormGroup({
-      name: new FormControl(this.data.name, [
-        Validators.required,
-        Validators.minLength(2)
-      ]),
-      officialRating: new FormControl(this.data.officialRating, [
-        Validators.required
-      ]),
-      city: new FormControl(this._formBuilder.group({
-          city: ''
-        })
-      ),
-      inspectionScore: new FormControl(this.data.inspectionScore, [
-        Validators.required, Validators.min(1), Validators.max(10)
-      ]),
-      foodQuality: new FormControl(this.data.foodQuality),
-      territorySize: new FormControl(this.data.territorySize),
-      waterSlides: new FormControl(this.data.waterSlides),
-      spa: new FormControl(this.data.spa),
-      distanceToBeach: new FormControl(this.data.distanceToBeach),
-      distanceFromAirport: new FormControl(this.data.distanceFromAirport),
-      remarks: new FormControl(this.data.remarks),
-      author: new FormControl(this.data.author.id),
-      recommendedTos: new FormControl(this.data.recommendedTos),
-      rooms: new FormControl(this.data.rooms),
-      labels: new FormControl(this.data.labels),
-      cuisineTypes: new FormControl(this.data.cuisineTypes)
-    });
-
-    this.cityGroupOptions = this.form.get('city')!.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filterGroup(value))
-      );
-
-    this.form.patchValue(
-      {
-        city: this.currentCity,
-      }
-    );
   }
 
 
@@ -253,4 +209,48 @@ export class HotelFormComponent implements OnInit {
     };
   }
 
+  private initForm() {
+    this.currentCity = this.data.city.title;
+
+    this.form = new FormGroup({
+      name: new FormControl(this.data.name, [
+        Validators.required,
+        Validators.minLength(2)
+      ]),
+      officialRating: new FormControl(this.data.officialRating, [
+        Validators.required
+      ]),
+      city: new FormControl(this._formBuilder.group({
+          city: ''
+        })
+      ),
+      inspectionScore: new FormControl(this.data.inspectionScore, [
+        Validators.required, Validators.min(1), Validators.max(10)
+      ]),
+      foodQuality: new FormControl(this.data.foodQuality),
+      territorySize: new FormControl(this.data.territorySize),
+      waterSlides: new FormControl(this.data.waterSlides),
+      spa: new FormControl(this.data.spa),
+      distanceToBeach: new FormControl(this.data.distanceToBeach),
+      distanceFromAirport: new FormControl(this.data.distanceFromAirport),
+      remarks: new FormControl(this.data.remarks),
+      author: new FormControl(this.data.author.id),
+      recommendedTos: new FormControl(this.data.recommendedTos),
+      rooms: new FormControl(this.data.rooms),
+      labels: new FormControl(this.data.labels),
+      cuisineTypes: new FormControl(this.data.cuisineTypes)
+    });
+
+    this.cityGroupOptions = this.form.get('city')!.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filterGroup(value))
+      );
+
+    this.form.patchValue(
+      {
+        city: this.currentCity,
+      }
+    );
+  }
 }
