@@ -1,38 +1,11 @@
 import {Injectable} from '@angular/core';
-import {map} from "rxjs/operators";
-import {ApiService} from "./api.service";
-import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {ReferenceData} from "../types/types";
-import {TOKEN_KEY} from "../common/constants";
+import {map} from 'rxjs/operators';
+import {ApiService} from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReferenceDataService {
-
-  // private referenceDataUrl: string;
-  //
-  // constructor(private http: HttpClient) {
-  //   this.referenceDataUrl = 'http://localhost:8080/api/reference_data';
-  // }
-  //
-  // public findAll(): Observable<ReferenceData[]> {
-  //   return this.http.get<ReferenceData[]>(this.referenceDataUrl, this.getRequestOptions());
-  // }
-  //
-  // private getRequestOptions() {
-  //   const token = sessionStorage.getItem(TOKEN_KEY);
-  //
-  //   const headers: { [key: string]: string } = {
-  //     'Content-Type': 'application/json',
-  //     Authorization: token ? `Bearer ${token}` : ''
-  //   };
-  //
-  //   return {
-  //     headers
-  //   };
-  // }
 
   private static readonly URL = '/api/reference_data';
   private cuisines = [];
