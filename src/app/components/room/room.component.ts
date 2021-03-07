@@ -23,9 +23,9 @@ export class RoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.api.get(RoomComponent.URL + id).subscribe((data: Room) => this.room = data);
-    // this.room = history.state;
+    // const id = this.route.snapshot.paramMap.get('id');
+    // this.api.get(RoomComponent.URL + id).subscribe((data: Room) => this.room = data);
+    this.room = history.state;
   }
 
   openDialog(room?: Room) {
