@@ -37,9 +37,16 @@
       <button mat-button [routerLink]="['/hotels', element.id]">
         View
       </button>
+      <button mat-button (click)="openDialog(element)">
+        Edit
+      </button>
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+
+
+
