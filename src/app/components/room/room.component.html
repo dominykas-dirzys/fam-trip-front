@@ -14,7 +14,7 @@
     <td class="mat-cell">{{room?.roomCondition}}</td>
     <td class="mat-cell">{{room?.remarks}}</td>
     <td class="mat-cell">
-      <button mat-button [routerLink]="['edit']">
+      <button mat-button (click)="openDialog(room)">
         Edit
       </button>
     </td>
