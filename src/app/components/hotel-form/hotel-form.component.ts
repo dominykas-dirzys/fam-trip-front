@@ -7,6 +7,7 @@ import {map, startWith} from 'rxjs/operators';
 import {CityService} from '../../services/city.service';
 import {HttpClient} from '@angular/common/http';
 import {TOKEN_KEY} from '../../common/constants';
+import {ReferenceDataService} from "../../services/reference-data.service";
 
 const _filter = (opt: City[], value: City | string): City[] => {
   const filterValue = typeof value === 'object' ? value.title.toLowerCase() : value.toLowerCase();
@@ -34,14 +35,12 @@ export class HotelFormComponent implements OnInit {
 
   referenceDataUrl: string;
 
-  referenceData = [];
   cuisines = [];
   foodQualities = [];
   hotelLabels = [];
   hotelRatings = [];
   theRecommendedTos = [];
   roomConditions = [];
-  roomTypes = [];
   sizes = [];
 
   cityGroupOptions: Observable<CityGroup[]>;
@@ -57,13 +56,14 @@ export class HotelFormComponent implements OnInit {
     private dialogRef: MatDialogRef<HotelFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Hotel,
     private cityService: CityService,
+    private referenceDataService: ReferenceDataService
   ) {
     this.referenceDataUrl = 'http://localhost:8080/api/reference_data';
   }
 
   ngOnInit(): void {
     this.fetchCities();
-    this.findAll();
+    this.fetchReferenceData();
 
     this.form = new FormGroup({
       name: new FormControl(this.data.name, [
@@ -185,58 +185,31 @@ export class HotelFormComponent implements OnInit {
     });
   }
 
-  public findAll() {
-    this.http.get(this.referenceDataUrl, this.getRequestOptions())
-      .pipe(
-        map(responseData => {
-          const referenceDataArray = [];
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              switch (key) {
-                case 'cuisineTypes':
-                  this.cuisines.push(...responseData[key]);
-                  break;
-                case 'foodQualities':
-                  this.foodQualities.push(...responseData[key]);
-                  break;
-                case 'hotelLabels':
-                  this.hotelLabels.push(...responseData[key]);
-                  break;
-                case 'hotelRatings':
-                  this.hotelRatings.push(...responseData[key]);
-                  break;
-                case 'recommendedTos':
-                  this.theRecommendedTos.push(...responseData[key]);
-                  break;
-                case 'roomConditions':
-                  this.roomConditions.push(...responseData[key]);
-                  break;
-                case 'roomTypes':
-                  this.roomTypes.push(...responseData[key]);
-                  break;
-                case 'sizes':
-                  this.sizes.push(...responseData[key]);
-                  break;
-              }
-              referenceDataArray.push({...responseData[key], id: key});
-            }
-          }
-          this.referenceData = referenceDataArray;
-        })
-      )
-      .subscribe();
-  }
+  public fetchReferenceData() {
+    this.referenceDataService.findAll();
 
-  private getRequestOptions() {
-    const token = sessionStorage.getItem(TOKEN_KEY);
+    this.cuisines = this.referenceDataService.getCuisines();
+    console.log('hotel-form findAll cuisines:');
+    console.log(this.cuisines);
 
-    const headers: { [key: string]: string } = {
-      'Content-Type': 'application/json',
-      Authorization: token ? `Bearer ${token}` : ''
-    };
+    this.foodQualities = this.referenceDataService.getFoodQualities();
+    console.log('hotel-form findAll foodQualities:');
+    console.log(this.foodQualities);
 
-    return {
-      headers
-    };
+    this.hotelLabels = this.referenceDataService.getHotelLabels();
+    console.log('hotel-form findAll hotelLabels:');
+    console.log(this.hotelLabels);
+
+    this.hotelRatings = this.referenceDataService.getHotelRatings();
+    console.log('hotel-form findAll hotelRatings:');
+    console.log(this.hotelRatings);
+
+    this.theRecommendedTos = this.referenceDataService.getRecommendedTos();
+    console.log('hotel-form findAll theRecommendedTos:');
+    console.log(this.theRecommendedTos);
+
+    this.sizes = this.referenceDataService.getSizes();
+    console.log('hotel-form findAll sizes:');
+    console.log(this.sizes);
   }
 }

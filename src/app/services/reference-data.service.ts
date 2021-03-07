@@ -91,16 +91,38 @@ export class ReferenceDataService {
         console.log(referenceDataUnits);
       });
   }
-  //
-  // public getHotelRatings() {
-  //   console.log('getHotelRatings');
-  //   console.log('Hotel ratings:');
-  //   console.log(this.hotelRatings);
-  //   console.log('(length:) ');
-  //   console.log(this.hotelRatings?.length);
-  //   console.log('[2]: ');
-  //   console.log(this.hotelRatings[2]);
-  //   return this.hotelRatings;
-  // }
 
+  public getCuisines() {
+    return this.cuisines;
+  }
+
+  public getFoodQualities() {
+    return this.foodQualities;
+  }
+
+  public getHotelLabels() {
+    return this.hotelLabels;
+  }
+
+  public getHotelRatings() {
+    return this.hotelRatings;
+  }
+
+  public getRecommendedTos() {
+    return this.theRecommendedTos;
+  }
+
+  public getRoomConditions() {
+    return this.roomConditions;
+  }
+
+  public getRoomTypes() {
+    return this.roomTypes;
+  }
+
+  public getSizes() {
+    console.log('referenceDataService getSizes:');
+    console.log(this.sizes);
+    return this.sizes;
+  }
 }
