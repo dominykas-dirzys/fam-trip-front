@@ -121,8 +121,6 @@ export class ReferenceDataService {
   }
 
   public getSizes() {
-    console.log('referenceDataService getSizes:');
-    console.log(this.sizes);
     return this.sizes;
   }
 }
