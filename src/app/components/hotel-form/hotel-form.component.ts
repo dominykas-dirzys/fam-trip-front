@@ -5,7 +5,6 @@ import {City, CityGroup, Hotel} from '../../types/types';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {CityService} from '../../services/city.service';
-import {HttpClient} from '@angular/common/http';
 import {ReferenceDataService} from '../../services/reference-data.service';
 
 const _filter = (opt: City[], value: City | string): City[] => {
@@ -48,7 +47,6 @@ export class HotelFormComponent implements OnInit {
   });
 
   constructor(
-    private http: HttpClient,
     private _formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<HotelFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Hotel,
@@ -175,9 +173,12 @@ export class HotelFormComponent implements OnInit {
   }
 
   fetchCities() {
-    this.cityService.findAll().subscribe(data => {
+    this.cityService.findAll().subscribe((
+      data: City[]) => {
       this.cities = data;
-      this.cityGroups.forEach(group => group.cities = data);
+      console.log('this.cities from hotel-form fetchCities():');
+      console.log(this.cities);
+      this.cityGroups.forEach(group => group.cities = this.cities);
       for (const element of this.cities) {
         this.cityTitles.push(element.title);
       }
