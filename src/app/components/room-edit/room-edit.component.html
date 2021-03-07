@@ -1,0 +1,48 @@
+<app-page-title>Room Edit</app-page-title>
+
+<form [formGroup]="newRoomForm" (ngSubmit)="onSubmit()">
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Room Type</mat-label>
+      <mat-select matInput formControlName="roomType">
+        <mat-option value="PROMO">Promo</mat-option>
+        <mat-option value="STANDARD_DBL">Standard Double</mat-option>
+        <mat-option value="FAMILY">Family</mat-option>
+        <mat-option value="SUITE">Suite</mat-option>
+        <mat-option value="DBL_SEA_VIEW">Double Sea View</mat-option>
+        <mat-option value="CUSTOM">Custom</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Size</mat-label>
+      <mat-select matInput formControlName="size">
+        <mat-option value="SMALL">Small</mat-option>
+        <mat-option value="NORMAL">Normal</mat-option>
+        <mat-option value="LARGE">Large</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Room Condition</mat-label>
+      <mat-select matInput formControlName="roomCondition">
+        <mat-option value="NEEDS_RENOVATION">Needs renovation</mat-option>
+        <mat-option value="WEAR_AND_TEAR">Wear And Tear</mat-option>
+        <mat-option value="VERY_GOOD">Very Good</mat-option>
+        <mat-option value="NEW">New</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Remarks</mat-label>
+      <textarea matInput formControlName="remarks"></textarea>
+    </mat-form-field>
+  </div>
+  <div>
+    <button mat-button color="primary" type="submit">Save</button>
+    <button mat-button color="primary" type="button">Cancel</button>
+  </div>
+</form>

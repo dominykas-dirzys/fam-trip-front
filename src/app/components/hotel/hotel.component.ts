@@ -20,7 +20,7 @@ export class HotelComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('hotelid');
     this.api.get(HotelComponent.URL + id).subscribe((data: Hotel) => this.hotel = data);
   }
 

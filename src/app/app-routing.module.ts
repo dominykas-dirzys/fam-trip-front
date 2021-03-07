@@ -4,6 +4,7 @@ import {HotelComponent} from './components/hotel/hotel.component';
 import {RoomComponent} from './components/room/room.component';
 import {HotelListComponent} from './components/hotel-list/hotel-list.component';
 import {RoomListComponent} from './components/room-list/room-list.component';
+import {RoomEditComponent} from './components/room-edit/room-edit.component';
 
 const routes: Routes = [
   {
@@ -11,16 +12,20 @@ const routes: Routes = [
     component: HotelListComponent
   },
    {
-    path: 'hotels/:id',
+    path: 'hotels/:hotelid',
     component: HotelComponent
   },
   {
-    path: 'hotels/:id/rooms',
-    component: RoomListComponent
+    path: 'hotels/:hotelid/rooms',
+    component: RoomListComponent, children: [
+      { path: 'new_room', component: RoomEditComponent }
+    ]
   },
   {
-    path: 'hotels/:id/rooms/:id',
-    component: RoomComponent
+    path: 'hotels/:hotelid/rooms/:roomid',
+    component: RoomComponent, children: [
+      { path: 'edit', component: RoomEditComponent }
+    ]
   }
 ];
 

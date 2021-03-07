@@ -21,6 +21,11 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import { ListHeaderComponent } from './shared/list-header/list-header.component';
 import { ListItemComponent } from './shared/list-item/list-item.component';
+import { RoomEditComponent } from './components/room-edit/room-edit.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule, MatLabel} from '@angular/material/form-field';
+import {MatOptionModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,8 @@ import { ListItemComponent } from './shared/list-item/list-item.component';
     LoginComponent,
     PageTitleComponent,
     ListHeaderComponent,
-    ListItemComponent
+    ListItemComponent,
+    RoomEditComponent
   ],
   imports: [
     AppRoutingModule,
@@ -47,6 +53,11 @@ import { ListItemComponent } from './shared/list-item/list-item.component';
     MatIconModule,
     MatCardModule,
     MatInputModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
