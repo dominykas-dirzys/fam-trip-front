@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Room} from '../../types/types';
+import {Hotel, Room} from '../../types/types';
 import {RoomEditComponent} from '../room-edit/room-edit.component';
 import {MatDialog} from '@angular/material/dialog';
+import {ActivatedRoute} from '@angular/router';
+import {ApiService} from "../../services/api.service";
 
 @Component({
   selector: 'app-room',
@@ -10,13 +12,20 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class RoomComponent implements OnInit {
 
+  private static readonly URL = '/api/rooms/';
+
   room: Room;
 
-  constructor(public dialog: MatDialog) {
+  constructor(
+    private api: ApiService,
+    private route: ActivatedRoute,
+    public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.room = history.state;
+    const id = this.route.snapshot.paramMap.get('id');
+    this.api.get(RoomComponent.URL + id).subscribe((data: Room) => this.room = data);
+    // this.room = history.state;
   }
 
   openDialog(room?: Room) {
