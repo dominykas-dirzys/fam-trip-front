@@ -12,21 +12,17 @@ const routes: Routes = [
     path: 'hotels',
     component: HotelListComponent
   },
-   {
+  {
     path: 'hotels/:id',
     component: HotelComponent
   },
   {
-    path: 'hotels/:hotelid/rooms',
-    component: RoomListComponent, children: [
-      { path: 'new_room', component: RoomEditComponent }
-    ]
+    path: 'rooms',
+    component: RoomListComponent
   },
   {
-    path: 'hotels/:hotelid/rooms/:roomid',
-    component: RoomComponent, children: [
-      { path: 'edit', component: RoomEditComponent }
-    ]
+    path: 'rooms/:id',
+    component: RoomComponent
   },
   {
     path: 'addHotel',
