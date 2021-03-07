@@ -9,7 +9,6 @@ import {ApiService} from './api.service';
 export class CityService {
 
   private static readonly URL = '/api/cities';
-  private cities: City[] = [];
 
   constructor(private api: ApiService) {
   }
