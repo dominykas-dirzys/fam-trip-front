@@ -6,8 +6,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {CityService} from '../../services/city.service';
 import {HttpClient} from '@angular/common/http';
-import {TOKEN_KEY} from '../../common/constants';
-import {ReferenceDataService} from "../../services/reference-data.service";
+import {ReferenceDataService} from '../../services/reference-data.service';
 
 const _filter = (opt: City[], value: City | string): City[] => {
   const filterValue = typeof value === 'object' ? value.title.toLowerCase() : value.toLowerCase();
@@ -33,8 +32,6 @@ export class HotelFormComponent implements OnInit {
     cities: [],
   }];
 
-  referenceDataUrl: string;
-
   cuisines = [];
   foodQualities = [];
   hotelLabels = [];
@@ -58,13 +55,15 @@ export class HotelFormComponent implements OnInit {
     private cityService: CityService,
     private referenceDataService: ReferenceDataService
   ) {
-    this.referenceDataUrl = 'http://localhost:8080/api/reference_data';
   }
 
   ngOnInit(): void {
     this.fetchCities();
     this.fetchReferenceData();
+    this.initForm();
+  }
 
+  initForm() {
     this.form = new FormGroup({
       name: new FormControl(this.data.name, [
         Validators.required,
@@ -187,29 +186,11 @@ export class HotelFormComponent implements OnInit {
 
   public fetchReferenceData() {
     this.referenceDataService.findAll();
-
     this.cuisines = this.referenceDataService.getCuisines();
-    console.log('hotel-form findAll cuisines:');
-    console.log(this.cuisines);
-
     this.foodQualities = this.referenceDataService.getFoodQualities();
-    console.log('hotel-form findAll foodQualities:');
-    console.log(this.foodQualities);
-
     this.hotelLabels = this.referenceDataService.getHotelLabels();
-    console.log('hotel-form findAll hotelLabels:');
-    console.log(this.hotelLabels);
-
     this.hotelRatings = this.referenceDataService.getHotelRatings();
-    console.log('hotel-form findAll hotelRatings:');
-    console.log(this.hotelRatings);
-
     this.theRecommendedTos = this.referenceDataService.getRecommendedTos();
-    console.log('hotel-form findAll theRecommendedTos:');
-    console.log(this.theRecommendedTos);
-
     this.sizes = this.referenceDataService.getSizes();
-    console.log('hotel-form findAll sizes:');
-    console.log(this.sizes);
   }
 }

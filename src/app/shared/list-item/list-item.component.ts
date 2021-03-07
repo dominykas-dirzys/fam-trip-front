@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CuisineType, FoodQuality, HotelLabel, HotelRating, RecommendedTo, Room, Size, User} from "../../types/types";
+import {Room, User} from "../../types/types";
 
 @Component({
   selector: 'app-list-item',
@@ -11,10 +11,10 @@ export class ListItemComponent implements OnInit {
   @Input() id: number;
   @Input() selected: number;
   @Input() name: string;
-  @Input() officialRating: HotelRating;
+  @Input() officialRating: number;
   @Input() inspectionScore: number;
-  @Input() foodQuality: FoodQuality;
-  @Input() territorySize: Size;
+  @Input() foodQuality: string;
+  @Input() territorySize: string;
   @Input() waterSlides: boolean;
   @Input() spa: boolean;
   @Input() distanceToBeach: number;
@@ -22,9 +22,9 @@ export class ListItemComponent implements OnInit {
   @Input() remarks: string;
   @Input() author: User;
   @Input() rooms: Room[];
-  @Input() recommendedTos: RecommendedTo[];
-  @Input() labels: HotelLabel[];
-  @Input() cuisineTypes: CuisineType[];
+  @Input() recommendedTos: string[];
+  @Input() labels: string[];
+  @Input() cuisineTypes: string[];
   @Output() selectItem = new EventEmitter<number>();
   @Output() removeItem = new EventEmitter<number>();
 
