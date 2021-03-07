@@ -16,11 +16,6 @@ export class RoomEditComponent implements OnInit {
   referenceDataUrl: string;
 
   referenceData = [];
-  cuisines = [];
-  foodQualities = [];
-  hotelLabels = [];
-  hotelRatings = [];
-  theRecommendedTos = [];
   roomConditions = [];
   roomTypes = [];
   sizes = [];
@@ -74,21 +69,6 @@ export class RoomEditComponent implements OnInit {
           for (const key in responseData) {
             if (responseData.hasOwnProperty(key)) {
               switch (key) {
-                case 'cuisineTypes':
-                  this.cuisines.push(...responseData[key]);
-                  break;
-                case 'foodQualities':
-                  this.foodQualities.push(...responseData[key]);
-                  break;
-                case 'hotelLabels':
-                  this.hotelLabels.push(...responseData[key]);
-                  break;
-                case 'hotelRatings':
-                  this.hotelRatings.push(...responseData[key]);
-                  break;
-                case 'recommendedTos':
-                  this.theRecommendedTos.push(...responseData[key]);
-                  break;
                 case 'roomConditions':
                   this.roomConditions.push(...responseData[key]);
                   break;
