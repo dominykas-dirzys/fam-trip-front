@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Hotel, Room} from '../../types/types';
+import {Component, OnInit} from '@angular/core';
+import {Room} from '../../types/types';
 import {RoomEditComponent} from '../room-edit/room-edit.component';
 import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute} from '@angular/router';
