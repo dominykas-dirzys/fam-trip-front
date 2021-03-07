@@ -3,7 +3,7 @@ import {Hotel, Room} from '../../types/types';
 import {RoomEditComponent} from '../room-edit/room-edit.component';
 import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute} from '@angular/router';
-import {ApiService} from "../../services/api.service";
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-room',
