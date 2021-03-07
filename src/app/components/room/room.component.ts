@@ -23,6 +23,7 @@ export class RoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // TODO: use this when RoomController created
     // const id = this.route.snapshot.paramMap.get('id');
     // this.api.get(RoomComponent.URL + id).subscribe((data: Room) => this.room = data);
     this.room = history.state;
