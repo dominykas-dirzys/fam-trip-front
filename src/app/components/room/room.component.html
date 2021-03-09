@@ -6,11 +6,19 @@
     <th class="mat-header-cell">Size</th>
     <th class="mat-header-cell">Room Condition</th>
     <th class="mat-header-cell">Remarks</th>
+    <th class="mat-header-cell">Actions</th>
   </tr>
   <tr class="mat-row">
     <td class="mat-cell">{{room?.id}}</td>
     <td class="mat-cell">{{room?.size}}</td>
     <td class="mat-cell">{{room?.roomCondition}}</td>
     <td class="mat-cell">{{room?.remarks}}</td>
+    <td class="mat-cell">
+      <button mat-button (click)="openDialog(room)">
+        Edit
+      </button>
+    </td>
   </tr>
 </table>
+
+<router-outlet></router-outlet>

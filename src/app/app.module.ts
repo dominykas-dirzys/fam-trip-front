@@ -22,10 +22,12 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {ListHeaderComponent} from './shared/list-header/list-header.component';
 import {ListItemComponent} from './shared/list-item/list-item.component';
+import {RoomEditComponent} from './components/room-edit/room-edit.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatOptionModule} from '@angular/material/core';
 import {HotelFormComponent} from './components/hotel-form/hotel-form.component';
-import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
@@ -39,6 +41,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     PageTitleComponent,
     ListHeaderComponent,
     ListItemComponent,
+    RoomEditComponent,
     HotelFormComponent
   ],
   imports: [
@@ -54,6 +57,11 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatIconModule,
     MatCardModule,
     MatInputModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
     MatOptionModule,

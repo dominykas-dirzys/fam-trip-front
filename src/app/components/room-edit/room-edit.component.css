@@ -1,0 +1,19 @@
+app-page-title {
+  text-align: center;
+}
+
+form {
+  margin: auto;
+  max-width: 1024px;
+  width: 100%;
+  text-align: center;
+}
+
+mat-form-field {
+  color: white;
+}
+
+button {
+  background-color: black;
+  color: white;
+}

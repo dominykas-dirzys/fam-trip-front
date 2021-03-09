@@ -9,7 +9,6 @@ import {Hotel, Room} from '../../types/types';
 export class RoomListComponent implements OnInit {
 
   @Input() rooms: Room[];
-  @Input() hotel: Hotel;
 
   constructor() {
   }
