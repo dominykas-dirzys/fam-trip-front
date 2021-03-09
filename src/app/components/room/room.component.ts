@@ -47,6 +47,7 @@ export class RoomComponent implements OnInit {
           (result: Room) => this.rooms = [...this.rooms, result]
         );
       }
+      this.room = data;
     });
   }
 }
