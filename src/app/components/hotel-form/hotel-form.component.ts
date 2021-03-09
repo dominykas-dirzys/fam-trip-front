@@ -1,11 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {City, CityGroup, Hotel} from '../../types/types';
+import {City, CityGroup, Country, Hotel} from '../../types/types';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {CityService} from '../../services/city.service';
 import {ReferenceDataService} from '../../services/reference-data.service';
+import {CountryService} from "../../services/country.service";
 
 const _filter = (opt: City[], value: City | string): City[] => {
   const filterValue = typeof value === 'object' ? value.title.toLowerCase() : value.toLowerCase();
@@ -20,6 +21,7 @@ const _filter = (opt: City[], value: City | string): City[] => {
 })
 export class HotelFormComponent implements OnInit {
 
+  countries: Country[] = [];
   cities: City[] = [];
   cityTitles: string[] = [];
 
@@ -51,11 +53,13 @@ export class HotelFormComponent implements OnInit {
     private dialogRef: MatDialogRef<HotelFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Hotel,
     private cityService: CityService,
+    private countryService: CountryService,
     private referenceDataService: ReferenceDataService
   ) {
   }
 
   ngOnInit(): void {
+    this.fetchCountries();
     this.fetchCities();
     this.fetchReferenceData();
     this.initForm();
@@ -183,6 +187,16 @@ export class HotelFormComponent implements OnInit {
         this.cityTitles.push(element.title);
       }
     });
+  }
+
+  fetchCountries() {
+    this.countryService.findAll().subscribe((
+      data: Country[]) => {
+        this.countries = data;
+        console.log('this.countries from hotel-form fetchCountries():');
+        console.log(this.countries);
+      }
+    );
   }
 
   public fetchReferenceData() {
