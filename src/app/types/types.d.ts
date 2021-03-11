@@ -25,6 +25,7 @@ export interface Room {
   size: string;
   roomCondition: string;
   remarks: string;
+  hotelId: number;
 }
 
 export interface User {

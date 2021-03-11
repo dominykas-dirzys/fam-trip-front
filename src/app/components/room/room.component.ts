@@ -42,12 +42,13 @@ export class RoomComponent implements OnInit {
         this.api.post(RoomComponent.URL, data).subscribe(
           (result: Room) => this.rooms = this.rooms.map(r => r.id === result.id ? result : r)
         );
+        this.room = data;
       } else if (data) {
         this.api.post(RoomComponent.URL, data).subscribe(
           (result: Room) => this.rooms = [...this.rooms, result]
         );
+        this.room = data;
       }
-      this.room = data;
     });
   }
 }

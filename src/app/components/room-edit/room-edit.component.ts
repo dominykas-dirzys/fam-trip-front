@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Room} from '../../types/types';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
@@ -9,7 +9,7 @@ import {ReferenceDataService} from '../../services/reference-data.service';
   templateUrl: './room-edit.component.html',
   styleUrls: ['./room-edit.component.css']
 })
-export class RoomEditComponent implements OnInit {
+export class RoomEditComponent implements OnInit, OnDestroy {
 
   roomConditions = [];
   roomTypes = [];
@@ -68,5 +68,9 @@ export class RoomEditComponent implements OnInit {
     console.log('Save method run');
     console.log(this.form.getRawValue());
     this.dialogRef.close({...this.data, ...this.form.getRawValue()});
+  }
+
+  ngOnDestroy() {
+    this.referenceDataService.resetReferences();
   }
 }
