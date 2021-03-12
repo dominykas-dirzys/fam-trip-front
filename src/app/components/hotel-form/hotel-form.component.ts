@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {City, CityGroup, Country, Hotel} from '../../types/types';
@@ -20,7 +20,7 @@ const _filter = (opt: City[], value: City | string): City[] => {
   templateUrl: './hotel-form.component.html',
   styleUrls: ['./hotel-form.component.css']
 })
-export class HotelFormComponent implements OnInit {
+export class HotelFormComponent implements OnInit, OnDestroy {
 
   countries: Country[] = [];
   cities: City[] = [];
@@ -83,9 +83,7 @@ export class HotelFormComponent implements OnInit {
       distanceToBeach: new FormControl(this.data.distanceToBeach),
       distanceFromAirport: new FormControl(this.data.distanceFromAirport),
       remarks: new FormControl(this.data.remarks),
-      author: new FormControl(this.data.author.id),
       recommendedTos: new FormControl(this.data.recommendedTos),
-      rooms: new FormControl(this.data.rooms),
       labels: new FormControl(this.data.labels),
       cuisineTypes: new FormControl(this.data.cuisineTypes)
     });
@@ -222,5 +220,9 @@ export class HotelFormComponent implements OnInit {
     this.hotelRatings = this.referenceDataService.getHotelRatings();
     this.theRecommendedTos = this.referenceDataService.getRecommendedTos();
     this.sizes = this.referenceDataService.getSizes();
+  }
+
+  ngOnDestroy() {
+    this.referenceDataService.resetReferences();
   }
 }
