@@ -92,7 +92,7 @@ export class HotelFormComponent implements OnInit {
 
     this.cityGroupOptions = this.form.get('city')!.valueChanges
       .pipe(
-        startWith(''),
+        startWith(this.data.city),
         map(value => this._filterGroup(value))
       );
 
