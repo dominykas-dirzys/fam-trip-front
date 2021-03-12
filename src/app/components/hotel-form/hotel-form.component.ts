@@ -167,6 +167,10 @@ export class HotelFormComponent implements OnInit {
     this.dialogRef.close({...this.data, ...this.form.getRawValue()});
   }
 
+  fetchCityGroups() {
+    this.fetchCountries();
+  }
+
   fetchCountries() {
     this.countryService.findAll().subscribe((
       data: Country[]) => {
@@ -180,12 +184,10 @@ export class HotelFormComponent implements OnInit {
     this.cityService.findAll().subscribe((
       data: City[]) => {
       this.cities = data;
+      this.cities = this.cities.sort((a, b) => a.title.localeCompare(b.title));
+      console.log(this.cities);
       this.groupCities();
     });
-  }
-
-  fetchCityGroups() {
-    this.fetchCountries();
   }
 
   groupCities() {
@@ -205,6 +207,7 @@ export class HotelFormComponent implements OnInit {
         this.cityGroups.push({country: citysCountryTitle, cities: cityArray});
       }
     }
+    this.cityGroups = this.cityGroups.sort((a, b) => a.country.localeCompare(b.country));
   }
 
   fetchReferenceData() {
