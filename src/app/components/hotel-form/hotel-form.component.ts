@@ -7,6 +7,7 @@ import {map, startWith} from 'rxjs/operators';
 import {CityService} from '../../services/city.service';
 import {ReferenceDataService} from '../../services/reference-data.service';
 import {CountryService} from '../../services/country.service';
+import {RequireMatch} from '../../common/requireMatch';
 
 const _filter = (opt: City[], value: City | string): City[] => {
   const filterValue = typeof value === 'object' ? value.title.toLowerCase() : value.toLowerCase();
@@ -67,7 +68,10 @@ export class HotelFormComponent implements OnInit {
       ]),
       city: new FormControl(this._formBuilder.group({
           city: this.data.city,
-        })
+        }), [
+          Validators.required,
+          RequireMatch
+        ]
       ),
       inspectionScore: new FormControl(this.data.inspectionScore, [
         Validators.required, Validators.min(1), Validators.max(10)
