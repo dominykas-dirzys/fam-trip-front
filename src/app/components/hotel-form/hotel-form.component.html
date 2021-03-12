@@ -41,6 +41,13 @@
         </mat-option>
       </mat-optgroup>
     </mat-autocomplete>
+    <mat-error *ngIf="form.controls['city'].hasError('required')">
+      City is required
+    </mat-error>
+
+    <mat-error *ngIf="form.controls['city'].hasError('incorrect')">
+      Please select city from the list
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>

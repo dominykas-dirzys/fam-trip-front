@@ -1,11 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {City, CityGroup, Hotel} from '../../types/types';
+import {City, CityGroup, Country, Hotel} from '../../types/types';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {CityService} from '../../services/city.service';
 import {ReferenceDataService} from '../../services/reference-data.service';
+import {CountryService} from '../../services/country.service';
+import {RequireMatch} from '../../common/requireMatch';
 
 const _filter = (opt: City[], value: City | string): City[] => {
   const filterValue = typeof value === 'object' ? value.title.toLowerCase() : value.toLowerCase();
@@ -20,16 +22,9 @@ const _filter = (opt: City[], value: City | string): City[] => {
 })
 export class HotelFormComponent implements OnInit {
 
+  countries: Country[] = [];
   cities: City[] = [];
-  cityTitles: string[] = [];
-
-  cityGroups = [{
-    country: 'Lithuania (hard-coded)',
-    cities: [],
-  }, {
-    country: 'Turkey (hard-coded)',
-    cities: [],
-  }];
+  cityGroups = [];
 
   cuisines = [];
   foodQualities = [];
@@ -51,12 +46,13 @@ export class HotelFormComponent implements OnInit {
     private dialogRef: MatDialogRef<HotelFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Hotel,
     private cityService: CityService,
+    private countryService: CountryService,
     private referenceDataService: ReferenceDataService
   ) {
   }
 
   ngOnInit(): void {
-    this.fetchCities();
+    this.fetchCityGroups();
     this.fetchReferenceData();
     this.initForm();
   }
@@ -72,7 +68,10 @@ export class HotelFormComponent implements OnInit {
       ]),
       city: new FormControl(this._formBuilder.group({
           city: this.data.city,
-        })
+        }), [
+          Validators.required,
+          RequireMatch
+        ]
       ),
       inspectionScore: new FormControl(this.data.inspectionScore, [
         Validators.required, Validators.min(1), Validators.max(10)
@@ -93,7 +92,7 @@ export class HotelFormComponent implements OnInit {
 
     this.cityGroupOptions = this.form.get('city')!.valueChanges
       .pipe(
-        startWith(''),
+        startWith(this.data.city),
         map(value => this._filterGroup(value))
       );
 
@@ -172,20 +171,50 @@ export class HotelFormComponent implements OnInit {
     this.dialogRef.close({...this.data, ...this.form.getRawValue()});
   }
 
+  fetchCityGroups() {
+    this.fetchCountries();
+  }
+
+  fetchCountries() {
+    this.countryService.findAll().subscribe((
+      data: Country[]) => {
+        this.countries = data;
+        this.fetchCities();
+      }
+    );
+  }
+
   fetchCities() {
     this.cityService.findAll().subscribe((
       data: City[]) => {
       this.cities = data;
-      console.log('this.cities from hotel-form fetchCities():');
+      this.cities = this.cities.sort((a, b) => a.title.localeCompare(b.title));
       console.log(this.cities);
-      this.cityGroups.forEach(group => group.cities = this.cities);
-      for (const element of this.cities) {
-        this.cityTitles.push(element.title);
-      }
+      this.groupCities();
     });
   }
 
-  public fetchReferenceData() {
+  groupCities() {
+    for (const city of this.cities) {
+      const citysCountryTitle = city.country.title;
+      let foundCountry = false;
+
+      for (const cityGroup of this.cityGroups) {
+        if (cityGroup.country === citysCountryTitle) {
+          foundCountry = true;
+          cityGroup.cities.push(city);
+        }
+      }
+      if (!foundCountry) {
+        const cityArray = [];
+        cityArray.push(city);
+        this.cityGroups.push({country: citysCountryTitle, cities: cityArray});
+      }
+    }
+    this.cityGroups = this.cityGroups.sort((a, b) => a.country.localeCompare(b.country));
+  }
+
+  fetchReferenceData() {
     this.referenceDataService.findAll();
     this.cuisines = this.referenceDataService.getCuisines();
     this.foodQualities = this.referenceDataService.getFoodQualities();
