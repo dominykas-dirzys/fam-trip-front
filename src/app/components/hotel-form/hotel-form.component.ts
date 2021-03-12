@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {CityService} from '../../services/city.service';
 import {ReferenceDataService} from '../../services/reference-data.service';
-import {CountryService} from "../../services/country.service";
+import {CountryService} from '../../services/country.service';
 
 const _filter = (opt: City[], value: City | string): City[] => {
   const filterValue = typeof value === 'object' ? value.title.toLowerCase() : value.toLowerCase();
@@ -23,15 +23,7 @@ export class HotelFormComponent implements OnInit {
 
   countries: Country[] = [];
   cities: City[] = [];
-  cityTitles: string[] = [];
-
-  cityGroups = [{
-    country: 'Lithuania (hard-coded)',
-    cities: [],
-  }, {
-    country: 'Turkey (hard-coded)',
-    cities: [],
-  }];
+  cityGroups = [];
 
   cuisines = [];
   foodQualities = [];
@@ -59,8 +51,7 @@ export class HotelFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchCountries();
-    this.fetchCities();
+    this.fetchCityGroups();
     this.fetchReferenceData();
     this.initForm();
   }
@@ -176,30 +167,47 @@ export class HotelFormComponent implements OnInit {
     this.dialogRef.close({...this.data, ...this.form.getRawValue()});
   }
 
-  fetchCities() {
-    this.cityService.findAll().subscribe((
-      data: City[]) => {
-      this.cities = data;
-      console.log('this.cities from hotel-form fetchCities():');
-      console.log(this.cities);
-      this.cityGroups.forEach(group => group.cities = this.cities);
-      for (const element of this.cities) {
-        this.cityTitles.push(element.title);
-      }
-    });
-  }
-
   fetchCountries() {
     this.countryService.findAll().subscribe((
       data: Country[]) => {
         this.countries = data;
-        console.log('this.countries from hotel-form fetchCountries():');
-        console.log(this.countries);
+        this.fetchCities();
       }
     );
   }
 
-  public fetchReferenceData() {
+  fetchCities() {
+    this.cityService.findAll().subscribe((
+      data: City[]) => {
+      this.cities = data;
+      this.groupCities();
+    });
+  }
+
+  fetchCityGroups() {
+    this.fetchCountries();
+  }
+
+  groupCities() {
+    for (const city of this.cities) {
+      const citysCountryTitle = city.country.title;
+      let foundCountry = false;
+
+      for (const cityGroup of this.cityGroups) {
+        if (cityGroup.country === citysCountryTitle) {
+          foundCountry = true;
+          cityGroup.cities.push(city);
+        }
+      }
+      if (!foundCountry) {
+        const cityArray = [];
+        cityArray.push(city);
+        this.cityGroups.push({country: citysCountryTitle, cities: cityArray});
+      }
+    }
+  }
+
+  fetchReferenceData() {
     this.referenceDataService.findAll();
     this.cuisines = this.referenceDataService.getCuisines();
     this.foodQualities = this.referenceDataService.getFoodQualities();
