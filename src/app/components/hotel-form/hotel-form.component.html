@@ -50,6 +50,10 @@
     </mat-error>
   </mat-form-field>
 
+  <button mat-button (click)="openDialog()">
+    Add new city
+  </button>
+
   <mat-form-field>
     <mat-label>Inspection Score (1..10)</mat-label>
     <input
@@ -121,14 +125,6 @@
   <mat-form-field>
     <mat-label>Remarks</mat-label>
     <textarea class="remarks" matInput formControlName="remarks"></textarea>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Rooms</mat-label>
-    <input
-      matInput
-      formControlName="rooms"
-    />
   </mat-form-field>
 
   <mat-form-field>

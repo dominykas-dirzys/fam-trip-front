@@ -29,6 +29,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatOptionModule} from '@angular/material/core';
 import {HotelFormComponent} from './components/hotel-form/hotel-form.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {CityFormComponent} from './components/city-form/city-form.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     ListHeaderComponent,
     ListItemComponent,
     RoomEditComponent,
-    HotelFormComponent
+    HotelFormComponent,
+    CityFormComponent
   ],
   imports: [
     AppRoutingModule,
@@ -66,7 +68,6 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     ReactiveFormsModule,
     MatOptionModule,
     MatSelectModule,
-    MatSlideToggleModule,
     MatSlideToggleModule
   ],
   providers: [],

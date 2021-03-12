@@ -17,4 +17,8 @@ export class CityService {
     return this.api.get(CityService.URL) as Observable<City[]>;
 
   }
+
+  post(data: object) {
+    return this.api.post(CityService.URL, data);
+  }
 }
