@@ -1,45 +1,54 @@
-<app-page-title>{{hotel?.name}}</app-page-title>
+<app-page-title>{{hotel?.name}} {{hotel?.officialRating}} ({{hotel?.inspectionScore}} / 10)</app-page-title>
+<h4>{{hotel?.city?.title}} ({{hotel?.city?.country?.title}})</h4>
 
-<table class="mat-table" >
+<table class="mat-table">
   <tr class="mat-header-row">
-    <th class="mat-header-cell">Name</th>
-    <th class="mat-header-cell">Official Rating</th>
-    <th class="mat-header-cell">City</th>
-    <th class="mat-header-cell">Country</th>
-    <th class="mat-header-cell">Inspection Score</th>
-    <th class="mat-header-cell">Food Quality</th>
-    <th class="mat-header-cell">Territory Size</th>
-    <th class="mat-header-cell">Water Slides</th>
-    <th class="mat-header-cell">SPA</th>
-    <th class="mat-header-cell">Distance to beach</th>
-    <th class="mat-header-cell">Distance from Airport</th>
-    <th class="mat-header-cell">Remarks</th>
     <th class="mat-header-cell">Author</th>
-    <th class="mat-header-cell">Rooms</th>
-    <th class="mat-header-cell">Recommended to</th>
     <th class="mat-header-cell">Labels</th>
-    <th class="mat-header-cell">Cuisine Type</th>
+    <th class="mat-header-cell">Recommended to</th>
+    <th class="mat-header-cell">Airport</th>
+    <th class="mat-header-cell">Beach</th>
   </tr>
   <tr class="mat-row">
-    <td class="mat-cell">{{hotel?.name}}</td>
-    <td class="mat-cell">{{hotel?.officialRating}}</td>
-    <td class="mat-cell">{{hotel?.city?.title}}</td>
-    <td class="mat-cell">{{hotel?.city?.country.title}}</td>
-    <td class="mat-cell">{{hotel?.inspectionScore}}</td>
-    <td class="mat-cell">{{hotel?.foodQuality}}</td>
+    <td class="mat-cell">{{hotel?.author?.email}}</td>
+    <td class="mat-cell"><p *ngFor="let label of hotel?.labels">{{label}}</p></td>
+    <td class="mat-cell"><p *ngFor="let recommendedTo of hotel?.recommendedTos">{{recommendedTo}}</p></td>
+    <td class="mat-cell">{{hotel?.distanceFromAirport}} km</td>
+    <td class="mat-cell">{{hotel?.distanceToBeach}} m</td>
+  </tr>
+</table>
+
+<br>
+
+<table class="mat-table">
+  <tr class="mat-header-row">
+    <th class="mat-header-cell">Territory</th>
+    <th class="mat-header-cell">Water Slides</th>
+    <th class="mat-header-cell">SPA</th>
+    <th class="mat-header-cell">Food</th>
+    <th class="mat-header-cell">Cuisine Type</th>
+
+  </tr>
+  <tr class="mat-row">
     <td class="mat-cell">{{hotel?.territorySize}}</td>
     <td class="mat-cell">{{hotel?.waterSlides}}</td>
     <td class="mat-cell">{{hotel?.spa}}</td>
-    <td class="mat-cell">{{hotel?.distanceToBeach}}</td>
-    <td class="mat-cell">{{hotel?.distanceFromAirport}}</td>
-    <td class="mat-cell">{{hotel?.remarks}}</td>
-    <td class="mat-cell">{{hotel?.author.email}}</td>
-    <td class="mat-cell">TODO: Open Rooms</td>
-    <td class="mat-cell">{{hotel?.recommendedTos?.toString()}}</td>
-    <td class="mat-cell">{{hotel?.labels?.toString()}}</td>
-    <td class="mat-cell">{{hotel?.cuisineTypes?.toString()}}</td>
+    <td class="mat-cell">{{hotel?.foodQuality}}</td>
+    <td class="mat-cell"><p *ngFor="let cuisineType of hotel?.cuisineTypes">{{cuisineType}}</p></td>
   </tr>
 </table>
+
+<br>
+
+<table class="mat-table">
+  <tr class="mat-header-row">
+    <th class="mat-header-cell">Remarks</th>
+  </tr>
+  <tr class="mat-row">
+    <td class="mat-cell"><p class="remarks">{{hotel?.remarks}}</p></td>
+  </tr>
+</table>
+
 <br>
 <hr>
 <br>
