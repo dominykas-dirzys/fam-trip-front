@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {City, CityGroup, Country, Hotel} from '../../types/types';
@@ -8,7 +8,7 @@ import {CityService} from '../../services/city.service';
 import {ReferenceDataService} from '../../services/reference-data.service';
 import {CountryService} from '../../services/country.service';
 import {RequireMatch} from '../../common/requireMatch';
-import {CityFormComponent} from "../city-form/city-form.component";
+import {CityFormComponent} from '../city-form/city-form.component';
 
 const _filter = (opt: City[], value: City | string): City[] => {
   const filterValue = typeof value === 'object' ? value.title.toLowerCase() : value.toLowerCase();
@@ -21,7 +21,7 @@ const _filter = (opt: City[], value: City | string): City[] => {
   templateUrl: './hotel-form.component.html',
   styleUrls: ['./hotel-form.component.css']
 })
-export class HotelFormComponent implements OnInit {
+export class HotelFormComponent implements OnInit, OnDestroy {
 
   countries: Country[] = [];
   cities: City[] = [];
@@ -221,6 +221,10 @@ export class HotelFormComponent implements OnInit {
     this.hotelRatings = this.referenceDataService.getHotelRatings();
     this.theRecommendedTos = this.referenceDataService.getRecommendedTos();
     this.sizes = this.referenceDataService.getSizes();
+  }
+
+  ngOnDestroy() {
+    this.referenceDataService.resetReferences();
   }
 
   openDialog(city?: City) {
