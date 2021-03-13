@@ -30,7 +30,6 @@ export class HotelListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.load();
-    this.dataSource = new MatTableDataSource(this.hotels);
   }
 
   ngAfterViewInit() {
@@ -54,7 +53,10 @@ export class HotelListComponent implements OnInit, AfterViewInit {
   }
 
   private load() {
-    this.api.get(HotelListComponent.URL).subscribe((data: Hotel[]) => this.hotels = data);
+    this.api.get(HotelListComponent.URL).subscribe((data: Hotel[]) => {
+      this.hotels = data;
+      this.dataSource = new MatTableDataSource(this.hotels);
+    });
   }
 
   openDialog(hotel?: Hotel) {
