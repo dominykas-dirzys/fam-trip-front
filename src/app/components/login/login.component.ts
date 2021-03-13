@@ -39,17 +39,13 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.isLoading = true;
     this.authService.login(this.form.getRawValue()).subscribe(() => {
       if (this.authService.isLoggedIn()) {
         this.router.navigateByUrl(this.authService.redirectUrl || '');
       }
-      this.isLoading = false;
     },
-      error => {
-      console.log(error);
-      this.isLoading = false;
-      });
+      error => console.log(error)
+    );
   }
 
   signup() {
