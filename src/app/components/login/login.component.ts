@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   isLoginMode = true;
   isLoading = false;
+  error: string = null;
 
   constructor(
     private authService: AuthService,
@@ -56,9 +57,10 @@ export class LoginComponent implements OnInit {
     this.authService.signup(this.form.getRawValue()).subscribe(() => {
       this.isLoading = false;
     },
-      error => {
-      console.log(error);
-      this.isLoading = false;
+      errorRes => {
+        this.error = errorRes.error.items.email;
+        console.log(errorRes);
+        this.isLoading = false;
     });
     this.form.reset();
   }

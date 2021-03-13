@@ -1,5 +1,8 @@
 <app-page-title>{{ isLoginMode ? 'Login' : 'Sign Up' }}</app-page-title>
 
+<div class="error-message" *ngIf="error">
+  <p>{{ error }}</p>
+</div>
 <div *ngIf="isLoading" style="text-align: center;">
   <app-loading-spinner></app-loading-spinner>
 </div>
