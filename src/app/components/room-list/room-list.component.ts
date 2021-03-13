@@ -1,5 +1,9 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {Hotel, Room} from '../../types/types';
+import {Room} from '../../types/types';
+import {MatDialog} from '@angular/material/dialog';
+import {RoomEditComponent} from '../room-edit/room-edit.component';
+import {ApiService} from '../../services/api.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-room-list',
@@ -8,13 +12,41 @@ import {Hotel, Room} from '../../types/types';
 })
 export class RoomListComponent implements OnInit {
 
-  @Input() rooms: Room[];
+  private static readonly URL = '/api/rooms/';
 
-  constructor() {
+  @Input() rooms: Room[];
+  room: Room;
+  id: number;
+
+  constructor(private api: ApiService, private route: ActivatedRoute, public dialog: MatDialog) {
   }
 
   displayedColumns: string[] = ['position', 'roomType', 'actions'];
 
   ngOnInit(): void {
+    this.id = +this.route.snapshot.paramMap.get('id');
+  }
+
+  openDialog(room?: Room) {
+    console.log(this.rooms);
+    const dialogRef = this.dialog.open(RoomEditComponent, {
+      width: '100%',
+      data: room || {}
+    });
+
+    dialogRef.afterClosed().subscribe((data: Room) => {
+      if (data) {
+        data.hotelId = this.id;
+        this.api.post(RoomListComponent.URL, data).subscribe(
+          (result: Room) => this.rooms = [...this.rooms, result]
+        );
+      }
+    });
+  }
+
+  delete(id: number) {
+    this.api.delete(RoomListComponent.URL + id).subscribe(
+      () => this.rooms = this.rooms.filter(item => item.id !== id)
+    );
   }
 }

@@ -17,6 +17,10 @@ export class AuthService {
     this.token = sessionStorage.getItem(TOKEN_KEY);
   }
 
+  signup(user) {
+    return this.api.post('/sign-up', user);
+  }
+
   isLoggedIn() {
     return !!this.token;
   }

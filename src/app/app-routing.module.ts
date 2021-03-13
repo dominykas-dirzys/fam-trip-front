@@ -4,8 +4,13 @@ import {HotelComponent} from './components/hotel/hotel.component';
 import {RoomComponent} from './components/room/room.component';
 import {HotelListComponent} from './components/hotel-list/hotel-list.component';
 import {RoomListComponent} from './components/room-list/room-list.component';
+import {LoginComponent} from './components/login/login.component';
 
 const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: 'hotels',
     component: HotelListComponent

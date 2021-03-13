@@ -1,6 +1,6 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {City, CityGroup, Country, Hotel} from '../../types/types';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -8,6 +8,7 @@ import {CityService} from '../../services/city.service';
 import {ReferenceDataService} from '../../services/reference-data.service';
 import {CountryService} from '../../services/country.service';
 import {RequireMatch} from '../../common/requireMatch';
+import {CityFormComponent} from '../city-form/city-form.component';
 
 const _filter = (opt: City[], value: City | string): City[] => {
   const filterValue = typeof value === 'object' ? value.title.toLowerCase() : value.toLowerCase();
@@ -47,7 +48,8 @@ export class HotelFormComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: Hotel,
     private cityService: CityService,
     private countryService: CountryService,
-    private referenceDataService: ReferenceDataService
+    private referenceDataService: ReferenceDataService,
+    public dialog: MatDialog
   ) {
   }
 
@@ -187,7 +189,6 @@ export class HotelFormComponent implements OnInit, OnDestroy {
       data: City[]) => {
       this.cities = data;
       this.cities = this.cities.sort((a, b) => a.title.localeCompare(b.title));
-      console.log(this.cities);
       this.groupCities();
     });
   }
@@ -224,5 +225,26 @@ export class HotelFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.referenceDataService.resetReferences();
+  }
+
+  openDialog(city?: City) {
+    const dialogRef = this.dialog.open(CityFormComponent, {
+      width: '100%',
+      data: city || {}
+    });
+
+    dialogRef.afterClosed().subscribe((data: City) => {
+      if (data && data.id) {
+        this.cityService.post(data).subscribe(
+          (result: City) => this.cities = this.cities.map(c => c.id === result.id ? result : c)
+        );
+      } else if (data) {
+        this.cityService.post(data).subscribe(
+          (result: City) => this.cities = [...this.cities, result]
+        );
+      }
+      this.cityGroups = [];
+      this.fetchCities();
+    });
   }
 }
