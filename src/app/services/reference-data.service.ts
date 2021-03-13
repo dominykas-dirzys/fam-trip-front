@@ -96,4 +96,15 @@ export class ReferenceDataService {
   public getSizes() {
     return this.sizes;
   }
+
+  public resetReferences() {
+    this.cuisines = [];
+    this.foodQualities = [];
+    this.hotelLabels = [];
+    this.hotelRatings = [];
+    this.theRecommendedTos = [];
+    this.roomConditions = [];
+    this.roomTypes = [];
+    this.sizes = [];
+  }
 }

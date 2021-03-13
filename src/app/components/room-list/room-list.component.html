@@ -17,11 +17,15 @@
       <button mat-button [routerLink]="['/rooms', element.id]" [state]="element">
         View
       </button>
+      <button mat-button (click)="delete(element.id)">
+        Delete
+      </button>
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-
-<router-outlet></router-outlet>
+<div>
+  <button mat-raised-button (click)="openDialog()">Add Room</button>
+</div>

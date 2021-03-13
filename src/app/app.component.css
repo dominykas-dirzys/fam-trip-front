@@ -4,9 +4,12 @@
 
 button {
   background: darkgrey;
-
 }
 
 button:hover {
   color: white;
+}
+
+span {
+  padding: 5px;
 }

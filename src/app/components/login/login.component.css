@@ -1,0 +1,19 @@
+mat-form-field {
+  background-color: darkgrey;
+  color: white;
+}
+
+form {
+  margin: auto;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+app-page-title {
+  text-align: center;
+}
+
+.form-buttons {
+  padding: 10px;
+}
