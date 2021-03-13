@@ -189,7 +189,6 @@ export class HotelFormComponent implements OnInit {
       data: City[]) => {
       this.cities = data;
       this.cities = this.cities.sort((a, b) => a.title.localeCompare(b.title));
-      console.log(this.cities);
       this.groupCities();
     });
   }
