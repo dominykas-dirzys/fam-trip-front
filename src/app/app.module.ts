@@ -30,6 +30,7 @@ import {MatOptionModule} from '@angular/material/core';
 import {HotelFormComponent} from './components/hotel-form/hotel-form.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {LoadingSpinnerComponent} from './shared/loading-spinner/loading-spinner.component';
+import {CityFormComponent} from './components/city-form/city-form.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,8 @@ import {LoadingSpinnerComponent} from './shared/loading-spinner/loading-spinner.
     RoomEditComponent,
     HotelFormComponent,
     LoadingSpinnerComponent
+    HotelFormComponent,
+    CityFormComponent
   ],
   imports: [
     AppRoutingModule,
