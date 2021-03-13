@@ -239,6 +239,8 @@ export class HotelFormComponent implements OnInit {
           (result: City) => this.cities = [...this.cities, result]
         );
       }
+      this.cityGroups = [];
+      this.fetchCities();
     });
   }
 }
