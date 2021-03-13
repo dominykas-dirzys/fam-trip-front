@@ -45,7 +45,7 @@ import {CityFormComponent} from './components/city-form/city-form.component';
     ListItemComponent,
     RoomEditComponent,
     HotelFormComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
     HotelFormComponent,
     CityFormComponent
   ],
