@@ -124,14 +124,6 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Author</mat-label>
-    <input
-      matInput
-      value='{"id":1, "password":"slaptazodis", "email":"user@user.use"}'
-      formControlName="author">
-  </mat-form-field>
-
-  <mat-form-field>
     <mat-label>Recommended To</mat-label>
     <mat-select [formControl]="recommendedTos" multiple>
       <mat-option *ngFor="let recommendedTo of theRecommendedTos" [value]="recommendedTo">
