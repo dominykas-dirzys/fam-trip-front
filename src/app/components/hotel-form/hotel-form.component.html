@@ -12,6 +12,9 @@
     <mat-error *ngIf="name.errors?.minlength">
       At least 2 characters are required
     </mat-error>
+    <mat-error *ngIf="name.errors?.maxlength">
+      Maximum 100 characters allowed
+    </mat-error>
     <mat-error *ngIf="name.errors?.required">
       Name is required
     </mat-error>

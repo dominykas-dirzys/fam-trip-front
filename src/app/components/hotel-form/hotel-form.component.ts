@@ -63,7 +63,8 @@ export class HotelFormComponent implements OnInit, OnDestroy {
     this.form = new FormGroup({
       name: new FormControl(this.data.name, [
         Validators.required,
-        Validators.minLength(2)
+        Validators.minLength(2),
+        Validators.maxLength(100)
       ]),
       officialRating: new FormControl(this.data.officialRating, [
         Validators.required
