@@ -53,7 +53,7 @@
     </mat-error>
   </mat-form-field>
 
-  <button mat-button (click)="openDialog()">
+  <button mat-raised-button color="primary" (click)="openDialog()">
     Add new city
   </button>
 
@@ -147,7 +147,7 @@
 
 </form>
 
-<div mat-dialog-actions>
+<div mat-dialog-actions class="center">
   <button mat-raised-button mat-button (click)="cancel()">Cancel</button>
   <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="save()">Save</button>
 </div>
