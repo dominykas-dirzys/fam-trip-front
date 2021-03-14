@@ -9,6 +9,7 @@ import {ReferenceDataService} from '../../services/reference-data.service';
 import {CountryService} from '../../services/country.service';
 import {RequireMatch} from '../../common/requireMatch';
 import {CityFormComponent} from '../city-form/city-form.component';
+import {ApiService} from "../../services/api.service";
 
 const _filter = (opt: City[], value: City | string): City[] => {
   const filterValue = typeof value === 'object' ? value.title.toLowerCase() : value.toLowerCase();
@@ -22,6 +23,8 @@ const _filter = (opt: City[], value: City | string): City[] => {
   styleUrls: ['./hotel-form.component.css']
 })
 export class HotelFormComponent implements OnInit, OnDestroy {
+
+  private static readonly URL = '/api/hotels';
 
   countries: Country[] = [];
   cities: City[] = [];
@@ -49,7 +52,8 @@ export class HotelFormComponent implements OnInit, OnDestroy {
     private cityService: CityService,
     private countryService: CountryService,
     private referenceDataService: ReferenceDataService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private api: ApiService
   ) {
   }
 
@@ -169,7 +173,11 @@ export class HotelFormComponent implements OnInit, OnDestroy {
   save() {
     console.log('Save method run');
     console.log(this.form.getRawValue());
-    this.dialogRef.close({...this.data, ...this.form.getRawValue()});
+
+    this.api.post(HotelFormComponent.URL, {...this.data, ...this.form.getRawValue()}).subscribe(
+      (result: Hotel) => this.dialogRef.close(result),
+      err => this.api.setValidationResult(err, this.form)
+    );
   }
 
   fetchCityGroups() {

@@ -66,14 +66,15 @@ export class HotelListComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe((data: Hotel) => {
-      if (data && data.id) {
-        this.api.post(HotelListComponent.URL, data).subscribe(
-          (result: Hotel) => this.hotels = this.hotels.map(h => h.id === result.id ? result : h)
-        );
-      } else if (data) {
-        this.api.post(HotelListComponent.URL, data).subscribe(
-          (result: Hotel) => this.hotels = [...this.hotels, result]
-        );
+      if (!data) {
+        return;
+      }
+
+      const index = this.hotels.findIndex(h => h.id === data.id);
+      if (index < 0) {
+        this.hotels = [...this.hotels, data];
+      } else {
+        this.hotels = this.hotels.map(h => h.id === data.id ? data : h);
       }
     });
   }
