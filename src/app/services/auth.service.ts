@@ -5,6 +5,8 @@ import {throwError} from 'rxjs';
 
 import { ApiService } from './api.service';
 import { TOKEN_KEY } from '../common/constants';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class AuthService {
 
   redirectUrl: string;
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService, private snackBar: MatSnackBar, private router: Router) {
     this.token = sessionStorage.getItem(TOKEN_KEY);
   }
 
@@ -49,7 +51,10 @@ export class AuthService {
         error => {
         console.log(error);
         this.error = error;
-        console.log(this.error);
+        this.snackBar.open('Invalid credentials', 'Change and try again', {
+          duration: 4000,
+          verticalPosition: 'top',
+        });
       });
     });
   }
@@ -59,5 +64,6 @@ export class AuthService {
     this.token = null;
     sessionStorage.setItem(TOKEN_KEY, null);
     console.log(this.token);
+    this.router.navigate(['/login']);
   }
 }
