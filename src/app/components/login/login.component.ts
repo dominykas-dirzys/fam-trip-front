@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -49,14 +51,14 @@ export class LoginComponent implements OnInit {
   }
 
   signup() {
-    this.isLoading = true;
     this.authService.signup(this.form.getRawValue()).subscribe(() => {
-      this.isLoading = false;
     },
       errorRes => {
-        this.error = errorRes.error.items.email;
         console.log(errorRes);
-        this.isLoading = false;
+        this.snackBar.open('User with this email already exists', 'Try again', {
+          duration: 4000,
+          verticalPosition: 'top',
+        });
     });
     this.form.reset();
   }
