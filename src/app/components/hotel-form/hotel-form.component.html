@@ -93,21 +93,9 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Water Slides</mat-label>
-    <mat-select [formControl]="waterSlides">
-      <mat-option [value]="true">Yes</mat-option>
-      <mat-option [value]="false">No</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <mat-checkbox [formControl]="waterSlides">Water Slides</mat-checkbox>
 
-  <mat-form-field>
-    <mat-label>SPA</mat-label>
-    <mat-select [formControl]="spa">
-      <mat-option [value]="true">Yes</mat-option>
-      <mat-option [value]="false">No</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <mat-checkbox [formControl]="spa">SPA</mat-checkbox>
 
   <mat-form-field>
     <mat-label>Distance to Beach (m)</mat-label>
