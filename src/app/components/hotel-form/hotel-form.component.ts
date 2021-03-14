@@ -87,8 +87,12 @@ export class HotelFormComponent implements OnInit, OnDestroy {
       territorySize: new FormControl(this.data.territorySize),
       waterSlides: new FormControl(this.data.waterSlides),
       spa: new FormControl(this.data.spa),
-      distanceToBeach: new FormControl(this.data.distanceToBeach),
-      distanceFromAirport: new FormControl(this.data.distanceFromAirport),
+      distanceToBeach: new FormControl(this.data.distanceToBeach, [
+        Validators.min(0)
+      ]),
+      distanceFromAirport: new FormControl(this.data.distanceFromAirport, [
+        Validators.min(0)
+      ]),
       remarks: new FormControl(this.data.remarks),
       recommendedTos: new FormControl(this.data.recommendedTos),
       labels: new FormControl(this.data.labels),
@@ -138,6 +142,14 @@ export class HotelFormComponent implements OnInit, OnDestroy {
 
   get waterSlides() {
     return this.form.get('waterSlides');
+  }
+
+  get distanceToBeach() {
+    return this.form.get('distanceToBeach');
+  }
+
+  get distanceFromAirport() {
+    return this.form.get('distanceFromAirport');
   }
 
   get spa() {

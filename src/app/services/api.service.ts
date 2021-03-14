@@ -22,6 +22,11 @@ export class ApiService {
           error: error.items[item]
         });
       }
+      console.log(error);
+      this.snackBar.open(error.items.name, 'Please correct', {
+        duration: 4000,
+        verticalPosition: 'top',
+      });
     } else {
       this.snackBar.open('System error', 'Try again', {
         duration: 4000,

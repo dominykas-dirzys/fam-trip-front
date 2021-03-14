@@ -27,7 +27,6 @@ export class RoomComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.api.get(RoomComponent.URL + id).subscribe((data: Room) => this.room = data);
     this.api.get(RoomComponent.URL).subscribe((data: Room[]) => this.rooms = data);
-    console.log(this.rooms);
   }
 
   openDialog(room?: Room) {

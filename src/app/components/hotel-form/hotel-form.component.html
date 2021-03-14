@@ -30,6 +30,9 @@
         {{hotelRating}}
       </mat-option>
     </mat-select>
+    <mat-error *ngIf="inspectionScore.errors?.required">
+      Official rating is required
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -115,17 +118,25 @@
   <mat-form-field>
     <mat-label>Distance to Beach (m)</mat-label>
     <input
+      type="number"
       matInput
       formControlName="distanceToBeach"
     />
+    <mat-error *ngIf="distanceToBeach.errors?.min">
+      Distance can't be < 0 m
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Distance from Airport (km)</mat-label>
     <input
+      type="number"
       matInput
       formControlName="distanceFromAirport"
     />
+    <mat-error *ngIf="distanceFromAirport.errors?.min">
+      Distance can't be < 0 km
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
