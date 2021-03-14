@@ -1,0 +1,23 @@
+h3 {
+  text-align: center;
+}
+
+form {
+  margin: auto;
+  max-width: 1024px;
+  width: 100%;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+mat-form-field {
+  margin: 10px;
+  width: 220px;
+}
+
+mat-checkbox {
+  margin: 10px;
+}
