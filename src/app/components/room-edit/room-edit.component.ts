@@ -71,12 +71,8 @@ export class RoomEditComponent implements OnInit, OnDestroy {
 
     const roomType = this.form.get('roomType');
     if (roomType.value !== 'CUSTOM') {
-      this.form.setValue({
-        ['roomType']: this.form.get('roomType').value,
-        ['type']: '',
-        ['size']: this.form.get('size').value,
-        ['roomCondition']: this.form.get('roomCondition').value,
-        ['remarks']: this.form.get('remarks').value,
+      this.form.patchValue({
+        ['type']: null
       });
     }
     console.log(this.form.getRawValue());
