@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 import {TOKEN_KEY} from '../common/constants';
-import {FormGroup} from "@angular/forms";
+import {FormGroup} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,22 @@ export class ApiService {
 
   private readonly urlPrefix = 'http://127.0.0.1:8080';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {
+  }
+
+  setValidationResult({status, error}: HttpErrorResponse, form: FormGroup) {
+    if (status === 400 && error?.items) {
+      for (const item of Object.keys(error.items)) {
+        form.get(item).setErrors({
+          error: error.items[item]
+        });
+      }
+    } else {
+      this.snackBar.open('System error', 'Try again', {
+        duration: 4000,
+        verticalPosition: 'top',
+      });
+    }
   }
 
   get(url: string) {
