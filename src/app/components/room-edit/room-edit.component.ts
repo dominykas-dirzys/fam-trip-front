@@ -30,6 +30,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
 
     this.form = new FormGroup({
       roomType: new FormControl(this.data.roomType, Validators.required),
+      type: new FormControl(this.data.type),
       size: new FormControl(this.data.size),
       roomCondition: new FormControl(this.data.roomCondition),
       remarks: new FormControl(this.data.remarks)
@@ -58,6 +59,10 @@ export class RoomEditComponent implements OnInit, OnDestroy {
 
   get remarks() {
     return this.form.get('remarks');
+  }
+
+  get type() {
+    return this.form.get('type');
   }
 
   cancel() {
