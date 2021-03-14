@@ -26,6 +26,7 @@ export class HotelListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private api: ApiService, public dialog: MatDialog) {
+    this.dataSource = new MatTableDataSource(this.hotels);
   }
 
   ngOnInit(): void {
@@ -55,7 +56,7 @@ export class HotelListComponent implements OnInit, AfterViewInit {
   private load() {
     this.api.get(HotelListComponent.URL).subscribe((data: Hotel[]) => {
       this.hotels = data;
-      this.dataSource = new MatTableDataSource(this.hotels);
+      this.dataSource.data = this.hotels;
     });
   }
 
