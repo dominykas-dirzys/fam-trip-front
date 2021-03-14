@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
-import { TOKEN_KEY } from '../common/constants';
+import {TOKEN_KEY} from '../common/constants';
+import {FormGroup} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class ApiService {
 
   private readonly urlPrefix = 'http://127.0.0.1:8080';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   get(url: string) {
     return this.http.get(this.urlPrefix + url, this.getRequestOptions());
@@ -31,7 +33,7 @@ export class ApiService {
   private getRequestOptions() {
     const token = sessionStorage.getItem(TOKEN_KEY);
 
-    const headers: {[key: string]: string} = {
+    const headers: { [key: string]: string } = {
       'Content-Type': 'application/json',
       Authorization: token ? `Bearer ${token}` : ''
     };
