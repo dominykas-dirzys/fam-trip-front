@@ -19,13 +19,17 @@
 
   <mat-form-field>
     <mat-label>Official Rating</mat-label>
-    <mat-select
-      required
-      [formControl]="officialRating"
-      name="rating">
-      <mat-option *ngFor="let hotelRating of hotelRatings" [value]="hotelRating">
-        {{hotelRating}}
-      </mat-option>
+    <mat-select matNativeControl [formControl]="officialRating"
+            name="rating" required>
+      <mat-option value="ONE_STAR">1 &#9733;</mat-option>
+      <mat-option value="TWO_STAR">2 &#9733;</mat-option>
+      <mat-option value="THREE_STAR">3 &#9733;</mat-option>
+      <mat-option value="FOUR_STAR">4 &#9733;</mat-option>
+      <mat-option value="FIVE_STAR">5 &#9733;</mat-option>
+      <mat-option value="HV_1">HV 1</mat-option>
+      <mat-option value="HV_2">HV 2</mat-option>
+      <mat-option value="APARTMENTS">Apartments</mat-option>
+      <mat-option value="NO_RATING">No Rating</mat-option>
     </mat-select>
   </mat-form-field>
 
@@ -77,19 +81,21 @@
 
   <mat-form-field>
     <mat-label>Food Quality</mat-label>
-    <mat-select [formControl]="foodQuality" name="foodQuality">
-      <mat-option *ngFor="let foodQuality of foodQualities" [value]="foodQuality">
-        {{foodQuality}}
-      </mat-option>
+    <mat-select matNativeControl [formControl]="foodQuality" name="foodQuality">
+      <mat-option value="TERRIBLE">Terrible</mat-option>
+      <mat-option value="POOR">Poor</mat-option>
+      <mat-option value="AVERAGE">Average</mat-option>
+      <mat-option value="GOOD">Good</mat-option>
+      <mat-option value="FANTASTIC">Fantastic</mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Territory Size</mat-label>
-    <mat-select [formControl]="territorySize" name="territorySize">
-      <mat-option *ngFor="let size of sizes" [value]="size">
-        {{size}}
-      </mat-option>
+    <mat-select matNativeControl [formControl]="territorySize" name="territorySize">
+      <mat-option value="SMALL">Small</mat-option>
+      <mat-option value="NORMAL">Normal</mat-option>
+      <mat-option value="LARGE">Large</mat-option>
     </mat-select>
   </mat-form-field>
 
@@ -120,28 +126,40 @@
 
   <mat-form-field>
     <mat-label>Recommended To</mat-label>
-    <mat-select [formControl]="recommendedTos" multiple>
-      <mat-option *ngFor="let recommendedTo of theRecommendedTos" [value]="recommendedTo">
-        {{recommendedTo}}
-      </mat-option>
+    <mat-select matNativeControl [formControl]="recommendedTos" multiple>
+      <mat-option value="FAMILIES_WITH_YOUNG_CHILDREN">Families with young children</mat-option>
+      <mat-option value="FAMILIES_WITH_OLDER_CHILDREN">Families with older children</mat-option>
+      <mat-option value="COUPLES">Couples</mat-option>
+      <mat-option value="FRIENDS">Friends</mat-option>
+      <mat-option value="YOUTH">Youth</mat-option>
+      <mat-option value="BUSINESS">Business</mat-option>
+      <mat-option value="SOLO_TRAVELERS">Solo travelers</mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Labels</mat-label>
-    <mat-select [formControl]="labels" multiple>
-      <mat-option *ngFor="let label of hotelLabels" [value]="label">
-        {{label}}
-      </mat-option>
+    <mat-select matNativeControl [formControl]="labels" multiple>
+      <mat-option value="ECONOMY">Economy</mat-option>
+      <mat-option value="SUPERIOR">Superior</mat-option>
+      <mat-option value="BOUTIQUE">Boutique</mat-option>
+      <mat-option value="ADULTS_ONLY">Adults only</mat-option>
+      <mat-option value="ECO_FRIENDLY">Eco-friendly</mat-option>
+      <mat-option value="PARTY">Party</mat-option>
+      <mat-option value="SHOPPING">Shopping</mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Cuisine Types</mat-label>
-    <mat-select [formControl]="cuisineTypes" multiple>
-      <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine">
-        {{cuisine}}
-      </mat-option>
+    <mat-select matNativeControl [formControl]="cuisineTypes" multiple>
+      <mat-option value="VEGETARIAN">Vegetarian</mat-option>
+      <mat-option value="ASIAN">Asian</mat-option>
+      <mat-option value="CONTINENTAL">Continental</mat-option>
+      <mat-option value="MEXICAN">Mexican</mat-option>
+      <mat-option value="LOCAL">Local</mat-option>
+      <mat-option value="SEAFOOD">Seafood</mat-option>
+      <mat-option value="CUSTOM">Custom</mat-option>
     </mat-select>
   </mat-form-field>
 
