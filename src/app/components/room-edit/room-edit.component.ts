@@ -61,16 +61,24 @@ export class RoomEditComponent implements OnInit, OnDestroy {
     return this.form.get('remarks');
   }
 
-  get type() {
-    return this.form.get('type');
-  }
-
   cancel() {
     this.dialogRef.close();
   }
 
   save() {
     console.log('Save method run');
+    console.log(this.form.getRawValue());
+
+    const roomType = this.form.get('roomType');
+    if (roomType.value !== 'CUSTOM') {
+      this.form.setValue({
+        ['roomType']: this.form.get('roomType').value,
+        ['type']: '',
+        ['size']: this.form.get('size').value,
+        ['roomCondition']: this.form.get('roomCondition').value,
+        ['remarks']: this.form.get('remarks').value,
+      });
+    }
     console.log(this.form.getRawValue());
     this.dialogRef.close({...this.data, ...this.form.getRawValue()});
   }
