@@ -31,6 +31,8 @@ import {HotelFormComponent} from './components/hotel-form/hotel-form.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {LoadingSpinnerComponent} from './shared/loading-spinner/loading-spinner.component';
 import {CityFormComponent} from './components/city-form/city-form.component';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,9 @@ import {CityFormComponent} from './components/city-form/city-form.component';
     MatOptionModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

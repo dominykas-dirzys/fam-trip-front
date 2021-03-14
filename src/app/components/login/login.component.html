@@ -1,9 +1,9 @@
 <app-page-title>{{ isLoginMode ? 'Login' : 'Sign Up' }}</app-page-title>
 
-<div *ngIf="isLoading" style="text-align: center;">
-  <app-loading-spinner></app-loading-spinner>
+<div class="error-message" *ngIf="error">
+  <p>{{ error }}</p>
 </div>
-<form [formGroup]="form" class="login-form" *ngIf="!isLoading">
+<form [formGroup]="form" class="login-form">
   <div>
     <mat-form-field>
       <mat-label>Email</mat-label>
