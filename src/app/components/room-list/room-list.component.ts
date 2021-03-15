@@ -25,6 +25,9 @@ export class RoomListComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id');
+
+    console.log('this.id:');
+    console.log(this.id);
   }
 
   openDialog(room?: Room) {

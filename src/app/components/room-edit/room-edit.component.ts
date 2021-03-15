@@ -39,6 +39,10 @@ export class RoomEditComponent implements OnInit, OnDestroy {
       roomCondition: new FormControl(this.data.roomCondition),
       remarks: new FormControl(this.data.remarks)
     });
+    console.log('this.data.hotelId:');
+    console.log(this.data.hotelId);
+
+
 
   }
 
