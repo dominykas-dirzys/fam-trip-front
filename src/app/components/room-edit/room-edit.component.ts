@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Room} from '../../types/types';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ReferenceDataService} from '../../services/reference-data.service';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-room-edit',
@@ -10,6 +11,8 @@ import {ReferenceDataService} from '../../services/reference-data.service';
   styleUrls: ['./room-edit.component.css']
 })
 export class RoomEditComponent implements OnInit, OnDestroy {
+
+  private static readonly URL = '/api/rooms';
 
   roomConditions = [];
   roomTypes = [];
@@ -21,7 +24,8 @@ export class RoomEditComponent implements OnInit, OnDestroy {
     private _formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<RoomEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Room,
-    private referenceDataService: ReferenceDataService
+    private referenceDataService: ReferenceDataService,
+    private api: ApiService
   ) {
   }
 
@@ -68,16 +72,15 @@ export class RoomEditComponent implements OnInit, OnDestroy {
   save() {
     const roomType = this.form.get('roomType');
     if (roomType.value !== 'CUSTOM') {
-      this.form.setValue({
-        ['roomType']: this.form.get('roomType').value,
-        ['type']: '',
-        ['size']: this.form.get('size').value,
-        ['roomCondition']: this.form.get('roomCondition').value,
-        ['remarks']: this.form.get('remarks').value,
+      this.form.patchValue({
+        ['type']: null
       });
     }
 
-    this.dialogRef.close({...this.data, ...this.form.getRawValue()});
+    this.api.post(RoomEditComponent.URL, {...this.data, ...this.form.getRawValue()}).subscribe(
+      (result: Room) => this.dialogRef.close(result),
+      err => this.api.setValidationResult(err, this.form)
+    );
   }
 
   ngOnDestroy() {

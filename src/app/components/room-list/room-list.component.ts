@@ -24,22 +24,24 @@ export class RoomListComponent implements OnInit {
   displayedColumns: string[] = ['position', 'roomType', 'type', 'actions'];
 
   ngOnInit(): void {
-    this.id = +this.route.snapshot.paramMap.get('id');
   }
 
   openDialog(room?: Room) {
-    console.log(this.rooms);
     const dialogRef = this.dialog.open(RoomEditComponent, {
       width: '100%',
       data: room || {}
     });
 
     dialogRef.afterClosed().subscribe((data: Room) => {
-      if (data) {
-        data.hotelId = this.id;
-        this.api.post(RoomListComponent.URL, data).subscribe(
-          (result: Room) => this.rooms = [...this.rooms, result]
-        );
+      if (!data) {
+        return;
+      }
+
+      const index = this.rooms.findIndex(r => r.id === data.id);
+      if (index < 0) {
+        this.rooms = [...this.rooms, data];
+      } else {
+        this.rooms = this.rooms.map(r => r.id === data.id ? data : r);
       }
     });
   }
