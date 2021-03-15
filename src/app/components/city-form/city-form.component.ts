@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {City, Country} from '../../types/types';
 import {CityService} from '../../services/city.service';
 import {CountryService} from '../../services/country.service';
+import {ApiService} from "../../services/api.service";
 
 @Component({
   selector: 'app-city-form',
@@ -22,6 +23,7 @@ export class CityFormComponent implements OnInit {
     private dialogRef: MatDialogRef<CityFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: City,
     private cityService: CityService,
+    private api: ApiService,
     private countryService: CountryService,
     public dialog: MatDialog
   ) {
@@ -77,6 +79,9 @@ export class CityFormComponent implements OnInit {
   save() {
     console.log('Save method run');
     console.log(this.form.getRawValue());
-    this.dialogRef.close({...this.data, ...this.form.getRawValue()});
+    this.cityService.post({...this.data, ...this.form.getRawValue()}).subscribe(
+      (result: City) => this.dialogRef.close(result),
+      err => this.api.setValidationResult(err, this.form)
+    );
   }
 }

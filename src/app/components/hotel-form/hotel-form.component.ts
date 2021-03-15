@@ -255,14 +255,23 @@ export class HotelFormComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((data: City) => {
-      if (data && data.id) {
-        this.cityService.post(data).subscribe(
-          (result: City) => this.cities = this.cities.map(c => c.id === result.id ? result : c)
-        );
-      } else if (data) {
-        this.cityService.post(data).subscribe(
-          (result: City) => this.cities = [...this.cities, result]
-        );
+      if (!data) {
+        return;
+      }
+
+      const index = this.cities.findIndex(c => c.id === data.id);
+      if (index < 0) {
+        this.cities = [...this.cities, data];
+      } else {
+        this.cities = this.cities.map(c => c.id === data.id ? data : c);
+
+        //   this.cityService.post(data).subscribe(
+        //     (result: City) => this.cities = this.cities.map(c => c.id === result.id ? result : c)
+        //   );
+        // } else if (data) {
+        //   this.cityService.post(data).subscribe(
+        //     (result: City) => this.cities = [...this.cities, result]
+        //   );
       }
       this.cityGroups = [];
       this.fetchCities();
