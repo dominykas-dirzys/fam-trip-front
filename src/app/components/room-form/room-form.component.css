@@ -4,7 +4,7 @@ app-page-title {
 
 form {
   margin: auto;
-  max-width: 1024px;
+  max-width: 950px;
   width: 100%;
   text-align: center;
 }
@@ -16,4 +16,9 @@ mat-form-field {
 button {
   background-color: black;
   color: white;
+}
+
+.remarks {
+  margin: 0px;
+  width: 100%;
 }
