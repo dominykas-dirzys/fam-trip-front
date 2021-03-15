@@ -19,6 +19,9 @@
       matInput
       formControlName="type"
     />
+    <mat-error *ngIf="type.errors?.maxlength">
+      Maximum 50 characters allowed
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>

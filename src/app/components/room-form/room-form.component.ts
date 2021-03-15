@@ -3,14 +3,13 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Room} from '../../types/types';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ReferenceDataService} from '../../services/reference-data.service';
-import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-room-edit',
-  templateUrl: './room-edit.component.html',
-  styleUrls: ['./room-edit.component.css']
+  templateUrl: './room-form.component.html',
+  styleUrls: ['./room-form.component.css']
 })
-export class RoomEditComponent implements OnInit, OnDestroy {
+export class RoomFormComponent implements OnInit, OnDestroy {
 
   roomConditions = [];
   roomTypes = [];
@@ -20,7 +19,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<RoomEditComponent>,
+    private dialogRef: MatDialogRef<RoomFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Room,
     private referenceDataService: ReferenceDataService
   ) {
@@ -31,7 +30,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
 
     this.form = new FormGroup({
       roomType: new FormControl(this.data.roomType, Validators.required),
-      type: new FormControl(this.data.type),
+      type: new FormControl(this.data.type, Validators.maxLength(50)),
       size: new FormControl(this.data.size),
       roomCondition: new FormControl(this.data.roomCondition),
       remarks: new FormControl(this.data.remarks)
@@ -51,6 +50,10 @@ export class RoomEditComponent implements OnInit, OnDestroy {
 
   get roomType() {
     return this.form.get('roomType');
+  }
+
+  get type() {
+    return this.form.get('type');
   }
 
   get roomCondition() {

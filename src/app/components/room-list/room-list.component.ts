@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {Room} from '../../types/types';
 import {MatDialog} from '@angular/material/dialog';
-import {RoomEditComponent} from '../room-edit/room-edit.component';
+import {RoomFormComponent} from '../room-form/room-form.component';
 import {ApiService} from '../../services/api.service';
 import {ActivatedRoute} from '@angular/router';
 
@@ -28,7 +28,7 @@ export class RoomListComponent implements OnInit {
   }
 
   openDialog(room?: Room) {
-    const dialogRef = this.dialog.open(RoomEditComponent, {
+    const dialogRef = this.dialog.open(RoomFormComponent, {
       width: '100%',
       data: room || {}
     });

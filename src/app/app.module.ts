@@ -22,7 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {ListHeaderComponent} from './shared/list-header/list-header.component';
 import {ListItemComponent} from './shared/list-item/list-item.component';
-import {RoomEditComponent} from './components/room-edit/room-edit.component';
+import {RoomFormComponent} from './components/room-form/room-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -48,7 +48,7 @@ import {OffRatingPipe} from './pipes/off-rating.pipe';
     PageTitleComponent,
     ListHeaderComponent,
     ListItemComponent,
-    RoomEditComponent,
+    RoomFormComponent,
     HotelFormComponent,
     LoadingSpinnerComponent,
     HotelFormComponent,
