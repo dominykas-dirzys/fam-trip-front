@@ -30,6 +30,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
 
     this.form = new FormGroup({
       roomType: new FormControl(this.data.roomType, Validators.required),
+      type: new FormControl(this.data.type),
       size: new FormControl(this.data.size),
       roomCondition: new FormControl(this.data.roomCondition),
       remarks: new FormControl(this.data.remarks)
@@ -66,6 +67,18 @@ export class RoomEditComponent implements OnInit, OnDestroy {
 
   save() {
     console.log('Save method run');
+    console.log(this.form.getRawValue());
+
+    const roomType = this.form.get('roomType');
+    if (roomType.value !== 'CUSTOM') {
+      this.form.setValue({
+        ['roomType']: this.form.get('roomType').value,
+        ['type']: '',
+        ['size']: this.form.get('size').value,
+        ['roomCondition']: this.form.get('roomCondition').value,
+        ['remarks']: this.form.get('remarks').value,
+      });
+    }
     console.log(this.form.getRawValue());
     this.dialogRef.close({...this.data, ...this.form.getRawValue()});
   }

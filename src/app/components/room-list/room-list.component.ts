@@ -21,7 +21,7 @@ export class RoomListComponent implements OnInit {
   constructor(private api: ApiService, private route: ActivatedRoute, public dialog: MatDialog) {
   }
 
-  displayedColumns: string[] = ['position', 'roomType', 'actions'];
+  displayedColumns: string[] = ['position', 'roomType', 'type', 'actions'];
 
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id');
