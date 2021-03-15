@@ -11,8 +11,8 @@
   </tr>
   <tr class="mat-row">
     <td class="mat-cell">{{room?.id}}</td>
-    <td class="mat-cell">{{room?.size}}</td>
-    <td class="mat-cell">{{room?.roomCondition}}</td>
+    <td class="mat-cell">{{room?.size | sizepipe}}</td>
+    <td class="mat-cell">{{room?.roomCondition | roomconditionpipe}}</td>
     <td class="mat-cell">{{room?.remarks}}</td>
     <td class="mat-cell">
       <button mat-button (click)="openDialog(room)">

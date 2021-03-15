@@ -36,6 +36,15 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {OffRatingPipe} from './pipes/off-rating.pipe';
+import {LabelsArrayPipe} from './pipes/labels-array.pipe';
+import {LabelsPipe} from './pipes/labels.pipe';
+import {RecToPipe} from './pipes/rec-to.pipe';
+import {SizePipe} from './pipes/size.pipe';
+import {FoodQltPipe} from './pipes/food-qlt.pipe';
+import {CuisinePipe} from './pipes/cuisine.pipe';
+import {CheckmarkPipe} from './pipes/checkmark.pipe';
+import {RoomTypePipe} from './pipes/room-type.pipe';
+import {RoomConditionPipe} from './pipes/room-condition.pipe';
 
 @NgModule({
   declarations: [
@@ -53,7 +62,16 @@ import {OffRatingPipe} from './pipes/off-rating.pipe';
     LoadingSpinnerComponent,
     HotelFormComponent,
     CityFormComponent,
-    OffRatingPipe
+    OffRatingPipe,
+    LabelsArrayPipe,
+    LabelsPipe,
+    RecToPipe,
+    SizePipe,
+    FoodQltPipe,
+    CuisinePipe,
+    CheckmarkPipe,
+    RoomTypePipe,
+    RoomConditionPipe
   ],
   imports: [
     AppRoutingModule,

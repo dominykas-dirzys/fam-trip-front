@@ -11,8 +11,8 @@
   </tr>
   <tr class="mat-row">
     <td class="mat-cell">{{hotel?.author?.email}}</td>
-    <td class="mat-cell"><p *ngFor="let label of hotel?.labels">{{label}}</p></td>
-    <td class="mat-cell"><p *ngFor="let recommendedTo of hotel?.recommendedTos">{{recommendedTo}}</p></td>
+    <td class="mat-cell"><p *ngFor="let label of hotel?.labels">{{label | labelspipe}}</p></td>
+    <td class="mat-cell"><p *ngFor="let recommendedTo of hotel?.recommendedTos">{{recommendedTo | rectopipe}}</p></td>
     <td class="mat-cell">{{hotel?.distanceFromAirport}} km</td>
     <td class="mat-cell">{{hotel?.distanceToBeach}} m</td>
   </tr>
@@ -30,11 +30,11 @@
 
   </tr>
   <tr class="mat-row">
-    <td class="mat-cell">{{hotel?.territorySize}}</td>
-    <td class="mat-cell">{{hotel?.waterSlides}}</td>
-    <td class="mat-cell">{{hotel?.spa}}</td>
-    <td class="mat-cell">{{hotel?.foodQuality}}</td>
-    <td class="mat-cell"><p *ngFor="let cuisineType of hotel?.cuisineTypes">{{cuisineType}}</p></td>
+    <td class="mat-cell">{{hotel?.territorySize | sizepipe}}</td>
+    <td class="mat-cell">{{hotel?.waterSlides | checkmarkpipe}}</td>
+    <td class="mat-cell">{{hotel?.spa | checkmarkpipe}}</td>
+    <td class="mat-cell">{{hotel?.foodQuality | foodqltpipe}}</td>
+    <td class="mat-cell"><p *ngFor="let cuisineType of hotel?.cuisineTypes">{{cuisineType | cuisinepipe}}</p></td>
   </tr>
 </table>
 
