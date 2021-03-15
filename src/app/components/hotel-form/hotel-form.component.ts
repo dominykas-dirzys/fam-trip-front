@@ -9,7 +9,7 @@ import {ReferenceDataService} from '../../services/reference-data.service';
 import {CountryService} from '../../services/country.service';
 import {RequireMatch} from '../../common/requireMatch';
 import {CityFormComponent} from '../city-form/city-form.component';
-import {ApiService} from "../../services/api.service";
+import {ApiService} from '../../services/api.service';
 
 const _filter = (opt: City[], value: City | string): City[] => {
   const filterValue = typeof value === 'object' ? value.title.toLowerCase() : value.toLowerCase();
@@ -264,17 +264,9 @@ export class HotelFormComponent implements OnInit, OnDestroy {
         this.cities = [...this.cities, data];
       } else {
         this.cities = this.cities.map(c => c.id === data.id ? data : c);
-
-        //   this.cityService.post(data).subscribe(
-        //     (result: City) => this.cities = this.cities.map(c => c.id === result.id ? result : c)
-        //   );
-        // } else if (data) {
-        //   this.cityService.post(data).subscribe(
-        //     (result: City) => this.cities = [...this.cities, result]
-        //   );
       }
-      this.cityGroups = [];
       this.fetchCities();
+      this.cityGroups = [];
     });
   }
 }
