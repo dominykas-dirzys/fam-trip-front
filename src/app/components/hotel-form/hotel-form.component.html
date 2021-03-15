@@ -134,11 +134,6 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Remarks</mat-label>
-    <textarea class="remarks" matInput formControlName="remarks"></textarea>
-  </mat-form-field>
-
-  <mat-form-field>
     <mat-label>Recommended To</mat-label>
     <mat-select matNativeControl [formControl]="recommendedTos" multiple>
       <mat-option value="FAMILIES_WITH_YOUNG_CHILDREN">Families with young children</mat-option>
@@ -175,6 +170,11 @@
       <mat-option value="SEAFOOD">Seafood</mat-option>
       <mat-option value="CUSTOM">Custom</mat-option>
     </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="remarks" appearance="fill">
+    <mat-label>Remarks</mat-label>
+    <textarea matInput matTextareaAutosize [matAutosizeMinRows]="5" formControlName="remarks"></textarea>
   </mat-form-field>
 
 </form>

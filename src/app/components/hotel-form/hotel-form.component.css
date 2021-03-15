@@ -4,7 +4,7 @@ h3 {
 
 form {
   margin: auto;
-  max-width: 1024px;
+  max-width: 950px;
   width: 100%;
 }
 
@@ -15,9 +15,14 @@ form {
 
 mat-form-field {
   margin: 10px;
-  width: 220px;
+  width: 150px;
 }
 
 mat-checkbox {
   margin: 10px;
+}
+
+.remarks {
+  margin: 0px;
+  width: 100%;
 }
