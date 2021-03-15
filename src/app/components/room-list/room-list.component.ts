@@ -24,6 +24,7 @@ export class RoomListComponent implements OnInit {
   displayedColumns: string[] = ['position', 'roomType', 'type', 'actions'];
 
   ngOnInit(): void {
+    this.id = +this.route.snapshot.paramMap.get('id');
   }
 
   openDialog(room?: Room) {

@@ -76,7 +76,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
         ['type']: null
       });
     }
-
+    console.log(this.form.getRawValue());
     this.api.post(RoomEditComponent.URL, {...this.data, ...this.form.getRawValue()}).subscribe(
       (result: Room) => this.dialogRef.close(result),
       err => this.api.setValidationResult(err, this.form)
