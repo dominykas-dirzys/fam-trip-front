@@ -35,6 +35,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {OffRatingPipe} from './pipes/off-rating.pipe';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     HotelFormComponent,
     LoadingSpinnerComponent,
     HotelFormComponent,
-    CityFormComponent
+    CityFormComponent,
+    OffRatingPipe
   ],
   imports: [
     AppRoutingModule,
