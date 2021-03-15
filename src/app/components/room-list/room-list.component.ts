@@ -25,9 +25,6 @@ export class RoomListComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id');
-
-    console.log('this.id:');
-    console.log(this.id);
   }
 
   openDialog(room?: Room) {
@@ -37,15 +34,11 @@ export class RoomListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((data: Room) => {
-      if (!data) {
-        return;
-      }
-
-      const index = this.rooms.findIndex(r => r.id === data.id);
-      if (index < 0) {
-        this.rooms = [...this.rooms, data];
-      } else {
-        this.rooms = this.rooms.map(r => r.id === data.id ? data : r);
+      if (data) {
+        data.hotelId = this.id;
+        this.api.post(RoomListComponent.URL, data).subscribe(
+          (result: Room) => this.rooms = [...this.rooms, result]
+        );
       }
     });
   }

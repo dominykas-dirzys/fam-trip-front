@@ -12,8 +12,6 @@ import {ApiService} from '../../services/api.service';
 })
 export class RoomEditComponent implements OnInit, OnDestroy {
 
-  private static readonly URL = '/api/rooms';
-
   roomConditions = [];
   roomTypes = [];
   sizes = [];
@@ -24,8 +22,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
     private _formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<RoomEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Room,
-    private referenceDataService: ReferenceDataService,
-    private api: ApiService
+    private referenceDataService: ReferenceDataService
   ) {
   }
 
@@ -39,11 +36,6 @@ export class RoomEditComponent implements OnInit, OnDestroy {
       roomCondition: new FormControl(this.data.roomCondition),
       remarks: new FormControl(this.data.remarks)
     });
-    console.log('this.data.hotelId:');
-    console.log(this.data.hotelId);
-
-
-
   }
 
   public fetchReferenceData() {
@@ -80,11 +72,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
         ['type']: null
       });
     }
-    console.log(this.form.getRawValue());
-    this.api.post(RoomEditComponent.URL, {...this.data, ...this.form.getRawValue()}).subscribe(
-      (result: Room) => this.dialogRef.close(result),
-      err => this.api.setValidationResult(err, this.form)
-    );
+    this.dialogRef.close({...this.data, ...this.form.getRawValue()});
   }
 
   ngOnDestroy() {
