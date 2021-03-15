@@ -77,6 +77,8 @@ export class HotelListComponent implements OnInit, AfterViewInit {
       } else {
         this.hotels = this.hotels.map(h => h.id === data.id ? data : h);
       }
+
+      this.load();
     });
   }
 }

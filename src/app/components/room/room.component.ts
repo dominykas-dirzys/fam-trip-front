@@ -13,6 +13,7 @@ import {ApiService} from '../../services/api.service';
 export class RoomComponent implements OnInit {
 
   private static readonly URL = '/api/rooms/';
+  id;
 
   rooms: Room[];
   room: Room;
@@ -24,30 +25,34 @@ export class RoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.api.get(RoomComponent.URL + id).subscribe((data: Room) => this.room = data);
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.load();
+  }
+
+  load() {
+    this.api.get(RoomComponent.URL + this.id).subscribe((data: Room) => this.room = data);
     this.api.get(RoomComponent.URL).subscribe((data: Room[]) => this.rooms = data);
   }
 
   openDialog(room?: Room) {
-    console.log(this.rooms);
     const dialogRef = this.dialog.open(RoomEditComponent, {
       width: '100%',
       data: room || {}
     });
 
     dialogRef.afterClosed().subscribe((data: Room) => {
-      if (data && data.id) {
-        this.api.post(RoomComponent.URL, data).subscribe(
-          (result: Room) => this.rooms = this.rooms.map(r => r.id === result.id ? result : r)
-        );
-        this.room = data;
-      } else if (data) {
-        this.api.post(RoomComponent.URL, data).subscribe(
-          (result: Room) => this.rooms = [...this.rooms, result]
-        );
-        this.room = data;
+      if (!data) {
+        return;
       }
+
+      const index = this.rooms.findIndex(r => r.id === data.id);
+      if (index < 0) {
+        this.rooms = [...this.rooms, data];
+      } else {
+        this.rooms = this.rooms.map(r => r.id === data.id ? data : r);
+      }
+
+      this.load();
     });
   }
 }

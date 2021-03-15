@@ -60,8 +60,6 @@ export class ReferenceDataService {
         })
       )
       .subscribe(referenceDataUnits => {
-        console.log('referenceDataUnits: ');
-        console.log(referenceDataUnits);
       });
   }
 

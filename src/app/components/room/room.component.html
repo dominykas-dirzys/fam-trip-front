@@ -1,4 +1,4 @@
-<app-page-title>{{room.roomType === 'CUSTOM' ? 'Custom room' : room.roomType}}</app-page-title>
+<app-page-title>{{room?.roomType === 'CUSTOM' ? 'Custom room' : room?.roomType}}</app-page-title>
 <app-page-title *ngIf="room.roomType === 'CUSTOM'">{{room.type}}</app-page-title>
 
 <table class="mat-table" >
