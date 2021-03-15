@@ -3,10 +3,13 @@
 <form [formGroup]="form" mat-dialog-content>
   <mat-form-field>
     <mat-label>Room Type</mat-label>
-    <mat-select [formControl]="roomType" name="type">
-      <mat-option *ngFor="let roomType of roomTypes" [value]="roomType">
-        {{roomType}}
-      </mat-option>
+    <mat-select matNativeControl [formControl]="roomType" name="type" required>
+      <mat-option value="PROMO">Promo</mat-option>
+      <mat-option value="STANDARD_DBL">Standard Double</mat-option>
+      <mat-option value="FAMILY">Family</mat-option>
+      <mat-option value="SUITE">Suite</mat-option>
+      <mat-option value="DBL_SEA_VIEW">Double Sea View</mat-option>
+      <mat-option value="CUSTOM">Custom</mat-option>
     </mat-select>
     <mat-error *ngIf="roomType.errors?.required">
       Room Type is required
@@ -23,19 +26,20 @@
 
   <mat-form-field>
     <mat-label>Size</mat-label>
-    <mat-select [formControl]="size" name="size">
-      <mat-option *ngFor="let size of sizes" [value]="size">
-        {{size}}
-      </mat-option>
+    <mat-select matNativeControl [formControl]="size" name="size">
+      <mat-option value="SMALL">Small</mat-option>
+      <mat-option value="NORMAL">Normal</mat-option>
+      <mat-option value="LARGE">Large</mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Room Condition</mat-label>
-    <mat-select [formControl]="roomCondition" name="condition">
-      <mat-option *ngFor="let roomCondition of roomConditions" [value]="roomCondition">
-        {{roomCondition}}
-      </mat-option>
+    <mat-select matNativeControl [formControl]="roomCondition" name="condition">
+      <mat-option value="NEEDS_RENOVATION">Needs renovation</mat-option>
+      <mat-option value="WEAR_AND_TEAR">Wear and tear</mat-option>
+      <mat-option value="VERY_GOOD">Very good</mat-option>
+      <mat-option value="NEW">New</mat-option>
     </mat-select>
   </mat-form-field>
 
