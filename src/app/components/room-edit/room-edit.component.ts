@@ -66,9 +66,6 @@ export class RoomEditComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    console.log('Save method run');
-    console.log(this.form.getRawValue());
-
     const roomType = this.form.get('roomType');
     if (roomType.value !== 'CUSTOM') {
       this.form.setValue({
@@ -79,7 +76,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
         ['remarks']: this.form.get('remarks').value,
       });
     }
-    console.log(this.form.getRawValue());
+
     this.dialogRef.close({...this.data, ...this.form.getRawValue()});
   }
 

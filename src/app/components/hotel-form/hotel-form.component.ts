@@ -183,9 +183,6 @@ export class HotelFormComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    console.log('Save method run');
-    console.log(this.form.getRawValue());
-
     this.api.post(HotelFormComponent.URL, {...this.data, ...this.form.getRawValue()}).subscribe(
       (result: Hotel) => this.dialogRef.close(result),
       err => this.api.setValidationResult(err, this.form)

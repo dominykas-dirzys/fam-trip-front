@@ -77,8 +77,6 @@ export class CityFormComponent implements OnInit {
   }
 
   save() {
-    console.log('Save method run');
-    console.log(this.form.getRawValue());
     this.cityService.post({...this.data, ...this.form.getRawValue()}).subscribe(
       (result: City) => this.dialogRef.close(result),
       err => this.api.setValidationResult(err, this.form)
