@@ -13,3 +13,9 @@ button:hover {
 span {
   padding: 5px;
 }
+
+.bg {
+  background-size: cover;
+  min-width: 100%;
+  min-height: 100%;
+}
