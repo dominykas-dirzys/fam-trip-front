@@ -34,6 +34,13 @@ export class ApiService {
     }
   }
 
+  deleteResult({status, error}: HttpErrorResponse) {
+    this.snackBar.open('Cannot delete', '', {
+        duration: 4000,
+        verticalPosition: 'top',
+      });
+    }
+
   get(url: string) {
     return this.http.get(this.urlPrefix + url, this.getRequestOptions());
   }
