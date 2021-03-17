@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {CityService} from '../../services/city.service';
 import {City} from '../../types/types';
 import {CityEditFormComponent} from '../city-edit-form/city-edit-form.component';
-import {MatDialog} from '@angular/material/dialog';
-import {ApiService} from "../../services/api.service";
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-city-list',
@@ -14,7 +14,11 @@ export class CityListComponent implements OnInit {
 
   cities: City[] = [];
 
-  constructor(private cityService: CityService, public dialog: MatDialog, private api: ApiService) {
+  constructor(
+    private cityService: CityService,
+    private dialogRef: MatDialogRef<CityListComponent>,
+    public dialog: MatDialog,
+    private api: ApiService) {
   }
 
   displayedColumns: string[] = ['id', 'country', 'title', 'actions'];
@@ -57,5 +61,9 @@ export class CityListComponent implements OnInit {
       () => this.cities = this.cities.filter(item => item.id !== id),
       err => this.api.deleteResult(err)
     );
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }
