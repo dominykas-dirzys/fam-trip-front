@@ -1,9 +1,9 @@
-<h3 mat-dialog-title>Add new City</h3>
+<h3 mat-dialog-title>Edit {{data.title}}</h3>
 
 <form [formGroup]="form" mat-dialog-content>
   <mat-form-field>
     <mat-label>Country</mat-label>
-    <mat-select [formControl]="country" name="title">
+    <mat-select required [formControl]="country">
       <mat-option *ngFor="let country of countries" [value]="country">
         {{country.title}}
       </mat-option>
@@ -18,10 +18,6 @@
            required
     />
   </mat-form-field>
-
-  <button mat-raised-button color="primary" (click)="openDialog()">
-    Edit all cities
-  </button>
 </form>
 
 <div mat-dialog-actions>

@@ -252,16 +252,6 @@ export class HotelFormComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((data: City) => {
-      if (!data) {
-        return;
-      }
-
-      const index = this.cities.findIndex(c => c.id === data.id);
-      if (index < 0) {
-        this.cities = [...this.cities, data];
-      } else {
-        this.cities = this.cities.map(c => c.id === data.id ? data : c);
-      }
       this.fetchCities();
       this.cityGroups = [];
     });

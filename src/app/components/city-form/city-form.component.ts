@@ -4,7 +4,8 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {City, Country} from '../../types/types';
 import {CityService} from '../../services/city.service';
 import {CountryService} from '../../services/country.service';
-import {ApiService} from "../../services/api.service";
+import {ApiService} from '../../services/api.service';
+import {CityListComponent} from '../city-list/city-list.component';
 
 @Component({
   selector: 'app-city-form',
@@ -70,6 +71,26 @@ export class CityFormComponent implements OnInit {
 
   get title() {
     return this.form.get('title');
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(CityListComponent, {
+      width: '100%'
+    });
+
+    dialogRef.afterClosed().subscribe((data: City) => {
+      if (!data) {
+        return;
+      }
+
+      // const index = this.cities.findIndex(c => c.id === data.id);
+      // if (index < 0) {
+      //   this.cities = [...this.cities, data];
+      // } else {
+      //   this.cities = this.cities.map(c => c.id === data.id ? data : c);
+      // }
+      this.fetchCities();
+    });
   }
 
   cancel() {

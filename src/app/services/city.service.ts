@@ -21,4 +21,8 @@ export class CityService {
   post(data: object) {
     return this.api.post(CityService.URL, data);
   }
+
+  delete(id: number){
+    return this.api.delete(CityService.URL + '/' + id);
+  }
 }

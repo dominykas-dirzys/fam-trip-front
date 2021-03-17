@@ -45,6 +45,8 @@ import {CuisinePipe} from './pipes/cuisine.pipe';
 import {CheckmarkPipe} from './pipes/checkmark.pipe';
 import {RoomTypePipe} from './pipes/room-type.pipe';
 import {RoomConditionPipe} from './pipes/room-condition.pipe';
+import { CityListComponent } from './components/city-list/city-list.component';
+import { CityEditFormComponent } from './components/city-edit-form/city-edit-form.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import {RoomConditionPipe} from './pipes/room-condition.pipe';
     CuisinePipe,
     CheckmarkPipe,
     RoomTypePipe,
-    RoomConditionPipe
+    RoomConditionPipe,
+    CityListComponent,
+    CityEditFormComponent
   ],
   imports: [
     AppRoutingModule,
