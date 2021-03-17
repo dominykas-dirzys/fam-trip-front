@@ -26,7 +26,6 @@ export class CityListComponent implements OnInit {
     this.cityService.findAll().subscribe((
       data: City[]) => {
       this.cities = data;
-      console.log(this.cities);
     });
   }
 

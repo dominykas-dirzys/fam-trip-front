@@ -40,7 +40,6 @@ export class CityFormComponent implements OnInit {
     this.countryService.findAll().subscribe((
       data: Country[]) => {
         this.countries = data.sort((a, b) => a.title.localeCompare(b.title));
-        console.log(this.countries);
       }
     );
   }
@@ -49,7 +48,6 @@ export class CityFormComponent implements OnInit {
     this.cityService.findAll().subscribe((
       data: City[]) => {
       this.cities = data;
-      console.log(this.cities);
     });
   }
 

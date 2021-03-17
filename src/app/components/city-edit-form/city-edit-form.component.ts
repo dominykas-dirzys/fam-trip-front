@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {City, Country} from "../../types/types";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {CityService} from "../../services/city.service";
-import {ApiService} from "../../services/api.service";
-import {CountryService} from "../../services/country.service";
+import {City, Country} from '../../types/types';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {CityService} from '../../services/city.service';
+import {ApiService} from '../../services/api.service';
+import {CountryService} from '../../services/country.service';
 
 @Component({
   selector: 'app-city-edit-form',
@@ -36,7 +36,6 @@ export class CityEditFormComponent implements OnInit {
     this.countryService.findAll().subscribe((
       data: Country[]) => {
         this.countries = data.sort((a, b) => a.title.localeCompare(b.title));
-        console.log(this.countries);
       }
     );
   }
@@ -51,8 +50,6 @@ export class CityEditFormComponent implements OnInit {
         Validators.minLength(2)
       ])
     });
-
-    console.log(this.data.country);
   }
 
   get country() {

@@ -2,7 +2,7 @@
 
 <form [formGroup]="form" mat-dialog-content>
   <mat-form-field>
-    <mat-label>Country</mat-label>
+    <mat-label>{{data.country.title}}</mat-label>
     <mat-select required [formControl]="country">
       <mat-option *ngFor="let country of countries" [value]="country">
         {{country.title}}
