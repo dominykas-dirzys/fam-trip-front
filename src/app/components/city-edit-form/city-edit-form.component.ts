@@ -47,7 +47,8 @@ export class CityEditFormComponent implements OnInit {
       ]),
       title: new FormControl(this.data.title, [
         Validators.required,
-        Validators.minLength(2)
+        Validators.minLength(2),
+        Validators.maxLength(50)
       ])
     });
   }

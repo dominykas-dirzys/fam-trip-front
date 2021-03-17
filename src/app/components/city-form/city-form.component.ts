@@ -58,7 +58,8 @@ export class CityFormComponent implements OnInit {
       ]),
       title: new FormControl('', [
         Validators.required,
-        Validators.minLength(2)
+        Validators.minLength(2),
+        Validators.maxLength(100)
       ])
     });
   }
@@ -81,12 +82,6 @@ export class CityFormComponent implements OnInit {
         return;
       }
 
-      // const index = this.cities.findIndex(c => c.id === data.id);
-      // if (index < 0) {
-      //   this.cities = [...this.cities, data];
-      // } else {
-      //   this.cities = this.cities.map(c => c.id === data.id ? data : c);
-      // }
       this.fetchCities();
     });
   }

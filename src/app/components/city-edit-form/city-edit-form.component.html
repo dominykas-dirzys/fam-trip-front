@@ -8,6 +8,9 @@
         {{country.title}}
       </mat-option>
     </mat-select>
+    <mat-error *ngIf="country.errors?.required">
+      Country is required
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -17,6 +20,15 @@
            formControlName="title"
            required
     />
+    <mat-error *ngIf="title.errors?.required">
+      Title is required
+    </mat-error>
+    <mat-error *ngIf="title.errors?.minLength">
+      Min. length: 2
+    </mat-error>
+    <mat-error *ngIf="title.errors?.maxLength">
+      Max. length: 100
+    </mat-error>
   </mat-form-field>
 </form>
 
