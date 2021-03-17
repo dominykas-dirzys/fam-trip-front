@@ -1,4 +1,4 @@
-<app-page-title>{{hotel?.name}} {{hotel?.officialRating}} ({{hotel?.inspectionScore}} / 10)</app-page-title>
+<app-page-title>{{hotel?.name}} {{hotel?.officialRating | offratingpipe}} ({{hotel?.inspectionScore}} / 10)</app-page-title>
 <h4>{{hotel?.city?.title}} ({{hotel?.city?.country?.title}})</h4>
 
 <table class="mat-table">

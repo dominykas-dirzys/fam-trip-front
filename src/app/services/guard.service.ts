@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import { AuthService } from './auth.service';
+import {Observable} from 'rxjs';
+import {map, take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +14,18 @@ export class GuardService implements CanActivate {
     private router: Router
   ) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.authService.isLoggedIn()) {
-      return true;
-    }
-
-    this.authService.redirectUrl = state.url;
-
-    this.router.navigate(['/login']);
-    return false;
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    router: RouterStateSnapshot
+  ): boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
+    return this.authService.user.pipe(
+      take(1),
+      map(user => {
+        const isAuth = !!user;
+        if (isAuth) {
+          return true;
+        }
+        return this.router.createUrlTree(['/login']);
+      }));
   }
 }
