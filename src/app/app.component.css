@@ -16,6 +16,7 @@ span {
 
 .bg {
   background-size: cover;
+  background-attachment: fixed;
   min-width: 100%;
   min-height: 100%;
 }
