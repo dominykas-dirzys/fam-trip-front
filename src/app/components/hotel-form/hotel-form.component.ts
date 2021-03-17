@@ -187,6 +187,7 @@ export class HotelFormComponent implements OnInit, OnDestroy {
       (result: Hotel) => this.dialogRef.close(result),
       err => this.api.setValidationResult(err, this.form)
     );
+    console.log(this.form.getRawValue());
   }
 
   fetchCityGroups() {

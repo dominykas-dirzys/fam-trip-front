@@ -22,7 +22,7 @@ export class ApiService {
           error: error.items[item]
         });
       }
-      this.snackBar.open(error.items.name || error.items.title || error.items.country, 'Please correct', {
+      this.snackBar.open(error.items.name || error.items.title || error.items.country || error.items.city, 'Please correct', {
         duration: 4000,
         verticalPosition: 'top',
       });
