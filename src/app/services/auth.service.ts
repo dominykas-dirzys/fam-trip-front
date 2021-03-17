@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 
@@ -16,7 +16,7 @@ import jwt_decode from 'jwt-decode';
 })
 export class AuthService {
 
-  user = new Subject<User>();
+  user = new BehaviorSubject<User>(null);
 
   private token: string;
 
