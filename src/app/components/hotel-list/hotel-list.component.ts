@@ -49,7 +49,7 @@ export class HotelListComponent implements OnInit, AfterViewInit {
 
   delete(id: number) {
     this.api.delete(HotelListComponent.URL + '/' + id).subscribe(
-      () => this.hotels = this.hotels.filter(item => item.id !== id)
+      () => this.dataSource.data = this.dataSource.data.filter(item => item.id !== id)
     );
   }
 
