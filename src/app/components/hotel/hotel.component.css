@@ -24,3 +24,8 @@ h4 {
 .remarks {
   text-align: justify;
 }
+
+button {
+  margin-left: 5px;
+  margin-right: 5px;
+}

@@ -47,12 +47,6 @@ export class HotelListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  delete(id: number) {
-    this.api.delete(HotelListComponent.URL + '/' + id).subscribe(
-      () => this.dataSource.data = this.dataSource.data.filter(item => item.id !== id)
-    );
-  }
-
   private load() {
     this.api.get(HotelListComponent.URL).subscribe((data: Hotel[]) => {
       this.hotels = data;

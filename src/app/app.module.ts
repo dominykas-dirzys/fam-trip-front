@@ -47,6 +47,7 @@ import {RoomTypePipe} from './pipes/room-type.pipe';
 import {RoomConditionPipe} from './pipes/room-condition.pipe';
 import { CityListComponent } from './components/city-list/city-list.component';
 import { CityEditFormComponent } from './components/city-edit-form/city-edit-form.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { CityEditFormComponent } from './components/city-edit-form/city-edit-for
     RoomTypePipe,
     RoomConditionPipe,
     CityListComponent,
-    CityEditFormComponent
+    CityEditFormComponent,
+    HomeComponent
   ],
   imports: [
     AppRoutingModule,

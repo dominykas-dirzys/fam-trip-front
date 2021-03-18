@@ -1,5 +1,10 @@
 <div class="bg" style="background-image: url('./assets/background.jpg');">
 <div class="header">
+  <span>
+    <button mat-icon-button color="primary" routerLink="home" aria-label="Home">
+      <mat-icon>home</mat-icon>
+    </button>
+  </span>
   <span><button mat-button routerLink="login"*ngIf="!isAuthenticated">Login</button></span>
   <span><button mat-button routerLink="hotels" *ngIf="isAuthenticated">Hotels</button></span>
   <span><button mat-button (click)="logout()" *ngIf="isAuthenticated">Logout</button></span>

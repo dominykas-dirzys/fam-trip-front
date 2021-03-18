@@ -1,4 +1,11 @@
-<app-page-title>{{hotel?.name}} {{hotel?.officialRating | offratingpipe}} ({{hotel?.inspectionScore}} / 10)</app-page-title>
+<app-page-title>{{hotel?.name}} {{hotel?.officialRating | offratingpipe}} ({{hotel?.inspectionScore}} / 10)
+  <button mat-mini-fab color="primary" (click)="openDialog()" aria-label="Edit">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button mat-mini-fab color="disabled" (click)="delete()" aria-label="Delete">
+    <mat-icon>delete</mat-icon>
+  </button>
+</app-page-title>
 <h4>{{hotel?.city?.title}} ({{hotel?.city?.country?.title}})</h4>
 
 <table class="mat-table">
