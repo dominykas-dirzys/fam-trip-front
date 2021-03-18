@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Room} from '../../types/types';
 import {RoomFormComponent} from '../room-form/room-form.component';
 import {MatDialog} from '@angular/material/dialog';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../services/api.service';
 
 @Component({
@@ -13,6 +13,7 @@ import {ApiService} from '../../services/api.service';
 export class RoomComponent implements OnInit {
 
   private static readonly URL = '/api/rooms/';
+  private id;
 
   rooms: Room[];
   room: Room;
@@ -20,16 +21,20 @@ export class RoomComponent implements OnInit {
   constructor(
     private api: ApiService,
     private route: ActivatedRoute,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private router: Router
+  ) {
   }
 
-  ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.api.get(RoomComponent.URL + id).subscribe((data: Room) => this.room = data);
+  ngOnInit()
+    :
+    void {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.api.get(RoomComponent.URL + this.id).subscribe((data: Room) => this.room = data);
     this.api.get(RoomComponent.URL).subscribe((data: Room[]) => this.rooms = data);
   }
 
-  openDialog(room?: Room) {
+  openDialog(room ?: Room) {
     const dialogRef = this.dialog.open(RoomFormComponent, {
       width: '100%',
       data: room || {}
@@ -48,5 +53,14 @@ export class RoomComponent implements OnInit {
         this.room = data;
       }
     });
+  }
+
+  delete() {
+    if (confirm('Are you sure you wish to delete this room?')) {
+      this.api.delete(RoomComponent.URL + this.id).subscribe(
+        () => this.router.navigate(['/hotels/' + this.room.hotelId]),
+        err => this.api.deleteResult(err)
+      );
+    }
   }
 }

@@ -2,13 +2,34 @@ app-page-title {
   text-align: center;
 }
 
-table td:first-child {
+table td {
   text-align: center;
   color: white;
+}
+
+table th {
+  text-align: center;
 }
 
 table {
   margin: auto;
   max-width: 1024px;
   width: 100%;
+}
+
+h4 {
+  text-align: center;
+}
+
+.remarks {
+  text-align: justify;
+}
+
+button {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.back {
+text-align: center;
 }

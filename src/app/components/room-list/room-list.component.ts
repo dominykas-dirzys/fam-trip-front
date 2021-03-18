@@ -42,10 +42,4 @@ export class RoomListComponent implements OnInit {
       }
     });
   }
-
-  delete(id: number) {
-    this.api.delete(RoomListComponent.URL + id).subscribe(
-      () => this.rooms = this.rooms.filter(item => item.id !== id)
-    );
-  }
 }

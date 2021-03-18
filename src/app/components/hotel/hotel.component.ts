@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Hotel} from '../../types/types';
 import {ApiService} from '../../services/api.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {HotelFormComponent} from "../hotel-form/hotel-form.component";
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {HotelFormComponent} from '../hotel-form/hotel-form.component';
 
 @Component({
   selector: 'app-hotel',

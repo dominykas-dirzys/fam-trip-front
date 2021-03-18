@@ -5,18 +5,33 @@
     <th class="mat-header-cell">ID</th>
     <th class="mat-header-cell">Size</th>
     <th class="mat-header-cell">Room Condition</th>
-    <th class="mat-header-cell">Remarks</th>
-    <th class="mat-header-cell">Actions</th>
+    <th class="mat-header-cell"></th>
   </tr>
   <tr class="mat-row">
     <td class="mat-cell">{{room?.id}}</td>
     <td class="mat-cell">{{room?.size | sizepipe}}</td>
     <td class="mat-cell">{{room?.roomCondition | roomconditionpipe}}</td>
-    <td class="mat-cell">{{room?.remarks}}</td>
     <td class="mat-cell">
-      <button mat-button (click)="openDialog(room)">
-        Edit
+      <button mat-mini-fab color="primary" (click)="openDialog(room)" aria-label="Edit">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-mini-fab color="disabled" (click)="delete()" aria-label="Delete">
+        <mat-icon>delete</mat-icon>
       </button>
     </td>
   </tr>
 </table>
+<br>
+<table class="mat-table">
+  <th class="mat-header-cell">Remarks</th>
+  <tr class="mat-row">
+    <td class="mat-cell"><p class="remarks">{{room?.remarks}}</p></td>
+  </tr>
+</table>
+
+<div class="back">
+<button mat-mini-fab color="primary" [routerLink]="['/hotels/' + room.hotelId]" aria-label="Back">
+  <mat-icon>keyboard_backspace
+  </mat-icon>
+</button>
+</div>
