@@ -60,3 +60,10 @@
 <hr>
 <br>
 <app-room-list [rooms]="hotel?.rooms"></app-room-list>
+
+<div class="back">
+  <button mat-mini-fab color="primary" [routerLink]="['/hotels']" aria-label="Back">
+    <mat-icon>keyboard_backspace
+    </mat-icon>
+  </button>
+</div>
