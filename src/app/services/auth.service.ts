@@ -123,4 +123,18 @@ export class AuthService {
     this.autoLogout((tokenFromRes.exp - tokenFromRes.iat) * 1000);
     localStorage.setItem('userData', JSON.stringify(userFromToken));
   }
+
+  canEditCheck(authorId: number): boolean {
+    let userId;
+    this.user.subscribe(data => {
+      if (data) {
+        userId = +data.id;
+      }
+    });
+    if (authorId === userId) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
