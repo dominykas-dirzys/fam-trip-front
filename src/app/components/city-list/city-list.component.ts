@@ -57,10 +57,12 @@ export class CityListComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.cityService.delete(id).subscribe(
-      () => this.cities = this.cities.filter(item => item.id !== id),
-      err => this.api.deleteResult(err)
-    );
+    if (confirm('Are you sure you wish to delete this city?')) {
+      this.cityService.delete(id).subscribe(
+        () => this.cities = this.cities.filter(item => item.id !== id),
+        err => this.api.deleteResult(err)
+      );
+    }
   }
 
   close() {
