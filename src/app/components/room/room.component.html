@@ -14,7 +14,7 @@
     <td class="mat-cell">{{room?.roomCondition | roomconditionpipe}}</td>
     <td class="mat-cell">{{room?.remarks}}</td>
     <td class="mat-cell">
-      <button mat-button (click)="openDialog(room)">
+      <button mat-button (click)="openDialog(room)" *ngIf="canEdit">
         Edit
       </button>
     </td>
