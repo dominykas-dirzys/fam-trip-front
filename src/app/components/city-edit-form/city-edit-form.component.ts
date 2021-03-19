@@ -62,7 +62,9 @@ export class CityEditFormComponent implements OnInit {
   }
 
   cancel() {
-    this.dialogRef.close();
+    if (confirm('Exit without saving changes?')) {
+      this.dialogRef.close();
+    }
   }
 
   save() {

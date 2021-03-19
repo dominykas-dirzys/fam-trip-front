@@ -32,7 +32,7 @@
   </mat-form-field>
 </form>
 
-<div mat-dialog-actions>
-  <button mat-raised-button mat-button (click)="cancel()">Cancel</button>
-  <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="save()">Save</button>
+<div mat-dialog-actions class="center">
+  <button mat-mini-fab color="warn" (click)="cancel()" aria-label="cancel"><mat-icon>close</mat-icon></button>
+  <button mat-mini-fab color="accent" [disabled]="form.invalid" (click)="save()" aria-label="save"><mat-icon>save</mat-icon></button>
 </div>
