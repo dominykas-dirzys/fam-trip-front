@@ -36,7 +36,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {OffRatingPipe} from './pipes/off-rating.pipe';
-import {LabelsArrayPipe} from './pipes/labels-array.pipe';
 import {LabelsPipe} from './pipes/labels.pipe';
 import {RecToPipe} from './pipes/rec-to.pipe';
 import {SizePipe} from './pipes/size.pipe';
@@ -67,7 +66,6 @@ import {MatGridListModule} from '@angular/material/grid-list';
     HotelFormComponent,
     CityFormComponent,
     OffRatingPipe,
-    LabelsArrayPipe,
     LabelsPipe,
     RecToPipe,
     SizePipe,

@@ -27,7 +27,7 @@
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>
-      <button mat-icon-button color="disabled" (click)="openDialog()" aria-label="Add Room">
+      <button mat-icon-button color="disabled" (click)="openDialog()" aria-label="Add Room" *ngIf="canEdit">
         <mat-icon>add_circle</mat-icon>
       </button>
     </th>
@@ -41,6 +41,3 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<div *ngIf="canEdit">
-  <button mat-raised-button (click)="openDialog()">Add Room</button>
-</div>

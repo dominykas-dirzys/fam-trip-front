@@ -18,10 +18,10 @@ export class LabelsPipe implements PipeTransform {
           labelListString = labelListString + 'Boutique';
           break;
         case 'ADULTS_ONLY':
-          labelListString = labelListString + 'Adults only';
+          labelListString = labelListString + 'Adults-only';
           break;
         case 'ECO_FRIENDLY':
-          labelListString = labelListString + 'Eco-friendly (Green)';
+          labelListString = labelListString + 'Eco-friendly';
           break;
         case 'PARTY':
           labelListString = labelListString + 'Party';

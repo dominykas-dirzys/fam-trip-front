@@ -2,7 +2,7 @@
   <button mat-icon-button color="primary" (click)="openDialog(room)" aria-label="Edit" *ngIf="canEdit">
     <mat-icon>edit</mat-icon>
   </button>
-  <button mat-icon-button color="primary" (click)="delete()" aria-label="Delete">
+  <button mat-icon-button color="primary" (click)="delete()" aria-label="Delete" *ngIf="canEdit">
     <mat-icon>delete</mat-icon>
   </button>
 </app-page-title>
@@ -28,7 +28,7 @@
 </table>
 
 <div class="back">
-<button mat-mini-fab color="primary" [routerLink]="['/hotels/' + room.hotelId]" aria-label="Back">
+<button mat-mini-fab color="primary" [routerLink]="['/hotels/' + room?.hotelId]" aria-label="Back">
   <mat-icon>keyboard_backspace
   </mat-icon>
 </button>

@@ -95,7 +95,7 @@ export class HotelListComponent implements OnInit, AfterViewInit {
       return data.name.toLowerCase().indexOf(searchTerms.name) !== -1
         && data.city.title.toString().toLowerCase().indexOf(searchTerms.city) !== -1
         && data.inspectionScore.toString().toLowerCase().indexOf(searchTerms.inspectionScore) !== -1
-        && data.labels.toString().toLowerCase().indexOf(searchTerms.labels) !== -1
+        && data.labels.toString().toLowerCase().replace('_', '-').indexOf(searchTerms.labels) !== -1
         && data.officialRating.toString().indexOf(searchTerms.officialRating) !== -1;
     };
     return filterFunction;

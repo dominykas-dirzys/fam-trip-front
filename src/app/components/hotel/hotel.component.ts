@@ -2,10 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Hotel} from '../../types/types';
 import {ApiService} from '../../services/api.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {HotelFormComponent} from '../hotel-form/hotel-form.component';
 import {AuthService} from '../../services/auth.service';
-import {NavigationService} from '../../services/navigation.service';
 
 @Component({
   selector: 'app-hotel',
@@ -25,8 +24,7 @@ export class HotelComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
-    private authService: AuthService,
-    private navigation: NavigationService
+    private authService: AuthService
   ) {
   }
 
@@ -60,9 +58,5 @@ export class HotelComponent implements OnInit {
         err => this.api.deleteResult(err)
       );
     }
-  }
-
-  back(): void {
-    this.navigation.back();
   }
 }
