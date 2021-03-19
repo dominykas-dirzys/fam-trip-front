@@ -65,7 +65,9 @@ export class RoomFormComponent implements OnInit, OnDestroy {
   }
 
   cancel() {
-    this.dialogRef.close();
+    if (confirm('Exit without saving changes?')) {
+      this.dialogRef.close();
+    }
   }
 
   save() {

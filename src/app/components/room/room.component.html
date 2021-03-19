@@ -1,4 +1,4 @@
-<app-page-title><h4>{{room?.roomType === 'CUSTOM' ? room?.type : room?.roomType}}</h4>
+<app-page-title><h4>{{room?.roomType === 'CUSTOM' ? room?.type : room?.roomType | roomtypepipe}}</h4>
   <button mat-icon-button color="primary" (click)="openDialog(room)" aria-label="Edit">
     <mat-icon>edit</mat-icon>
   </button>

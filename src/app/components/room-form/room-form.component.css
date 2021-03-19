@@ -1,4 +1,4 @@
-app-page-title {
+h3 {
   text-align: center;
 }
 
@@ -6,16 +6,19 @@ form {
   margin: auto;
   max-width: 950px;
   width: 100%;
-  text-align: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
 }
 
 mat-form-field {
-  color: white;
+  margin: 10px;
 }
 
-button {
-  background-color: black;
-  color: white;
+mat-checkbox {
+  margin: 10px;
 }
 
 .remarks {
