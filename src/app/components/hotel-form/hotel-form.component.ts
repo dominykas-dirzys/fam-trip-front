@@ -88,7 +88,7 @@ export class HotelFormComponent implements OnInit, OnDestroy {
       waterSlides: new FormControl(this.data.waterSlides),
       spa: new FormControl(this.data.spa),
       distanceToBeach: new FormControl(this.data.distanceToBeach, [
-        Validators.min(0)
+        Validators.min(0), this.notDecimal
       ]),
       distanceFromAirport: new FormControl(this.data.distanceFromAirport, [
         Validators.min(0)
@@ -258,8 +258,8 @@ export class HotelFormComponent implements OnInit, OnDestroy {
   }
 
   notDecimal(control: FormControl): {[s: string]: boolean} {
-    if(control.value) {
-      if (!Number.isInteger(+control.value) || control.value.indexOf('.') > -1) {
+    if (control.value) {
+      if (!Number.isInteger(+control.value) || control.value.toString().indexOf('.') > -1) {
         return {mustBeInteger: true};
       }
     }

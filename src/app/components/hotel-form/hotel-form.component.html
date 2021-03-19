@@ -122,6 +122,9 @@
     <mat-error *ngIf="distanceToBeach.errors?.min">
       Distance can't be < 0 m
     </mat-error>
+    <mat-error *ngIf="distanceToBeach.errors?.mustBeInteger">
+      Inspection Score must be an integer
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
