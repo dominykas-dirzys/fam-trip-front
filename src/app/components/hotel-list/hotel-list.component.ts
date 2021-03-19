@@ -81,6 +81,12 @@ export class HotelListComponent implements OnInit, AfterViewInit {
           this.dataSource.filter = JSON.stringify(this.filterValues);
         }
       );
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch (property) {
+        case 'city': return item.city.title;
+        default: return item[property];
+      }
+    };
   }
 
   createFilter(): (data: any, filter: string) => boolean {
