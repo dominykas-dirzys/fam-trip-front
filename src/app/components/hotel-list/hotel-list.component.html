@@ -1,11 +1,21 @@
 <app-page-title>Hotels</app-page-title>
 
-<div>
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Enter hotel" #input>
+<mat-form-field class="filter" floatLabel="never">
+  <mat-label>Search by name</mat-label>
+  <input matInput [formControl]="nameFilter">
 </mat-form-field>
-</div>
+<mat-form-field class="filter" floatLabel="never">
+  <mat-label>Search by city</mat-label>
+  <input matInput [formControl]="cityFilter">
+</mat-form-field>
+<mat-form-field class="filter" floatLabel="never">
+  <mat-label>Search by inspection score</mat-label>
+  <input matInput [formControl]="insScoreFilter">
+</mat-form-field>
+<mat-form-field class="filter" floatLabel="never">
+  <mat-label>Search by labels</mat-label>
+  <input matInput [formControl]="labelsFilter">
+</mat-form-field>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
   <ng-container matColumnDef="position">
@@ -55,9 +65,6 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-  <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-  </tr>
 </table>
 
 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>

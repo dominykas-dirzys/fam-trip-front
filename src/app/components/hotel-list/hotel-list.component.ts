@@ -6,6 +6,7 @@ import {HotelFormComponent} from '../hotel-form/hotel-form.component';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-hotel-list',
@@ -22,29 +23,71 @@ export class HotelListComponent implements OnInit, AfterViewInit {
 
   dataSource: MatTableDataSource<Hotel>;
 
+  nameFilter = new FormControl('');
+  cityFilter = new FormControl('');
+  insScoreFilter = new FormControl('');
+  labelsFilter = new FormControl('');
+  filterValues = {
+    name: '',
+    inspectionScore: '',
+    city: '',
+    labels: ''
+  };
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private api: ApiService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.hotels);
+    this.dataSource.filterPredicate = this.createFilter();
   }
 
   ngOnInit(): void {
     this.load();
+    this.nameFilter.valueChanges
+      .subscribe(
+        name => {
+          this.filterValues.name = name;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      );
+    this.cityFilter.valueChanges
+      .subscribe(
+        city => {
+          this.filterValues.city = city;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      );
+    this.insScoreFilter.valueChanges
+      .subscribe(
+        inspectionScore => {
+          this.filterValues.inspectionScore = inspectionScore;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      );
+    this.labelsFilter.valueChanges
+      .subscribe(
+        labels => {
+          this.filterValues.labels = labels;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      );
+  }
+
+  createFilter(): (data: any, filter: string) => boolean {
+    let filterFunction = function(data, filter): boolean {
+      let searchTerms = JSON.parse(filter);
+      return data.name.toLowerCase().indexOf(searchTerms.name) !== -1
+        && data.city.title.toString().toLowerCase().indexOf(searchTerms.city) !== -1
+        && data.inspectionScore.toString().toLowerCase().indexOf(searchTerms.inspectionScore) !== -1
+        && data.labels.toString().toLowerCase().indexOf(searchTerms.labels) !== -1;
+    };
+    return filterFunction;
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
 
   private load() {
