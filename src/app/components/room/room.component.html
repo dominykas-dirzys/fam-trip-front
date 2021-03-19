@@ -1,5 +1,5 @@
 <app-page-title><h4>{{room?.roomType === 'CUSTOM' ? room?.type : room?.roomType | roomtypepipe}}</h4>
-  <button mat-icon-button color="primary" (click)="openDialog(room)" aria-label="Edit">
+  <button mat-icon-button color="primary" (click)="openDialog(room)" aria-label="Edit" *ngIf="canEdit">
     <mat-icon>edit</mat-icon>
   </button>
   <button mat-icon-button color="primary" (click)="delete()" aria-label="Delete">

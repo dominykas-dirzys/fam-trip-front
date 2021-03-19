@@ -1,11 +1,36 @@
 <app-page-title><h4>Hotels</h4></app-page-title>
 
-<div>
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Enter hotel" #input>
+<mat-form-field class="filter" floatLabel="never">
+  <mat-label>Search by name</mat-label>
+  <input matInput [formControl]="nameFilter">
 </mat-form-field>
-</div>
+<mat-form-field class="filter" floatLabel="never">
+  <mat-label>Search by city</mat-label>
+  <input matInput [formControl]="cityFilter">
+</mat-form-field>
+<mat-form-field class="filter" floatLabel="never">
+  <mat-label>Search by inspection score</mat-label>
+  <input matInput [formControl]="insScoreFilter">
+</mat-form-field>
+<mat-form-field class="filter" floatLabel="never">
+  <mat-label>Search by labels</mat-label>
+  <input matInput [formControl]="labelsFilter">
+</mat-form-field>
+<mat-form-field class="filter">
+  <mat-label>Search by official rating</mat-label>
+  <mat-select matNativeControl [formControl]="officialRatingFilter">
+    <mat-option value="ONE_STAR">1 &#9733;</mat-option>
+    <mat-option value="TWO_STAR">2 &#9733;</mat-option>
+    <mat-option value="THREE_STAR">3 &#9733;</mat-option>
+    <mat-option value="FOUR_STAR">4 &#9733;</mat-option>
+    <mat-option value="FIVE_STAR">5 &#9733;</mat-option>
+    <mat-option value="HV_1">HV 1</mat-option>
+    <mat-option value="HV_2">HV 2</mat-option>
+    <mat-option value="APARTMENTS">Apartments</mat-option>
+    <mat-option value="NO_RATING">No Rating</mat-option>
+    <mat-option value=""></mat-option>
+  </mat-select>
+</mat-form-field>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
   <ng-container matColumnDef="position">
@@ -29,7 +54,7 @@
   </ng-container>
 
   <ng-container matColumnDef="labels">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Labels</th>
+    <th mat-header-cell *matHeaderCellDef>Labels</th>
     <td mat-cell *matCellDef="let element">{{element.labels | labelsarraypipe}}</td>
   </ng-container>
 
@@ -49,9 +74,6 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-  <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-  </tr>
 </table>
 
 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>

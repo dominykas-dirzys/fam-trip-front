@@ -45,7 +45,6 @@ export class AuthService {
           const errorMessage = errorRes.error.details;
           return throwError(errorMessage);
         }), tap((resData: {token: string}) => {
-          console.log(resData.token);
           this.handleAuthentication(resData.token);
         }))
         .subscribe((response: { token: string }) => {
@@ -59,7 +58,6 @@ export class AuthService {
         }
       },
         error => {
-        console.log(error);
         this.error = error;
         this.snackBar.open('Invalid credentials', 'Change and try again', {
           duration: 4000,
@@ -96,12 +94,11 @@ export class AuthService {
 
   logout() {
     this.user.next(null);
-    console.log(this.token);
     this.token = null;
     sessionStorage.setItem(TOKEN_KEY, null);
-    console.log(this.token);
     this.router.navigate(['/login']);
     localStorage.removeItem('userData');
+    localStorage.removeItem('authorId');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
     }
@@ -118,9 +115,22 @@ export class AuthService {
     const tokenFromRes: {sub: string; exp: number; iat: number; jti: string; } = jwt_decode(token);
     const expDate = new Date(tokenFromRes.exp * 1000);
     const userFromToken = new User(tokenFromRes.sub, tokenFromRes.jti, token, expDate);
-    console.log(userFromToken);
     this.user.next(userFromToken);
     this.autoLogout((tokenFromRes.exp - tokenFromRes.iat) * 1000);
     localStorage.setItem('userData', JSON.stringify(userFromToken));
+  }
+
+  canEditCheck(authorId: number): boolean {
+    let userId;
+    this.user.subscribe(data => {
+      if (data) {
+        userId = +data.id;
+      }
+    });
+    if (authorId === userId) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

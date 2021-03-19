@@ -4,6 +4,10 @@ import {ApiService} from '../../services/api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {HotelFormComponent} from '../hotel-form/hotel-form.component';
+import {MatDialog} from '@angular/material/dialog';
+import {HotelFormComponent} from '../hotel-form/hotel-form.component';
+import {AuthService} from '../../services/auth.service';
+import {NavigationService} from '../../services/navigation.service';
 
 @Component({
   selector: 'app-hotel',
@@ -14,6 +18,7 @@ export class HotelComponent implements OnInit {
 
   private static readonly URL = '/api/hotels/';
   private id;
+  canEdit = false;
 
   hotel: Hotel;
 
@@ -21,13 +26,18 @@ export class HotelComponent implements OnInit {
     private api: ApiService,
     private route: ActivatedRoute,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: AuthService,
+    private navigation: NavigationService
   ) {
   }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.api.get(HotelComponent.URL + this.id).subscribe((data: Hotel) => this.hotel = data);
+    this.api.get(HotelComponent.URL + this.id).subscribe((data: Hotel) => {
+      this.hotel = data;
+      this.canEdit = this.authService.canEditCheck(data.author.id);
+    });
   }
 
   openDialog() {
@@ -52,6 +62,9 @@ export class HotelComponent implements OnInit {
         err => this.api.deleteResult(err)
       );
     }
+  }
 
+  back(): void {
+    this.navigation.back();
   }
 }

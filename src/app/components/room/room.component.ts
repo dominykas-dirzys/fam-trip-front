@@ -4,6 +4,7 @@ import {RoomFormComponent} from '../room-form/room-form.component';
 import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../services/api.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-room',
@@ -17,21 +18,23 @@ export class RoomComponent implements OnInit {
 
   rooms: Room[];
   room: Room;
+  canEdit = false;
 
   constructor(
     private api: ApiService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
+    private authService: AuthService) {
+    public dialog: MatDialog,
     private router: Router
   ) {
   }
 
-  ngOnInit()
-    :
-    void {
+  ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.api.get(RoomComponent.URL + this.id).subscribe((data: Room) => this.room = data);
     this.api.get(RoomComponent.URL).subscribe((data: Room[]) => this.rooms = data);
+    this.canEdit = this.authService.canEditCheck(+localStorage.getItem('authorId'));
   }
 
   openDialog(room ?: Room) {

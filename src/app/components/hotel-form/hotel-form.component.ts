@@ -81,14 +81,14 @@ export class HotelFormComponent implements OnInit, OnDestroy {
         ]
       ),
       inspectionScore: new FormControl(this.data.inspectionScore, [
-        Validators.required, Validators.min(1), Validators.max(10)
+        Validators.required, Validators.min(1), Validators.max(10), this.notDecimal
       ]),
       foodQuality: new FormControl(this.data.foodQuality),
       territorySize: new FormControl(this.data.territorySize),
       waterSlides: new FormControl(this.data.waterSlides),
       spa: new FormControl(this.data.spa),
       distanceToBeach: new FormControl(this.data.distanceToBeach, [
-        Validators.min(0)
+        Validators.min(0), this.notDecimal
       ]),
       distanceFromAirport: new FormControl(this.data.distanceFromAirport, [
         Validators.min(0)
@@ -189,7 +189,6 @@ export class HotelFormComponent implements OnInit, OnDestroy {
       (result: Hotel) => this.dialogRef.close(result),
       err => this.api.setValidationResult(err, this.form)
     );
-    console.log(this.form.getRawValue());
   }
 
   fetchCityGroups() {
@@ -258,5 +257,14 @@ export class HotelFormComponent implements OnInit, OnDestroy {
       this.fetchCities();
       this.cityGroups = [];
     });
+  }
+
+  notDecimal(control: FormControl): {[s: string]: boolean} {
+    if (control.value) {
+      if (!Number.isInteger(+control.value) || control.value.toString().indexOf('.') > -1) {
+        return {mustBeInteger: true};
+      }
+    }
+    return null;
   }
 }

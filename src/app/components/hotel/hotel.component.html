@@ -3,10 +3,10 @@
     <mat-icon>keyboard_backspace
     </mat-icon>
   </button>
-  <button mat-icon-button color="disabled" (click)="openDialog()" aria-label="Edit">
+    <button mat-icon-button color="primary" (click)="openDialog()" aria-label="Edit" *ngIf="canEdit">
     <mat-icon>edit</mat-icon>
   </button>
-  <button mat-icon-button color="disabled" (click)="delete()" aria-label="Delete">
+  <button mat-icon-button color="disabled" (click)="delete()" aria-label="Delete" *ngIf="canEdit">
     <mat-icon>delete</mat-icon>
   </button>
 </app-page-title>
