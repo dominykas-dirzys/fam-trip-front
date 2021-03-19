@@ -187,7 +187,6 @@ export class HotelFormComponent implements OnInit, OnDestroy {
       (result: Hotel) => this.dialogRef.close(result),
       err => this.api.setValidationResult(err, this.form)
     );
-    console.log(this.form.getRawValue());
   }
 
   fetchCityGroups() {
@@ -259,7 +258,6 @@ export class HotelFormComponent implements OnInit, OnDestroy {
   }
 
   notDecimal(control: FormControl): {[s: string]: boolean} {
-    console.log(control);
     if(control.value) {
       if (!Number.isInteger(+control.value) || control.value.indexOf('.') > -1) {
         return {mustBeInteger: true};
