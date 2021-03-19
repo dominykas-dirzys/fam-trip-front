@@ -4,8 +4,6 @@ import {ApiService} from '../../services/api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {HotelFormComponent} from '../hotel-form/hotel-form.component';
-import {MatDialog} from '@angular/material/dialog';
-import {HotelFormComponent} from '../hotel-form/hotel-form.component';
 import {AuthService} from '../../services/auth.service';
 import {NavigationService} from '../../services/navigation.service';
 

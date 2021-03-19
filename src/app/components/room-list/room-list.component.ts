@@ -1,5 +1,3 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Room} from '../../types/types';
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {Hotel, Room} from '../../types/types';
 import {MatDialog} from '@angular/material/dialog';

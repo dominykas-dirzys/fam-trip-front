@@ -24,13 +24,14 @@ export class RoomComponent implements OnInit {
     private api: ApiService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    private authService: AuthService) {
-    public dialog: MatDialog,
+    private authService: AuthService,
     private router: Router
   ) {
   }
 
-  ngOnInit(): void {
+  ngOnInit()
+    :
+    void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.api.get(RoomComponent.URL + this.id).subscribe((data: Room) => this.room = data);
     this.api.get(RoomComponent.URL).subscribe((data: Room[]) => this.rooms = data);
