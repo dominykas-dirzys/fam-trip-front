@@ -5,6 +5,7 @@ app-page-title {
 
 h4 {
   margin: 0px;
+  text-align: center;
 }
 
 table td {
@@ -21,10 +22,6 @@ table {
   margin: auto;
   max-width: 1024px;
   width: 100%;
-}
-
-h4 {
-  text-align: center;
 }
 
 .remarks {

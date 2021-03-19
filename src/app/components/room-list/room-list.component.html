@@ -1,4 +1,4 @@
-<app-page-title>Rooms</app-page-title>
+<app-page-title><h3>Rooms</h3></app-page-title>
 
 <table mat-table [dataSource]="rooms" class="mat-elevation-z8">
   <ng-container matColumnDef="position">
@@ -13,7 +13,7 @@
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>
-      <button mat-icon-button color="primary" (click)="openDialog()" aria-label="Add Room">
+      <button mat-icon-button color="disabled" (click)="openDialog()" aria-label="Add Room">
         <mat-icon>add_circle</mat-icon>
       </button>
     </th>

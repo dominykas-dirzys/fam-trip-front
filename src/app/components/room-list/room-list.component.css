@@ -1,19 +1,42 @@
 app-page-title {
   text-align: center;
+  color: rgba(122,29,166,1);
 }
 
-table td:first-child {
+h3 {
+  margin: 0px;
+  text-align: center;
+}
+
+table td {
   text-align: center;
   color: white;
 }
 
+table th {
+  text-align: center;
+}
+
 table {
+  background: rgba(0,0,0,0);
   margin: auto;
   max-width: 1024px;
   width: 100%;
 }
 
-div {
-  text-align: center;
-  padding: 10px;
+.remarks {
+  text-align: justify;
+}
+
+button {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.mat-header-row {
+  background: rgba(122,29,166,0.8);
+}
+
+.mat-row {
+  background: rgba(66,66,66,0.8);
 }
