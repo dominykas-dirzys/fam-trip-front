@@ -26,6 +26,7 @@ table {
 
 .remarks {
   text-align: justify;
+  white-space: pre-wrap;
 }
 
 button {
