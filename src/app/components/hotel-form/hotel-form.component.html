@@ -34,8 +34,26 @@
       <mat-option value="APARTMENTS">Apartments</mat-option>
       <mat-option value="NO_RATING">No Rating</mat-option>
     </mat-select>
-    <mat-error *ngIf="inspectionScore.errors?.required">
+    <mat-error *ngIf="officialRating.errors?.required">
       Official rating is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Inspection Score 1-10</mat-label>
+    <input
+      matInput
+      required
+      formControlName="inspectionScore"
+    />
+    <mat-error *ngIf="inspectionScore.errors?.required">
+      Inspection Score is required
+    </mat-error>
+    <mat-error *ngIf="inspectionScore.errors?.min">
+      Inspection Score must be from 1 to 10
+    </mat-error>
+    <mat-error *ngIf="inspectionScore.errors?.max">
+      Inspection Score must be from 1 to 10
     </mat-error>
   </mat-form-field>
 
@@ -68,32 +86,27 @@
   </button>
 
   <mat-form-field>
-    <mat-label>Inspection Score 1-10</mat-label>
+    <mat-label>Distance to Airport (km)</mat-label>
     <input
+      type="number"
       matInput
-      required
-      formControlName="inspectionScore"
+      formControlName="distanceFromAirport"
     />
-    <mat-error *ngIf="inspectionScore.errors?.required">
-      Inspection Score is required
-    </mat-error>
-    <mat-error *ngIf="inspectionScore.errors?.min">
-      Inspection Score must be from 1 to 10
-    </mat-error>
-    <mat-error *ngIf="inspectionScore.errors?.max">
-      Inspection Score must be from 1 to 10
+    <mat-error *ngIf="distanceFromAirport.errors?.min">
+      Distance can't be < 0 km
     </mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Food Quality</mat-label>
-    <mat-select matNativeControl [formControl]="foodQuality" name="foodQuality">
-      <mat-option value="TERRIBLE">Terrible</mat-option>
-      <mat-option value="POOR">Poor</mat-option>
-      <mat-option value="AVERAGE">Average</mat-option>
-      <mat-option value="GOOD">Good</mat-option>
-      <mat-option value="FANTASTIC">Fantastic</mat-option>
-    </mat-select>
+    <mat-label>Distance to Beach (m)</mat-label>
+    <input
+      type="number"
+      matInput
+      formControlName="distanceToBeach"
+    />
+    <mat-error *ngIf="distanceToBeach.errors?.min">
+      Distance can't be < 0 m
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -110,39 +123,26 @@
   <mat-checkbox [formControl]="spa">SPA</mat-checkbox>
 
   <mat-form-field>
-    <mat-label>Distance to Beach (m)</mat-label>
-    <input
-      type="number"
-      matInput
-      formControlName="distanceToBeach"
-    />
-    <mat-error *ngIf="distanceToBeach.errors?.min">
-      Distance can't be < 0 m
-    </mat-error>
+    <mat-label>Food Quality</mat-label>
+    <mat-select matNativeControl [formControl]="foodQuality" name="foodQuality">
+      <mat-option value="TERRIBLE">Terrible</mat-option>
+      <mat-option value="POOR">Poor</mat-option>
+      <mat-option value="AVERAGE">Average</mat-option>
+      <mat-option value="GOOD">Good</mat-option>
+      <mat-option value="FANTASTIC">Fantastic</mat-option>
+    </mat-select>
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Distance from Airport (km)</mat-label>
-    <input
-      type="number"
-      matInput
-      formControlName="distanceFromAirport"
-    />
-    <mat-error *ngIf="distanceFromAirport.errors?.min">
-      Distance can't be < 0 km
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Recommended To</mat-label>
-    <mat-select matNativeControl [formControl]="recommendedTos" multiple>
-      <mat-option value="FAMILIES_WITH_YOUNG_CHILDREN">Families with young children</mat-option>
-      <mat-option value="FAMILIES_WITH_OLDER_CHILDREN">Families with older children</mat-option>
-      <mat-option value="COUPLES">Couples</mat-option>
-      <mat-option value="FRIENDS">Friends</mat-option>
-      <mat-option value="YOUTH">Youth</mat-option>
-      <mat-option value="BUSINESS">Business</mat-option>
-      <mat-option value="SOLO_TRAVELERS">Solo travelers</mat-option>
+    <mat-label>Cuisine Types</mat-label>
+    <mat-select matNativeControl [formControl]="cuisineTypes" multiple>
+      <mat-option value="VEGETARIAN">Vegetarian</mat-option>
+      <mat-option value="ASIAN">Asian</mat-option>
+      <mat-option value="CONTINENTAL">Continental</mat-option>
+      <mat-option value="MEXICAN">Mexican</mat-option>
+      <mat-option value="LOCAL">Local</mat-option>
+      <mat-option value="SEAFOOD">Seafood</mat-option>
+      <mat-option value="CUSTOM">Custom</mat-option>
     </mat-select>
   </mat-form-field>
 
@@ -160,26 +160,26 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Cuisine Types</mat-label>
-    <mat-select matNativeControl [formControl]="cuisineTypes" multiple>
-      <mat-option value="VEGETARIAN">Vegetarian</mat-option>
-      <mat-option value="ASIAN">Asian</mat-option>
-      <mat-option value="CONTINENTAL">Continental</mat-option>
-      <mat-option value="MEXICAN">Mexican</mat-option>
-      <mat-option value="LOCAL">Local</mat-option>
-      <mat-option value="SEAFOOD">Seafood</mat-option>
-      <mat-option value="CUSTOM">Custom</mat-option>
+    <mat-label>Recommended To</mat-label>
+    <mat-select matNativeControl [formControl]="recommendedTos" multiple>
+      <mat-option value="FAMILIES_WITH_YOUNG_CHILDREN">Families with young children</mat-option>
+      <mat-option value="FAMILIES_WITH_OLDER_CHILDREN">Families with older children</mat-option>
+      <mat-option value="COUPLES">Couples</mat-option>
+      <mat-option value="FRIENDS">Friends</mat-option>
+      <mat-option value="YOUTH">Youth</mat-option>
+      <mat-option value="BUSINESS">Business</mat-option>
+      <mat-option value="SOLO_TRAVELERS">Solo travelers</mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field class="remarks" appearance="fill">
     <mat-label>Remarks</mat-label>
-    <textarea matInput matTextareaAutosize [matAutosizeMinRows]="5" formControlName="remarks"></textarea>
+    <textarea matInput matTextareaAutosize [matAutosizeMinRows]="4" formControlName="remarks"></textarea>
   </mat-form-field>
 
 </form>
 
 <div mat-dialog-actions class="center">
-  <button mat-raised-button mat-button (click)="cancel()">Cancel</button>
-  <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="save()">Save</button>
+  <button mat-mini-fab color="warn" (click)="cancel()" aria-label="cancel"><mat-icon>close</mat-icon></button>
+  <button mat-mini-fab color="accent" [disabled]="form.invalid" (click)="save()" aria-label="save"><mat-icon>save</mat-icon></button>
 </div>
