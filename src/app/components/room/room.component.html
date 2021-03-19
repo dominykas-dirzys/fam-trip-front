@@ -19,7 +19,9 @@
 </table>
 <br>
 <table *ngIf="room?.remarks" class="mat-table">
-  <th class="mat-header-cell">Remarks</th>
+  <tr class="mat-header-row">
+    <th class="mat-header-cell">Remarks</th>
+  </tr>
   <tr class="mat-row">
     <td class="mat-cell"><p class="remarks">{{room?.remarks}}</p></td>
   </tr>
