@@ -16,6 +16,21 @@
   <mat-label>Search by labels</mat-label>
   <input matInput [formControl]="labelsFilter">
 </mat-form-field>
+<mat-form-field class="filter" floatLabel="never">
+  <mat-label>Search by official rating</mat-label>
+  <mat-select matNativeControl [formControl]="officialRatingFilter">
+    <mat-option value="ONE_STAR">1 &#9733;</mat-option>
+    <mat-option value="TWO_STAR">2 &#9733;</mat-option>
+    <mat-option value="THREE_STAR">3 &#9733;</mat-option>
+    <mat-option value="FOUR_STAR">4 &#9733;</mat-option>
+    <mat-option value="FIVE_STAR">5 &#9733;</mat-option>
+    <mat-option value="HV_1">HV 1</mat-option>
+    <mat-option value="HV_2">HV 2</mat-option>
+    <mat-option value="APARTMENTS">Apartments</mat-option>
+    <mat-option value="NO_RATING">No Rating</mat-option>
+    <mat-option value=""></mat-option>
+  </mat-select>
+</mat-form-field>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
   <ng-container matColumnDef="position">

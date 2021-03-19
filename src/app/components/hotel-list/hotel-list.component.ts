@@ -27,11 +27,13 @@ export class HotelListComponent implements OnInit, AfterViewInit {
   cityFilter = new FormControl('');
   insScoreFilter = new FormControl('');
   labelsFilter = new FormControl('');
+  officialRatingFilter = new FormControl('');
   filterValues = {
     name: '',
     inspectionScore: '',
     city: '',
-    labels: ''
+    labels: '',
+    officialRating: ''
   };
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -72,15 +74,23 @@ export class HotelListComponent implements OnInit, AfterViewInit {
           this.dataSource.filter = JSON.stringify(this.filterValues);
         }
       );
+    this.officialRatingFilter.valueChanges
+      .subscribe(
+        officialRating => {
+          this.filterValues.officialRating = officialRating;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      );
   }
 
   createFilter(): (data: any, filter: string) => boolean {
-    let filterFunction = function(data, filter): boolean {
-      let searchTerms = JSON.parse(filter);
+    const filterFunction = function(data, filter): boolean {
+      const searchTerms = JSON.parse(filter);
       return data.name.toLowerCase().indexOf(searchTerms.name) !== -1
         && data.city.title.toString().toLowerCase().indexOf(searchTerms.city) !== -1
         && data.inspectionScore.toString().toLowerCase().indexOf(searchTerms.inspectionScore) !== -1
-        && data.labels.toString().toLowerCase().indexOf(searchTerms.labels) !== -1;
+        && data.labels.toString().toLowerCase().indexOf(searchTerms.labels) !== -1
+        && data.officialRating.toString().indexOf(searchTerms.officialRating) !== -1;
     };
     return filterFunction;
   }
