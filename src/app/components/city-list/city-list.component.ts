@@ -21,7 +21,7 @@ export class CityListComponent implements OnInit {
     private api: ApiService) {
   }
 
-  displayedColumns: string[] = ['id', 'country', 'title', 'actions'];
+  displayedColumns: string[] = ['country', 'title', 'actions'];
 
   ngOnInit(): void {
     this.fetchCities();
