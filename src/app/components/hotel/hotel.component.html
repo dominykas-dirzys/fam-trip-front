@@ -18,7 +18,7 @@
   </tr>
   <tr class="mat-row">
     <td class="mat-cell">{{hotel?.author?.email}}</td>
-    <td class="mat-cell"><p *ngFor="let label of hotel?.labels">{{label | labelspipe}}</p></td>
+    <td class="mat-cell"><p *ngFor="let label of hotel?.labels">{{label | labelspipe}}}</p></td>
     <td class="mat-cell"><p *ngFor="let recommendedTo of hotel?.recommendedTos">{{recommendedTo | rectopipe}}</p></td>
     <td class="mat-cell">{{hotel?.distanceFromAirport}} km</td>
     <td class="mat-cell">{{hotel?.distanceToBeach}} m</td>

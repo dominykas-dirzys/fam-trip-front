@@ -22,16 +22,16 @@ export class OffRatingPipe implements PipeTransform {
         return '5 \u2605';
         break;
       case 'HV_1':
-        return 'HV 1';
+        return 'HV-1';
         break;
       case 'HV_2':
-        return 'HV 2';
+        return 'HV-2';
         break;
       case 'APARTMENTS':
-        return 'Apartments';
+        return 'Apts.';
         break;
       case 'NO_RATING':
-        return 'No Rating';
+        return '-';
         break;
     }
   }

@@ -1,5 +1,10 @@
 app-page-title {
   text-align: center;
+  color: rgba(122,29,166,1);
+}
+
+h4 {
+  margin: 0px;
 }
 
 table td:first-child {
@@ -30,3 +35,4 @@ mat-form-field {
 div {
   text-align: center;
 }
+

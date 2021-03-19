@@ -9,25 +9,25 @@ export class LabelsArrayPipe implements PipeTransform {
     for (let i = 0; i < value.length; i++) {
       switch (value[i]) {
         case 'ECONOMY':
-          labelListString = labelListString + 'Economy';
+          labelListString = labelListString + 'Eco';
           break;
         case 'SUPERIOR':
-          labelListString = labelListString + 'Superior';
+          labelListString = labelListString + 'Super';
           break;
         case 'BOUTIQUE':
           labelListString = labelListString + 'Boutique';
           break;
         case 'ADULTS_ONLY':
-          labelListString = labelListString + 'Adults only';
+          labelListString = labelListString + 'Adult';
           break;
         case 'ECO_FRIENDLY':
-          labelListString = labelListString + 'Eco-friendly';
+          labelListString = labelListString + 'Green';
           break;
         case 'PARTY':
           labelListString = labelListString + 'Party';
           break;
         case 'SHOPPING':
-          labelListString = labelListString + 'Shopping';
+          labelListString = labelListString + 'Shops';
           break;
       }
       if (i < value.length - 1) {
