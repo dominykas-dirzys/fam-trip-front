@@ -12,10 +12,10 @@
     <td class="mat-cell">{{room?.size | sizepipe}}</td>
     <td class="mat-cell">{{room?.roomCondition | roomconditionpipe}}</td>
     <td class="mat-cell">
-      <button mat-mini-fab color="primary" (click)="openDialog(room)" aria-label="Edit">
+      <button mat-icon-button color="primary" (click)="openDialog(room)" aria-label="Edit">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-mini-fab color="disabled" (click)="delete()" aria-label="Delete">
+      <button mat-icon-button color="disabled" (click)="delete()" aria-label="Delete">
         <mat-icon>delete</mat-icon>
       </button>
     </td>

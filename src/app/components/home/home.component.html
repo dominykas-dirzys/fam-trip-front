@@ -1,1 +1,15 @@
-<p>home works!</p>
+
+<div class="cover">
+<div class="home">
+
+<h1>Welcome!</h1>
+
+
+  <h3 *ngIf="isAuthenticated">What would you like to do?</h3>
+
+  <p><app-login *ngIf="!isAuthenticated"></app-login>
+  <p><button mat-raised-button [routerLink]="['/hotels']" color="primary" *ngIf="isAuthenticated">View hotels</button>
+  <button mat-raised-button color="primary" *ngIf="isAuthenticated" (click)="openDialog()">Add new hotel</button></p>
+</div>
+
+</div>

@@ -48,6 +48,7 @@ import {RoomConditionPipe} from './pipes/room-condition.pipe';
 import { CityListComponent } from './components/city-list/city-list.component';
 import { CityEditFormComponent } from './components/city-edit-form/city-edit-form.component';
 import { HomeComponent } from './components/home/home.component';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -102,11 +103,11 @@ import { HomeComponent } from './components/home/home.component';
     MatOptionModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatSlideToggleModule,
     MatSortModule,
     MatPaginatorModule,
     MatSnackBarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

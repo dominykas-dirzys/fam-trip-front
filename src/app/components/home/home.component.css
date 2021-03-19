@@ -1,0 +1,19 @@
+.cover {
+  top: 25%;
+  width: 100%;
+  text-align:center;
+  position:fixed;
+}
+
+.home {
+  background: rgba(229, 228, 255, 0.1);
+  max-width: 400px;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  color: rgba(122,29,166,1);
+}
+
+button {
+  margin: 15px;
+}

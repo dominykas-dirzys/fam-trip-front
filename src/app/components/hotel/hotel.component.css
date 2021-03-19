@@ -33,3 +33,8 @@ button {
 .back {
   text-align: center;
 }
+
+.back button {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}

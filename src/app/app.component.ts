@@ -25,7 +25,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authService.autoLogin();
 
     this.userSub = this.authService.user.subscribe(user => {
-      console.log(user);
       this.isAuthenticated = !!user;
       if (user) {
         this.user = user.email;

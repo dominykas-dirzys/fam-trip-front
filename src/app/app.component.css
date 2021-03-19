@@ -3,7 +3,10 @@
 }
 
 button {
-  background: darkgrey;
+  background: rgba(229, 228, 255, 0.2);
+  margin-left: 5px;
+  margin-right: 5px;
+  color: rgba(122,29,166,1);
 }
 
 button:hover {

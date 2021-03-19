@@ -5,10 +5,12 @@
       <mat-icon>home</mat-icon>
     </button>
   </span>
-  <span><button mat-button routerLink="login"*ngIf="!isAuthenticated">Login</button></span>
   <span><button mat-button routerLink="hotels" *ngIf="isAuthenticated">Hotels</button></span>
-  <span><button mat-button (click)="logout()" *ngIf="isAuthenticated">Logout</button></span>
-  <span class="user" *ngIf="isAuthenticated">Logged in as: {{ user }}</span>
+  <span><button class="user" mat-icon-button color="primary" (click)="logout()" *ngIf="isAuthenticated" aria-label="Logout">
+    <mat-icon>logout</mat-icon>
+  </button></span>
+  <span><button class="user" mat-button *ngIf="isAuthenticated">Logged in as: {{ user }}</button></span>
+
 </div>
 <hr>
 <router-outlet></router-outlet>

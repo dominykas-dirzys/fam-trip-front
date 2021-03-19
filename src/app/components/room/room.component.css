@@ -31,5 +31,10 @@ button {
 }
 
 .back {
-text-align: center;
+  text-align: center;
+}
+
+.back button {
+  margin-top: 15px;
+  margin-bottom: 30px;
 }
