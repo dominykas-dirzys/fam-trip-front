@@ -1,5 +1,11 @@
 app-page-title {
   text-align: center;
+  color: rgba(122,29,166,1);
+}
+
+h4 {
+  margin: 0px;
+  text-align: center;
 }
 
 table td {
@@ -12,13 +18,10 @@ table th {
 }
 
 table {
+  background: rgba(0,0,0,0);
   margin: auto;
   max-width: 1024px;
   width: 100%;
-}
-
-h4 {
-  text-align: center;
 }
 
 .remarks {
@@ -37,4 +40,12 @@ button {
 .back button {
   margin-top: 15px;
   margin-bottom: 30px;
+}
+
+.mat-header-row {
+  background: rgba(122,29,166,0.8);
+}
+
+.mat-row {
+  background: rgba(66,66,66,0.8);
 }

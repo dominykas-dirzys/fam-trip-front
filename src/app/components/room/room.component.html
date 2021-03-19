@@ -1,28 +1,24 @@
-<app-page-title>{{room?.roomType === 'CUSTOM' ? 'Custom room: ' + room.type : room?.roomType}}</app-page-title>
+<app-page-title><h4>{{room?.roomType === 'CUSTOM' ? room?.type : room?.roomType}}</h4>
+  <button mat-icon-button color="primary" (click)="openDialog(room)" aria-label="Edit">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button mat-icon-button color="primary" (click)="delete()" aria-label="Delete">
+    <mat-icon>delete</mat-icon>
+  </button>
+</app-page-title>
 
-<table class="mat-table" >
+<table *ngIf="room?.size != null || room?.roomCondition != null" class="mat-table">
   <tr class="mat-header-row">
-    <th class="mat-header-cell">ID</th>
-    <th class="mat-header-cell">Size</th>
-    <th class="mat-header-cell">Room Condition</th>
-    <th class="mat-header-cell"></th>
+    <th *ngIf="room?.size != null" class="mat-header-cell">Size</th>
+    <th *ngIf="room?.roomCondition != null" class="mat-header-cell">Room Condition</th>
   </tr>
   <tr class="mat-row">
-    <td class="mat-cell">{{room?.id}}</td>
-    <td class="mat-cell">{{room?.size | sizepipe}}</td>
-    <td class="mat-cell">{{room?.roomCondition | roomconditionpipe}}</td>
-    <td class="mat-cell">
-      <button mat-icon-button color="primary" (click)="openDialog(room)" aria-label="Edit">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-icon-button color="disabled" (click)="delete()" aria-label="Delete">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
+    <td *ngIf="room?.size != null" class="mat-cell">{{room?.size | sizepipe}}</td>
+    <td *ngIf="room?.roomCondition != null" class="mat-cell">{{room?.roomCondition | roomconditionpipe}}</td>
   </tr>
 </table>
 <br>
-<table class="mat-table">
+<table *ngIf="room?.remarks" class="mat-table">
   <th class="mat-header-cell">Remarks</th>
   <tr class="mat-row">
     <td class="mat-cell"><p class="remarks">{{room?.remarks}}</p></td>
