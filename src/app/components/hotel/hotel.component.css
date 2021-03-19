@@ -3,6 +3,10 @@ app-page-title {
   color: rgba(122,29,166,1);
 }
 
+h4 {
+  margin: 0px;
+}
+
 table td {
   text-align: center;
   color: white;
@@ -13,6 +17,7 @@ table th {
 }
 
 table {
+  background: rgba(0,0,0,0);
   margin: auto;
   max-width: 1024px;
   width: 100%;
@@ -38,4 +43,12 @@ button {
 .back button {
   margin-top: 15px;
   margin-bottom: 30px;
+}
+
+.mat-header-row {
+  background: rgba(122,29,166,0.8);
+}
+
+.mat-row {
+  background: rgba(66,66,66,0.8);
 }

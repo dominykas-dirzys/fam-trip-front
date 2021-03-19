@@ -1,27 +1,41 @@
-<app-page-title>{{hotel?.name}} {{hotel?.officialRating | offratingpipe}} ({{hotel?.inspectionScore}} / 10)
-  <button mat-icon-button color="primary" (click)="openDialog()" aria-label="Edit">
+<app-page-title><h4>{{hotel?.name}} {{hotel?.officialRating | offratingpipe}}</h4>
+  <button mat-icon-button color="primary" [routerLink]="['/hotels']" aria-label="Back">
+    <mat-icon>keyboard_backspace
+    </mat-icon>
+  </button>
+  <button mat-icon-button color="disabled" (click)="openDialog()" aria-label="Edit">
     <mat-icon>edit</mat-icon>
   </button>
   <button mat-icon-button color="disabled" (click)="delete()" aria-label="Delete">
     <mat-icon>delete</mat-icon>
   </button>
 </app-page-title>
-<h4>{{hotel?.city?.title}} ({{hotel?.city?.country?.title}})</h4>
 
 <table class="mat-table">
   <tr class="mat-header-row">
-    <th class="mat-header-cell">Author</th>
-    <th class="mat-header-cell">Labels</th>
-    <th class="mat-header-cell">Recommended to</th>
-    <th class="mat-header-cell">Airport</th>
-    <th class="mat-header-cell">Beach</th>
+    <th class="mat-header-cell">Inspection Score</th>
+    <th class="mat-header-cell">City</th>
+    <th *ngIf="hotel?.distanceFromAirport != null" class="mat-header-cell">Airport</th>
+    <th *ngIf="hotel?.distanceToBeach != null" class="mat-header-cell">Beach</th>
   </tr>
+
   <tr class="mat-row">
-    <td class="mat-cell">{{hotel?.author?.email}}</td>
-    <td class="mat-cell"><p *ngFor="let label of hotel?.labels">{{label | labelspipe}}}</p></td>
-    <td class="mat-cell"><p *ngFor="let recommendedTo of hotel?.recommendedTos">{{recommendedTo | rectopipe}}</p></td>
-    <td class="mat-cell">{{hotel?.distanceFromAirport}} km</td>
-    <td class="mat-cell">{{hotel?.distanceToBeach}} m</td>
+    <td class="mat-cell">{{hotel?.inspectionScore}} / 10</td>
+    <td class="mat-cell">{{hotel?.city?.title}} ({{hotel?.city?.country?.title}})</td>
+    <td *ngIf="hotel?.distanceFromAirport != null" class="mat-cell">{{hotel?.distanceFromAirport}} km</td>
+    <td *ngIf="hotel?.distanceToBeach != null" class="mat-cell">{{hotel?.distanceToBeach}} m</td>
+  </tr>
+</table>
+
+<table *ngIf="hotel?.labels.length > 0" class="mat-table">
+  <tr class="mat-row">
+    <td class="mat-cell">Labels: {{hotel?.labels | labelspipe}}</td>
+  </tr>
+</table>
+
+<table *ngIf="hotel?.recommendedTos.length > 0" class="mat-table">
+  <tr class="mat-row">
+    <td class="mat-cell">Recommended to: {{hotel?.recommendedTos | rectopipe}}</td>
   </tr>
 </table>
 
@@ -29,25 +43,29 @@
 
 <table class="mat-table">
   <tr class="mat-header-row">
-    <th class="mat-header-cell">Territory</th>
+    <th *ngIf="hotel?.territorySize != null"class="mat-header-cell">Territory</th>
     <th class="mat-header-cell">Water Slides</th>
     <th class="mat-header-cell">SPA</th>
-    <th class="mat-header-cell">Food</th>
-    <th class="mat-header-cell">Cuisine Type</th>
-
+    <th *ngIf="hotel?.foodQuality != null" class="mat-header-cell">Food</th>
   </tr>
+
   <tr class="mat-row">
-    <td class="mat-cell">{{hotel?.territorySize | sizepipe}}</td>
+    <td *ngIf="hotel?.territorySize != null" class="mat-cell">{{hotel?.territorySize | sizepipe}}</td>
     <td class="mat-cell">{{hotel?.waterSlides | checkmarkpipe}}</td>
     <td class="mat-cell">{{hotel?.spa | checkmarkpipe}}</td>
-    <td class="mat-cell">{{hotel?.foodQuality | foodqltpipe}}</td>
-    <td class="mat-cell"><p *ngFor="let cuisineType of hotel?.cuisineTypes">{{cuisineType | cuisinepipe}}</p></td>
+    <td *ngIf="hotel?.foodQuality != null" class="mat-cell">{{hotel?.foodQuality | foodqltpipe}}</td>
+  </tr>
+</table>
+
+<table *ngIf="hotel?.cuisineTypes.length > 0" class="mat-table">
+  <tr class="mat-row">
+    <td class="mat-cell">Cuisine types: {{hotel?.cuisineTypes | cuisinepipe}}</td>
   </tr>
 </table>
 
 <br>
 
-<table class="mat-table">
+<table *ngIf="hotel?.remarks" class="mat-table">
   <tr class="mat-header-row">
     <th class="mat-header-cell">Remarks</th>
   </tr>
@@ -57,9 +75,17 @@
 </table>
 
 <br>
-<hr>
-<br>
+
 <app-room-list [rooms]="hotel?.rooms"></app-room-list>
+
+<br>
+
+<table class="mat-table">
+  <tr class="mat-row">
+    <td class="mat-cell">Author: {{hotel?.author?.email}}</td>
+  </tr>
+</table>
+
 
 <div class="back">
   <button mat-mini-fab color="primary" [routerLink]="['/hotels']" aria-label="Back">

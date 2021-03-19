@@ -19,6 +19,7 @@ mat-paginator {
 }
 
 table {
+  background: rgba(66,66,66,0.5);
   margin: auto;
   max-width: 1024px;
   width: 100%;

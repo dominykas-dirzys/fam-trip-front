@@ -16,7 +16,7 @@ export class HotelListComponent implements OnInit, AfterViewInit {
 
   private static readonly URL = '/api/hotels';
 
-  displayedColumns: string[] = ['position', 'name', 'officialRating', 'inspectionScore', 'city', 'labels', 'actions'];
+  displayedColumns: string[] = ['position', 'name', 'inspectionScore', 'city', 'labels', 'actions'];
 
   hotels: Hotel[] = [];
 

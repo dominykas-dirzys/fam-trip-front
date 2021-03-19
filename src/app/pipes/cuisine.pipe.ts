@@ -5,28 +5,35 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class CuisinePipe implements PipeTransform {
   transform(value: any) {
-    switch (value) {
-      case 'VEGETARIAN':
-        return 'Vegetarian';
-        break;
-      case 'ASIAN':
-        return 'Asian';
-        break;
-      case 'CONTINENTAL':
-        return 'Continental';
-        break;
-      case 'MEXICAN':
-        return 'Mexican';
-        break;
-      case 'LOCAL':
-        return 'Local';
-        break;
-      case 'SEAFOOD':
-        return 'Seafood';
-        break;
-      case 'CUSTOM':
-        return 'Custom';
-        break;
+    let labelListString = '';
+    for (let i = 0; i < value.length; i++) {
+      switch (value[i]) {
+        case 'VEGETARIAN':
+          labelListString = labelListString + 'Vegetarian';
+          break;
+        case 'ASIAN':
+          labelListString = labelListString + 'Asian';
+          break;
+        case 'CONTINENTAL':
+          labelListString = labelListString + 'Continental';
+          break;
+        case 'MEXICAN':
+          labelListString = labelListString + 'Mexican';
+          break;
+        case 'LOCAL':
+          labelListString = labelListString + 'Local';
+          break;
+        case 'SEAFOOD':
+          labelListString = labelListString + 'Seafood';
+          break;
+        case 'CUSTOM':
+          labelListString = labelListString + 'Custom';
+          break;
+      }
+      if (i < value.length - 1) {
+        labelListString = labelListString + ' | ';
+      }
     }
+    return labelListString;
   }
 }

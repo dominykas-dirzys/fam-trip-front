@@ -5,28 +5,35 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class LabelsPipe implements PipeTransform {
   transform(value: any) {
-    switch (value) {
-      case 'ECONOMY':
-        return 'Economy';
-        break;
-      case 'SUPERIOR':
-        return 'Superior';
-        break;
-      case 'BOUTIQUE':
-        return 'Boutique';
-        break;
-      case 'ADULTS_ONLY':
-        return 'Adults only';
-        break;
-      case 'ECO_FRIENDLY':
-        return 'Eco-friendly';
-        break;
-      case 'PARTY':
-        return 'Party';
-        break;
-      case 'SHOPPING':
-        return 'Shopping';
-        break;
+    let labelListString = '';
+    for (let i = 0; i < value.length; i++) {
+      switch (value[i]) {
+        case 'ECONOMY':
+          labelListString = labelListString + 'Economy';
+          break;
+        case 'SUPERIOR':
+          labelListString = labelListString + 'Superior';
+          break;
+        case 'BOUTIQUE':
+          labelListString = labelListString + 'Boutique';
+          break;
+        case 'ADULTS_ONLY':
+          labelListString = labelListString + 'Adults only';
+          break;
+        case 'ECO_FRIENDLY':
+          labelListString = labelListString + 'Eco-friendly (Green)';
+          break;
+        case 'PARTY':
+          labelListString = labelListString + 'Party';
+          break;
+        case 'SHOPPING':
+          labelListString = labelListString + 'Shopping';
+          break;
+      }
+      if (i < value.length - 1) {
+        labelListString = labelListString + ' | ';
+      }
     }
+    return labelListString;
   }
 }
