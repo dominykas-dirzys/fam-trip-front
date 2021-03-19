@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from './services/auth.service';
 import {Subscription} from 'rxjs';
-import {User} from './shared/models/user.model';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +24,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authService.autoLogin();
 
     this.userSub = this.authService.user.subscribe(user => {
-      console.log(user);
       this.isAuthenticated = !!user;
       if (user) {
         this.user = user.email;

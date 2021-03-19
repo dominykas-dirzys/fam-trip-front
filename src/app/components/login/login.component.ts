@@ -45,21 +45,24 @@ export class LoginComponent implements OnInit {
       if (this.authService.isLoggedIn()) {
         this.router.navigateByUrl(this.authService.redirectUrl || '');
       }
-    },
-      error => console.log(error)
-    );
+    });
   }
 
   signup() {
     this.authService.signup(this.form.getRawValue()).subscribe(() => {
     },
       errorRes => {
-        console.log(errorRes);
         this.snackBar.open('User with this email already exists', 'Try again', {
           duration: 4000,
           verticalPosition: 'top',
         });
-    });
+    },
+      () => {
+        this.snackBar.open('Sign up successful!', 'Got it!', {
+          duration: 4000,
+          verticalPosition: 'top',
+        });
+      });
     this.form.reset();
   }
 
