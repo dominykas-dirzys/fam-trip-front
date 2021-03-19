@@ -83,6 +83,9 @@
     <mat-error *ngIf="inspectionScore.errors?.max">
       Inspection Score must be from 1 to 10
     </mat-error>
+    <mat-error *ngIf="inspectionScore.errors?.mustBeInteger">
+      Inspection Score must be an integer
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
