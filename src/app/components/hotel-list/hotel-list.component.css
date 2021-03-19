@@ -27,13 +27,16 @@ table {
 
 mat-form-field {
   background-color: rgba(122,29,166,0.6);
+  color: white;
+  padding: 0px 5px;
+  flex: 1;
+}
+
+.flex-container {
   margin: auto;
   max-width: 1024px;
   width: 100%;
-  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
 }
-
-div {
-  text-align: center;
-}
-
