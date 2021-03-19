@@ -36,6 +36,7 @@ export class RoomListComponent implements OnInit, OnChanges {
   ngOnChanges() {
     if (this.hotel) {
       this.canEdit = this.authService.canEditCheck(this.hotel.author.id);
+      localStorage.setItem('authorId', this.hotel.author.id.toString());
     }
   }
 

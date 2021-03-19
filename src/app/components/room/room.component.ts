@@ -30,7 +30,7 @@ export class RoomComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.api.get(RoomComponent.URL + id).subscribe((data: Room) => this.room = data);
     this.api.get(RoomComponent.URL).subscribe((data: Room[]) => this.rooms = data);
-    this.canEdit = this.authService.canEditCheck(this.authService.savedAuthorId);
+    this.canEdit = this.authService.canEditCheck(+localStorage.getItem('authorId'));
   }
 
   openDialog(room?: Room) {

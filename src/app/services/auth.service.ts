@@ -26,8 +26,6 @@ export class AuthService {
 
   tokenExpirationTimer: any;
 
-  savedAuthorId: number;
-
   constructor(private api: ApiService, private snackBar: MatSnackBar, private router: Router) {
     this.token = sessionStorage.getItem(TOKEN_KEY);
   }
@@ -104,6 +102,7 @@ export class AuthService {
     console.log(this.token);
     this.router.navigate(['/login']);
     localStorage.removeItem('userData');
+    localStorage.removeItem('authorId');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
     }
@@ -128,7 +127,6 @@ export class AuthService {
 
   canEditCheck(authorId: number): boolean {
     let userId;
-    this.savedAuthorId = authorId;
     this.user.subscribe(data => {
       if (data) {
         userId = +data.id;
