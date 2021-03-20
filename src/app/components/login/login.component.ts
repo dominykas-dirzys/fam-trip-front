@@ -52,10 +52,19 @@ export class LoginComponent implements OnInit {
     this.authService.signup(this.form.getRawValue()).subscribe(() => {
     },
       errorRes => {
-        this.snackBar.open('User with this email already exists', 'Try again', {
+      if (errorRes.error.items != null || undefined) {
+        if (errorRes.error.items.email === 'Such user exits already') {
+          this.snackBar.open('User with this email already exists', 'Try again', {
+            duration: 4000,
+            verticalPosition: 'top',
+          });
+        }
+      } else {
+        this.snackBar.open('System error', 'Try again', {
           duration: 4000,
           verticalPosition: 'top',
         });
+      }
     },
       () => {
         this.snackBar.open('Sign up successful!', 'Got it!', {

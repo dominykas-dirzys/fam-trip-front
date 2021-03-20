@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
-import {throwError} from 'rxjs';
+import {tap} from 'rxjs/operators';
 
 import { ApiService } from './api.service';
 import { TOKEN_KEY } from '../common/constants';
@@ -19,8 +18,6 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
 
   private token: string;
-
-  error: string;
 
   redirectUrl: string;
 
@@ -41,10 +38,7 @@ export class AuthService {
   login(user): Observable<boolean> {
     return new Observable<boolean>(observer => {
       this.api.post('/login', user)
-        .pipe(catchError(errorRes => {
-          const errorMessage = errorRes.error.details;
-          return throwError(errorMessage);
-        }), tap((resData: {token: string}) => {
+        .pipe(tap((resData: {token: string}) => {
           this.handleAuthentication(resData.token);
         }))
         .subscribe((response: { token: string }) => {
@@ -58,11 +52,17 @@ export class AuthService {
         }
       },
         error => {
-        this.error = error;
-        this.snackBar.open('Invalid credentials', 'Change and try again', {
-          duration: 4000,
-          verticalPosition: 'top',
-        });
+        if (error.status === 400 || error.status === 401 || error.status === 403) {
+          this.snackBar.open('Invalid credentials', 'Change and try again', {
+            duration: 4000,
+            verticalPosition: 'top',
+          });
+        } else {
+          this.snackBar.open('System error', 'Try again', {
+            duration: 4000,
+            verticalPosition: 'top',
+          });
+        }
       });
     });
   }
