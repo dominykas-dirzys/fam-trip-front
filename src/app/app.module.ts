@@ -48,6 +48,7 @@ import { CityListComponent } from './components/city-list/city-list.component';
 import { CityEditFormComponent } from './components/city-edit-form/city-edit-form.component';
 import { HomeComponent } from './components/home/home.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatCheckboxModule,
     MatGridListModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule {
