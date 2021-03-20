@@ -73,6 +73,7 @@ export class LoginComponent implements OnInit {
         });
       });
     this.form.reset();
+    this.onSwitchMode();
   }
 
   get email() {
