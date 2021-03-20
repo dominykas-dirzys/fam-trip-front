@@ -71,9 +71,9 @@ export class LoginComponent implements OnInit {
           duration: 4000,
           verticalPosition: 'top',
         });
+        this.onSwitchMode();
       });
     this.form.reset();
-    this.onSwitchMode();
   }
 
   get email() {
