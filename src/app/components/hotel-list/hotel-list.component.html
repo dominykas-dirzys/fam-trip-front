@@ -42,6 +42,11 @@
       <mat-option value=""></mat-option>
     </mat-select>
   </mat-form-field>
+  <button mat-raised-button
+          type="button"
+          (click)="resetFilters()">
+    Reset
+  </button>
 </div>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>

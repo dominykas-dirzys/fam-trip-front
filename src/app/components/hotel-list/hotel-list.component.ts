@@ -92,6 +92,9 @@ export class HotelListComponent implements OnInit, AfterViewInit {
   createFilter(): (data: any, filter: string) => boolean {
     const filterFunction = function(data, filter): boolean {
       const searchTerms = JSON.parse(filter);
+      if (searchTerms.labels === undefined || searchTerms.labels.length === 0) {
+        searchTerms.labels = [];
+      }
       return data.name.toLowerCase().indexOf(searchTerms.name) !== -1
         && data.city.title.toString().toLowerCase().indexOf(searchTerms.city) !== -1
         && data.inspectionScore.toString().toLowerCase().indexOf(searchTerms.inspectionScore) !== -1
@@ -133,5 +136,13 @@ export class HotelListComponent implements OnInit, AfterViewInit {
 
       this.load();
     });
+  }
+
+  resetFilters() {
+    this.nameFilter.setValue('');
+    this.insScoreFilter.setValue('');
+    this.cityFilter.setValue('');
+    this.officialRatingFilter.setValue('');
+    this.labelsFilter.setValue('');
   }
 }
