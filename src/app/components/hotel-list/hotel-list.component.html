@@ -13,10 +13,20 @@
     <mat-label>Search by inspection score</mat-label>
     <input matInput [formControl]="insScoreFilter">
   </mat-form-field>
-  <mat-form-field class="filter" floatLabel="never">
+
+  <mat-form-field class="filter">
     <mat-label>Search by labels</mat-label>
-    <input matInput [formControl]="labelsFilter">
+    <mat-select matNativeControl [formControl]="labelsFilter" multiple>
+      <mat-option value="ECONOMY">Economy</mat-option>
+      <mat-option value="SUPERIOR">Superior</mat-option>
+      <mat-option value="BOUTIQUE">Boutique</mat-option>
+      <mat-option value="ADULTS_ONLY">Adults only</mat-option>
+      <mat-option value="ECO_FRIENDLY">Eco-friendly</mat-option>
+      <mat-option value="PARTY">Party</mat-option>
+      <mat-option value="SHOPPING">Shopping</mat-option>
+    </mat-select>
   </mat-form-field>
+
   <mat-form-field class="filter">
     <mat-label>Search by official rating</mat-label>
     <mat-select matNativeControl [formControl]="officialRatingFilter">
