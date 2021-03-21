@@ -21,7 +21,7 @@
 
   <tr class="mat-row">
     <td class="mat-cell">{{hotel?.inspectionScore}} / 10</td>
-    <td class="mat-cell">{{hotel?.city?.title}} ({{hotel?.city?.country?.title}})</td>
+    <td class="mat-cell">{{hotel?.city?.title | titlecase}} ({{hotel?.city?.country?.title}})</td>
     <td *ngIf="hotel?.distanceFromAirport != null" class="mat-cell">{{hotel?.distanceFromAirport}} km</td>
     <td *ngIf="hotel?.distanceToBeach != null" class="mat-cell">{{hotel?.distanceToBeach}} m</td>
   </tr>
